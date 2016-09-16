@@ -18,6 +18,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+<<<<<<< HEAD
 	url(r'', include('dmlblog.urls')),
+=======
+    url(r'', include('dmlblog.urls')),
+>>>>>>> a84a95c05f969b2f71a3f52cda2ec2daf0414304
 ]
 
