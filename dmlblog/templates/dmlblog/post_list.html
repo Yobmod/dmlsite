@@ -1,19 +1,9 @@
 <html>
-	<div class="row">
-		<h1>DML THEME</h1>
-		
-		<h3>I R Make Website!..</h3>
-	</div>
-	
 	<div>
-	<img src="http://www.kreativeeyedesign.com/wp-content/uploads/2014/10/genius.jpg" alt="badge" style="width:200px;height:100px;">
-	</div>
-	
-{% for post in posts %}
-	<div>
+	{% for post in posts %}
 		<p>published: {{ post.published_date }}</p>
         <h1><a href="">{{ post.title }}</a></h1>
         <p>{{ post.text|linebreaksbr }}</p>
+	{% endfor %}	
 	</div>
-{% endfor %}	
 </html>
