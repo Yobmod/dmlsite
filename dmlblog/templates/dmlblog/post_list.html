@@ -1,9 +1,14 @@
-<html>
-	<div>
+{% extends 'dmlblog/base.html' %}
+
+{% block content %}
 	{% for post in posts %}
-		<p>published: {{ post.published_date }}</p>
-        <h1><a href="">{{ post.title }}</a></h1>
+		<div class="post">
+        <div class="date">
+            {{ post.published_date }}
+        </div>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
         <p>{{ post.text|linebreaksbr }}</p>
-	{% endfor %}	
-	</div>
-</html>
+    </div>
+	{% endfor %}
+{% endblock %}
+
