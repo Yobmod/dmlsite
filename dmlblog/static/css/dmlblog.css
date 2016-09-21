@@ -1,19 +1,19 @@
 h1 {
     color: darkblue;
 	font-size: 32px;
-	font-family: 'Lobster';
+	font-family: 'Arial';
 }
 
 h1 a {
     color: blue;
 	font-size: 32px;
-	font-family: 'Lobster';
+	font-family: 'Arial';
 }
 
 h1 a:visited {
         color: darkblue;
 	font-size: 32px;
-	font-family: 'Lobster';
+	font-family: 'Arial';
 }
 
 
@@ -34,7 +34,7 @@ h1 a:visited {
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Arial', cursive;
 }
 
 .date {
