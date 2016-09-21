@@ -43,9 +43,15 @@ def post_draft_list(request):
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
-    return redirect('post_detail', pk=pk)
+    return redirect('post_detail', pk=post.pk)
 	
 def post_remove(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	post.delete()
 	return redirect('post_list')
+
+def contact_admins(request):
+	return render(request, 'dmlblog/contact_admins.html')
+	
+def django_admin_page(request):
+	return render(request, 'dmlblog/admin')
