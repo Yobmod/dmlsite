@@ -14,10 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+import django.contrib.auth.views
 from django.contrib import admin
+
+admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
     url(r'', include('dmlblog.urls')),
 ]
 
