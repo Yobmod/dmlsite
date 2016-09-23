@@ -1,20 +1,21 @@
 .page-header {
-    background-color: #ff9400;
+    background-color: darkorange;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
 
 footer {
-    background-color: #ff9400;
-    margin-top: 100;
+    background-color: darkorange;
+    margin-top: 150;
     margin-bottom: 0;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 20px 5px 40px;
 }
 
 body {
     background-color: white;
     background-image: url("../images/tree.png");
     background-repeat: no-repeat;
+    background-position: bottom;
 }
 
 h1 {
@@ -37,13 +38,13 @@ h1 a:visited {
 
 
 .page-header {
-    background-color: #ff9400;
+    background-color: darkorange;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #ffffff;
+    color: white;
     font-size: 36pt;
     text-decoration: none;
 }
@@ -69,7 +70,7 @@ h1, h2, h3, h4 {
 }
 
 .top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
+    color: white;
     float: right;
     font-size: 26pt;
     margin-right: 20px;
