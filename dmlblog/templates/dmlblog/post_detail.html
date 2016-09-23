@@ -37,8 +37,9 @@
         		<strong>{{ comment.author }}</strong>
         		<p>{{ comment.text|linebreaks }}</p>
     			</div>
-			{% empty %}
-    			<p>No comments here yet :(</p>
+	{% empty %}
+    		<p>No comments here yet :(
+    		   Login to comment</p>
 	{% endfor %}
 {% endblock %}
 
