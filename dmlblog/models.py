@@ -34,4 +34,4 @@ class Comment(models.Model):
         return self.text
         
     def approved_comments(self):
-    return self.comments.filter(approved_comment=True)
+        return self.comments.filter(approved_comment=True)
