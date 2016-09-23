@@ -1,3 +1,22 @@
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+footer {
+    background-color: #ff9400;
+    margin-top: 100;
+    margin-bottom: 0;
+    padding: 5px 5px 5px 5px;
+}
+
+body {
+    background-color: white;
+    background-image: url("../images/tree.png");
+    background-repeat: no-repeat;
+}
+
 h1 {
     color: darkblue;
 	font-size: 32px;
