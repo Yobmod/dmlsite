@@ -24,7 +24,7 @@ SECRET_KEY = 'u8&hn$a@%16^xvg+t5#abg(p6+&+y&qms6!@$cf*$-q3!^lge+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+TAGGIT_CASE_INSENSITIVE = True
 ALLOWED_HOSTS = []
 
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'dmlblog',
+	'taggit',
 ]
 
 MIDDLEWARE = [

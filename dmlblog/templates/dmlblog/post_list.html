@@ -10,9 +10,11 @@
 			</div>
         
 			<p>{{ post.text|linebreaksbr }}</p>
-			<a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+			<span class="tags"><p># {% for tag in post.tags.all %}{{ tag }}</p>{% endfor %}</span>
+			<a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+		
 		</div>
-		<hr>
+		
 	{% endfor %}
 {% endblock %}
 
