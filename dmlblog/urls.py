@@ -5,10 +5,10 @@ from django.conf.urls.static import static
 
 
 
-
+#app_name = 'dmlblog'
 urlpatterns = [
-    	url(r'^$', views.post_list, name='post_list'),
-    	url(r'^drafts/$', views.post_draft_list, name='post_draft_list'),
+    url(r'^$', views.post_list, name='post_list'),
+    url(r'^drafts/$', views.post_draft_list, name='post_draft_list'),
     	
 	url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
 	url(r'^post/new/$', views.post_new, name='post_new'),
@@ -22,10 +22,7 @@ urlpatterns = [
 	url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
 	url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
 	
-	
-	url(r'^contact/$', views.contact_admins, name='contact_admins'),
-	
-	url(r'^admin/$', views.django_admin_page, name='django_admin_page'),
+
 	
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

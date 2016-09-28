@@ -6,10 +6,15 @@ class ChoiceInline(admin.TabularInline):
 	extra = 3
 
 class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [
+	fieldsets = [
         (None,               {'fields': ['question_text']}),
+		(None,               {'fields': ['author']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
     ]
-    inlines = [ChoiceInline]
+	inlines = [ChoiceInline]
+	list_display = ('question_text', 'author', 'pub_date', 'was_published_recently', )
+	search_fields = ['question_text']
+	#search_fields = ['author']
+	date_hierarchy = 'pub_date'
 
 admin.site.register(Question, QuestionAdmin)

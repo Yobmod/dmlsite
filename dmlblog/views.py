@@ -58,13 +58,6 @@ def post_remove(request, pk):
 	post.delete()
 	return redirect('post_list')
 
-def contact_admins(request):
-	return render(request, 'dmlblog/contact_admins.html')
-
-@login_required
-def django_admin_page(request):
-	return render(request, 'dmlblog/admin')
-	
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
