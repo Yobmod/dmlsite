@@ -1,4 +1,4 @@
-{% extends 'dmlmain/base.html' %}
+{% extends 'dmlmain/base.html' %} {% load embed_video_tags %}
 
 {% block content %}
     <div class="post">
@@ -10,16 +10,21 @@
         	{% if user.is_authenticated %}
         	<a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}"><span class="glyphicon glyphicon-save"></span></a>
         	{% endif %}
-	{% endif %}
+		{% endif %}
         
         {% if user.is_authenticated %}
         	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-		<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-	{% endif %}
-		<a class="btn btn-default" href="/"><span class="glyphicon glyphicon-plus"></span></a>
+			<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+		{% endif %}
+			<a class="btn btn-default" href="/"><span class="glyphicon glyphicon-plus"></span></a>
 		
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
+		
+		{% for video post.video %}	
+			{% video post.video as my_video %}
+			
+			{% endvideo %}
 		<span class="tags"><p># {% for tag in post.tags.all %}{{ tag }}</p>
 		{% endfor %}
 		</span>

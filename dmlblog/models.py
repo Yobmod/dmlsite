@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from taggit.managers import TaggableManager
+from embed_video.fields import EmbedVideoField
 
 
 class Post(models.Model):
@@ -12,6 +13,8 @@ class Post(models.Model):
 	published_date = models.DateTimeField(
 			blank=True, null=True)
 	tags = TaggableManager()
+	video = EmbedVideoField(max_length=200, null=True, blank=True)  # same like models.URLField
+	paginate_by = 10
 
 	def publish(self):
 		self.published_date = timezone.now()
