@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 	'dmlpolls',
 	'dmlmain',
 	'taggit',
+	'embed_video',
 ]
 
 MIDDLEWARE = [

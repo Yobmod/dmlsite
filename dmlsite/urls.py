@@ -29,5 +29,6 @@ urlpatterns = [
 	url(r'^', include('dmlmain.urls')),
 	url(r'^blog/', include('dmlblog.urls')),
 	url(r'^polls/', include('dmlpolls.urls')),
+	url(r'^video/', include('embed_video.urls')),
 ]
 
