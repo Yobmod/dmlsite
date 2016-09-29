@@ -4,10 +4,10 @@ from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ('title', 'text', "tags", "video")
-        
+	class Meta:
+		model = Post
+		fields = ('title', 'text', "tags", "video")
+		
 		
 class CommentForm(forms.ModelForm):
 	class Meta:
@@ -27,12 +27,3 @@ class TagIndexView(TagMixin, ListView):
 		
 	def get_queryset(self):
 		return Post.objects.filter(tags__slug=self.kwargs.get(pk))
-			
-
-		
-	
-		
-		
-
-		
-		
