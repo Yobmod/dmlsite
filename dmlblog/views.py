@@ -5,7 +5,7 @@ from .forms import PostForm, CommentForm, TagIndexView, TagMixin
 from django.contrib.auth.decorators import login_required
 
 def post_list(request):
-	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
 	return render(request, 'dmlblog/post_list.html', {'posts': posts})
 	
 def post_detail(request, pk):
@@ -20,9 +20,9 @@ def post_new(request):
 			post = form.save(commit=False)
 			post.author = request.user
 			post.save()
-			m = Post.objects.get(pk=post.pk)
-			m.image = form.cleaned_data['image']
-			m.save()
+			# m = Post.objects.get(pk=post.pk)
+			# m.image = form.cleaned_data['image']
+			# m.save()
 			return redirect('post_detail', pk=post.pk)
 	else:
 		form = PostForm()
