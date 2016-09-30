@@ -22,11 +22,7 @@ class Post(models.Model):
 	def __str__(self):
 		return self.title
 		
-	def delete(self, *args, **kwargs):
-		# Delete image file also
-		storage, path = self.image.storage, self.image.path
-		super(ImageModel, self).delete(*args, **kwargs)
-		storage.delete(path)
+
 		
 
 		
