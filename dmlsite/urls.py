@@ -32,3 +32,13 @@ urlpatterns = [
 	#url(r'^video/', include('embed_video.urls')),
 ]
 
+
+from django.conf.urls.static import static
+from django.conf import settings
+# try:
+	# from .local_settings import *
+# except ImportError:
+	# pass
+	
+# if DEBUG == True:
+urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

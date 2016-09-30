@@ -23,11 +23,16 @@
 			<p>{{ post.text|linebreaksbr }}</p>
 		
 		{% if post.video %}	
-			
 		{% video post.video %}
 			{% video post.video as my_video %}
 		{% endvideo %}
 		{% endif %}
+		
+		
+		{% if post.image %}
+			 <img src="{{ post.image }}">
+		{% endif %}
+		
 		
 		<span class="tags">
 		{% for tag in post.tags.all %}
@@ -35,7 +40,9 @@
 		{% endfor %}
 		</span>
 		
+		
     </div>
+	
 	
 	
        	<a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>

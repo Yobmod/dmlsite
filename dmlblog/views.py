@@ -15,11 +15,14 @@ def post_detail(request, pk):
 @login_required	
 def post_new(request):
 	if request.method == "POST":
-		form = PostForm(request.POST)
+		form = PostForm(request.POST, request.FILES)
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.author = request.user
 			post.save()
+			m = Post.objects.get(pk=post.pk)
+			m.image = form.cleaned_data['image']
+			m.save()
 			return redirect('post_detail', pk=post.pk)
 	else:
 		form = PostForm()
