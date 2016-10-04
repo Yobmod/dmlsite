@@ -20,16 +20,17 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = [
-	
+
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-	url(r'^admin/', include(admin.site.urls)), 
+	url(r'^admin/', include(admin.site.urls)),
 	#url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	#url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
-	
+
 	url(r'^', include('dmlmain.urls')),
 	url(r'^blog/', include('dmlblog.urls')),
 	url(r'^polls/', include('dmlpolls.urls')),
-	#url(r'^video/', include('embed_video.urls')),
+	
+
 ]
 
 
@@ -39,6 +40,6 @@ from django.conf import settings
 	# from .local_settings import *
 # except ImportError:
 	# pass
-	
+
 # if DEBUG == True:
 urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

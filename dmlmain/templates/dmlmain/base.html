@@ -2,6 +2,7 @@
 
 <head>
 {% load staticfiles%}
+{% load sitetree %}
 
 <title>DMLsite</title>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -19,13 +20,14 @@
 		<p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'logout' %}?next={{request.path}}">Log out</a>)</small></p>
 	{% else %}
 		<a href="{% url 'login' %}?next={{request.path}}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-		
+
 	{% endif %}
 		<a href="{% url 'contact_admins' %}" class="top-menu"><span class="glyphicon glyphicon-phone-alt"></span></a>
-        
+
 		<h1><a href="/">DML</a><a href="/blog">Blog</a> / <a href="/polls">Polls</a> </h1>
+		{% sitetree_menu from "main_tree" include "trunk" %}
 		</div>
-    
+
 	<div class="content container">
         <div class="row">
             <div class="col-md-8">
