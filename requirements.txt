@@ -18,6 +18,7 @@ django-extensions==1.7.4
 django-haystack==2.5.0
 django-hitcount==1.2.2
 django-modelcluster==2.0
+django-sitetree==1.6.0
 django-tagging==0.4.5
 django-taggit==0.18.3
 django-treebeard==4.0.1
