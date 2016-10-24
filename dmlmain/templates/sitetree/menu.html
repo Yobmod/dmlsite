@@ -1,7 +1,12 @@
+<head>
 {% load sitetree %}
-<ul>
+{% load staticfiles%}
+<link rel="stylesheet" href="{% static '/dmlmain.css' %}">
+</head>
+
+<ul class = "sitetree">
 	{% for item in sitetree_items %}
-	<li>
+	<li class = "sitetree">
         <a href="{% sitetree_url for item %}" {% if item.hint %}title="{{ item.hint }}"{% endif %} {% if item.is_current or item.in_current_branch %}class="{{ item.is_current|yesno:"current_item ," }}{{ item.in_current_branch|yesno:"current_branch," }}"{% endif %}>{{ item.title_resolved }}</a>
 		{% if item.has_children %}
 			{% sitetree_children of item for menu template "sitetree/menu.html" %}
@@ -9,3 +14,4 @@
 	</li>
 	{% endfor %}
 </ul>
+
