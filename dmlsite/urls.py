@@ -29,17 +29,13 @@ urlpatterns = [
 	url(r'^', include('dmlmain.urls')),
 	url(r'^blog/', include('dmlblog.urls')),
 	url(r'^polls/', include('dmlpolls.urls')),
-	
 
 ]
 
 
 from django.conf.urls.static import static
 from django.conf import settings
-# try:
-	# from .local_settings import *
-# except ImportError:
-	# pass
 
-# if DEBUG == True:
-urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+	urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+	urlpatterns +=  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,10 +10,12 @@ class Post(models.Model):
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
 	published_date = models.DateTimeField(blank=True, null=True)
-	tags = TaggableManager()
-	video = EmbedVideoField(max_length=200, null=True, blank=True)	# same like models.URLField
-	image = models.ImageField(upload_to='static/images', null=True, blank=True)
-	paginate_by = 10
+	tags = TaggableManager(blank=True)
+	video = EmbedVideoField(max_length=200, null=True, blank=True)
+	image = models.ImageField(upload_to='', null=True, blank=True, height_field='image_height', width_field='image_width')
+	image_width = models.IntegerField(default=100)
+	image_height = models.IntegerField(default=100)
+	paginate_by = 5
 
 	def publish(self):
 		self.published_date = timezone.now()

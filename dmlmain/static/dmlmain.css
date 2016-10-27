@@ -94,6 +94,14 @@ footer {
     margin-bottom: 70px;
 }
 
+.thumbnail{
+	height: 20%;
+	width: 20%;
+	border: 10px;
+	margin: 10px;
+	background-color: darkblue;
+}
+
 ul {
 	color: darkblue;
 	font-size: 20pt;
