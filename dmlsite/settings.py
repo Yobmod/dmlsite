@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [BASE_DIR, 'storage']
+#STATICFILES_DIRS = [BASE_DIR, 'storage']
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -142,5 +142,5 @@ if not DEBUG:
 	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 	AWS_STORAGE_BUCKET_NAME = 'dmlsite'
-	AWS_ACCESS_KEY_ID = 'AKIAIXLQVFPOJK5NPYSQ'
-	AWS_SECRET_ACCESS_KEY = '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'
+	AWS_ACCESS_KEY_ID = 'AKIAICIVHERX6ZDDFOBA'
+	AWS_SECRET_ACCESS_KEY = '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'
