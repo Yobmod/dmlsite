@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATICFILES_DIRS = [BASE_DIR, 'storage']
+STATICFILES_DIRS = [BASE_DIR, 'storage']
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -138,9 +138,9 @@ LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-if not DEBUG:
-	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	AWS_STORAGE_BUCKET_NAME = 'dmlsite'
-	AWS_ACCESS_KEY_ID = 'AKIAICIVHERX6ZDDFOBA'
-	AWS_SECRET_ACCESS_KEY = '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'
+# if not DEBUG:
+	# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	# AWS_STORAGE_BUCKET_NAME = 'dmlsite'
+	# AWS_ACCESS_KEY_ID = 'AKIAICIVHERX6ZDDFOBA'
+	# AWS_SECRET_ACCESS_KEY = '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'
