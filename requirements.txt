@@ -2,6 +2,7 @@ arrow==0.8.0
 autoenv==1.0.0
 beautifulsoup4==4.5.1
 binaryornot==0.4.0
+boto==2.43.0
 chardet==2.3.0
 click==6.6
 cookiecutter==1.4.0
@@ -19,6 +20,7 @@ django-haystack==2.5.0
 django-hitcount==1.2.2
 django-modelcluster==2.0
 django-sitetree==1.6.0
+django-storages==1.5.1
 django-tagging==0.4.5
 django-taggit==0.18.3
 django-treebeard==4.0.1
