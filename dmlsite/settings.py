@@ -139,7 +139,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if not DEBUG:
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    AWS_STORAGE_BUCKET_NAME = 'dmlsite'
-    AWS_ACCESS_KEY_ID = 'AKIAIXLQVFPOJK5NPYSQ'
-    AWS_SECRET_ACCESS_KEY = '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'
+	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+	AWS_STORAGE_BUCKET_NAME = 'dmlsite'
+	AWS_ACCESS_KEY_ID = 'AKIAIXLQVFPOJK5NPYSQ'
+	AWS_SECRET_ACCESS_KEY = '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'
