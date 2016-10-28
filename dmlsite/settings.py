@@ -130,10 +130,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [BASE_DIR,]
+STATICFILES_DIRS = [BASE_DIR, 'storage']
 
 
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
