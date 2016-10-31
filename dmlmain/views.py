@@ -30,9 +30,9 @@ def contact_admins(request):
 
 		subject = 'Site contact form'
 		from_email = settings.EMAIL_HOST_USER
-		to_email = [from_email, 'other.email.com']
-		contact_message = """%s: %s via %s""" %(form_name, form_message, form_email)
-		send_mail(subject, contact_message, from_email, [to_email], fail_silently=False)
+		to_email = [from_email, 'other@email.com']
+		contact_message = "%s: %s via %s"%(form_name, form_message, form_email)
+		send_mail(subject, contact_message, from_email, to_email, fail_silently=False)
 
 	context = {'form':form,}
 	return render(request, 'dmlmain/contact_admins.html', context)

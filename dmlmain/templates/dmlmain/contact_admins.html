@@ -1,4 +1,5 @@
 {% extends 'dmlmain/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div class="contact">
@@ -11,7 +12,7 @@
 		<span class="glyphicon glyphicon-phone"></span>
 
 		<form method='POST' action=''>{%csrf_token %}
-		{{form.as_p}}
+		{{form|crispy}}
 		<input type='submit', value='Submit'/>
 
 

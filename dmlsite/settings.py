@@ -13,7 +13,7 @@ ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'yobmod@gmail.com'
-EMAIL_HOST_PASSWORD = 'SnoodlinG'
+EMAIL_HOST_PASSWORD = '3Monsters'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Application definition
@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 	'taggit',
 	'embed_video',
 	'sitetree',
+	'crispy_forms',
 	'storages',
 ]
 
@@ -131,16 +132,17 @@ USE_L10N = True
 USE_TZ = True
 
 TAGGIT_CASE_INSENSITIVE = True
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATICFILES_DIRS = [BASE_DIR, 'storage']
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'media_root')
