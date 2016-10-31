@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from .models import Choice, Question
 
@@ -20,7 +21,7 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
 	model = Question
 	template_name = 'dmlpolls/detail.html'
-	
+
 	def get_queryset(self):
 		"""Excludes any questions that aren't published yet."""
 		return Question.objects.filter(pub_date__lte=timezone.now())
@@ -29,7 +30,7 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
 	model = Question
 	template_name = 'dmlpolls/results.html'
-	
+
 	def get_queryset(self):
 		"""Excludes any questions that aren't published yet."""
 		return Question.objects.filter(pub_date__lte=timezone.now())
@@ -52,7 +53,7 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a user hits the Back button.
         return HttpResponseRedirect(reverse('poll_results', args=(question.id,)))
 		#return HttpResponse("placeholder for votes number %s." % question_id)
-		
+
 # def make_poll(request)
 	# pub = datetime.datetime.now()
 	# Question.question_text = input("What is your poll question")

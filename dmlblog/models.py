@@ -9,7 +9,7 @@ class Post(models.Model):
 	title = models.CharField(max_length=200)
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
-	published_date = models.DateTimeField(blank=True, null=True)
+	published_date = models.DateTimeField(blank=True, null=True, auto_now_add=False, auto_now=True)
 	tags = TaggableManager(blank=True)
 	video = EmbedVideoField(max_length=200, null=True, blank=True)
 	image = models.ImageField(upload_to='', null=True, blank=True, height_field='image_height', width_field='image_width')
@@ -23,12 +23,12 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.title
-		
 
-		
 
-		
-	
+
+
+
+
 class Comment(models.Model):
 	post = models.ForeignKey('dmlblog.Post', related_name='comments')
 	author = models.CharField(max_length=200)
@@ -42,12 +42,6 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.text
-		
+
 	def approved_comments(self):
 		return self.comments.filter(approved_comment=True)
-
-		
-
-
-
-	

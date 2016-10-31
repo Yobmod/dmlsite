@@ -1,17 +1,23 @@
 
 import os
 import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'u8&hn$a@%16^xvg+t5#abg(p6+&+y&qms6!@$cf*$-q3!^lge+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-TAGGIT_CASE_INSENSITIVE = True
+
 ALLOWED_HOSTS = []
 
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'yobmod@gmail.com'
+EMAIL_HOST_PASSWORD = 'SnoodlinG'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 # Application definition
+
 
 INSTALLED_APPS = [
 	'django.contrib.admin',
@@ -45,7 +51,7 @@ ROOT_URLCONF = 'dmlsite.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(BASE_DIR, 'dmlsite/templates')],
+		'DIRS': [os.path.join(BASE_DIR, 'templates')],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -124,6 +130,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+TAGGIT_CASE_INSENSITIVE = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -137,10 +144,3 @@ LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# if not DEBUG:
-	# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	# AWS_STORAGE_BUCKET_NAME = 'dmlsite'
-	# AWS_ACCESS_KEY_ID = 'AKIAICIVHERX6ZDDFOBA'
-	# AWS_SECRET_ACCESS_KEY = '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'
