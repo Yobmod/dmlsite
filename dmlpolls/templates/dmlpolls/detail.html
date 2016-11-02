@@ -3,6 +3,8 @@
 {% block content %}
 
 <h1>{{ question.question_text }}</h1>
+<h2>{{question.author}}</h2>
+<h2>{{question.pub_date}}</h2>
 
 {% if error_message %}
 	<p><strong>{{ error_message }}</strong></p>

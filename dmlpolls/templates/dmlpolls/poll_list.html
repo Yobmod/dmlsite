@@ -1,0 +1,16 @@
+{% extends 'dmlmain/base.html' %}
+
+{% block content %}
+
+
+<div>
+{% for question in questions%}
+
+    <a href="{% url 'poll_detail' question.id %}">{{ question.question_text }}</a>   	{{poll.author}} - {{poll.pub_date}}
+
+{% endfor %}
+</div>
+
+
+
+{% endblock %}

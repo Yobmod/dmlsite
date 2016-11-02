@@ -1,0 +1,17 @@
+{% extends 'dmlmain/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<p>Add Choices</p>
+    <form id="choice" name="" action="" method="post"> {% csrf_token %}
+    {{form|crispy}}
+	    <fieldset>
+            <label for="id_choice">Choice: </label>{{form.choice}}
+
+            <input type="submit" value="Submit" />
+        </fieldset>
+    </form>
+
+
+{% endblock %}

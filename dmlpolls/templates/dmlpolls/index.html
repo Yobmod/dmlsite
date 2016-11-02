@@ -2,14 +2,16 @@
 
 {% block content %}
 
+	<h1>Recent Polls</h1>
 		{% if latest_question_list %}
 		<ul>
 		{% for question in latest_question_list %}
-        <li><a href="{% url "poll_detail" question.id %}">{{ question.question_text }}</a></li>
+        <li><a href="{% url "poll_detail" question.id %}">{{ question.question_text }}</a>{{question.author}}{{question.pub_date}}</li>
 		{% endfor %}
 		</ul>
 		{% else %}
-		<p>No polls are available.</p>
+		<p>No recent polls are available.</p>
 		{% endif %}
+		<p>See all <a href="{% url "poll_list" %}">previous polls here</a></p>
 
 {% endblock %}
