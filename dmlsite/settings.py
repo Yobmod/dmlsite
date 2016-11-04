@@ -9,7 +9,7 @@ SECRET_KEY = 'u8&hn$a@%16^xvg+t5#abg(p6+&+y&qms6!@$cf*$-q3!^lge+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'yobmod@gmail.com'
@@ -22,20 +22,30 @@ EMAIL_USE_TLS = True
 INSTALLED_APPS = [
 	'django.contrib.admin',
 	'django.contrib.admindocs',
+	'registration',
 	'django.contrib.auth',
+	'django.contrib.sites',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+
 	'dmlblog',
 	'dmlpolls',
 	'dmlmain',
+
 	'taggit',
 	'embed_video',
+
 	'sitetree',
 	'crispy_forms',
 	'storages',
 ]
+
+ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
+TAGGIT_CASE_INSENSITIVE = True
+CRISPY_TEMPLATE_PACK = 'bootstrap3' #or bootstap, bootstrap4, uni-forms
 
 MIDDLEWARE = [
 	'django.middleware.security.SecurityMiddleware',
@@ -69,10 +79,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -86,11 +94,8 @@ DATABASES = {
 }
 
 DATABASES['default'] = dj_database_url.config()
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 ALLOWED_HOSTS = ['*']
-
 DEBUG = False
 
 try:
@@ -101,7 +106,6 @@ except ImportError:
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -120,31 +124,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'GB'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
-TAGGIT_CASE_INSENSITIVE = True
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
 STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
-
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_root')
-
 LOGIN_REDIRECT_URL = '/'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'media_root')
