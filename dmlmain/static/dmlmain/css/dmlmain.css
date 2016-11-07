@@ -123,7 +123,7 @@ li a:hover {
 	color: grey;
 	white-space: nowrap;
 	overflow:hidden;
-	
+
 }
 
 .comment {
@@ -136,7 +136,7 @@ li a:hover {
 /* contact content  end.........................................................................................................................................................................*/
 body {
     background-color: white;
-    background-image: url("dmlmain/images/tree.png");
+    background-image: url("../images/tree.png");
     background-repeat: no-repeat;
     background-position: bottom;
 	 font-family: 'Arial', cursive;
@@ -178,7 +178,7 @@ h1 a, h1 a:hover {
 }
 
  .sitetree a:hover{ 						/* changes bullet and text colors*/
-	color: orangered;					
-	
+	color: orangered;
+
 }
 /* side nav bar end.........................................................................................................................................................................*/
