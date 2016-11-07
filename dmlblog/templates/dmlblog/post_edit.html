@@ -1,9 +1,10 @@
 {% extends 'dmlmain/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h1>New post</h1>
     <form method="POST" enctype='multipart/form-data' class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+        {{form|crispy}}
         <button type="submit" class="save btn btn-default">Save</button>
 
     </form>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.contrib import messages
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, TagIndexView, TagMixin
 from django.contrib.auth.decorators import login_required
@@ -20,7 +21,10 @@ def post_new(request):
 			post = form.save(commit=False)
 			post.author = request.user
 			post.save()
-			return redirect('dmlblog/post_detail.html', pk=post.pk)
+			messages.success(request, "New post created!")
+			return redirect('blog:post_detail', pk=post.pk)
+		else:
+			messages.error(request, "New post failed!")
 	else:
 		form = PostForm()
 	return render(request, 'dmlblog/post_edit.html', {'form': form})
@@ -29,13 +33,13 @@ def post_new(request):
 def post_edit(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	if request.method == "POST":
-		form = PostForm(request.POST, instance=post)
+		form = PostForm(request.POST or None, instance=post)
 		if form.is_valid():
-			post = form.save(commit=False)
-			post.author = request.user
-			post.save()
+			instance = form.save(commit=False)
+			instance.author = request.user
+			instance.save()
 			form.save_m2m()
-			return redirect('post_detail', pk=post.pk)
+			return redirect('blog:post_detail', pk=post.pk)
 	else:
 		form = PostForm(instance=post)
 	return render(request, 'dmlblog/post_edit.html', {'form': form})
@@ -50,13 +54,13 @@ def post_draft_list(request):
 def post_publish(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	post.publish()
-	return redirect('post_detail', pk=post.pk)
+	return redirect('blog:post_detail', pk=post.pk)
 
 @login_required
 def post_remove(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	post.delete()
-	return redirect('post_list')
+	return redirect('blog:post_list')
 
 def add_comment_to_post(request, pk):
 	post = get_object_or_404(Post, pk=pk)
@@ -66,7 +70,7 @@ def add_comment_to_post(request, pk):
 			comment = form.save(commit=False)
 			comment.post = post
 			comment.save()
-			return redirect('post_detail', pk=post.pk)
+			return redirect('blog:post_detail', pk=post.pk)
 	else:
 		form = CommentForm()
 	return render(request, 'dmlblog/add_comment_to_post.html', {'form': form})
