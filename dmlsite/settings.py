@@ -22,7 +22,6 @@ EMAIL_USE_TLS = True
 INSTALLED_APPS = [
 	'django.contrib.admin',
 	'django.contrib.admindocs',
-	'registration',
 	'django.contrib.auth',
 	'django.contrib.sites',
 	'django.contrib.contenttypes',
@@ -36,14 +35,18 @@ INSTALLED_APPS = [
 
 	'taggit',
 	'embed_video',
-
+	'registration',
 	'sitetree',
 	'crispy_forms',
 	'storages',
+	
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
+SITE_ID = 1
+
+
 TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3' #or bootstap, bootstrap4, uni-forms
 
@@ -134,7 +137,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_root')

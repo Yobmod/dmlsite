@@ -4,20 +4,30 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import SignUpForm, ContactForm
+from .models import SignUp
 
 def homepage(request):
-	if request.user.is_authenticated():
-		text = "Hello %s" %(request.user)
-	else:
-		text = "Welcome visitor"
 	form = SignUpForm(request.POST or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
 		#if not instance.name:
 		#	instance.name = "Visitor"
 		name = form.cleaned_data.get('name')
-		instance.save
-	context = {'text': text, 'form':form,}  #'text' is name of template tag, text is what is shown
+		instance.save()
+		  #'text' is name of template tag, text is what is shown
+
+	if request.user.is_authenticated() and request.user.is_staff:
+		text = "Hello %s, valued employee, printing signups" %(request.user)
+		i = 1
+		for instance in SignUp.objects.all():
+			print(i)
+			print(instance)
+			i += 1
+	elif request.user.is_authenticated():
+			text = "Hello %s" %(request.user)
+	else:
+			text = "Welcome visitor"
+	context = {'text': text, 'form':form,}
 	return render(request, 'dmlmain/homepage.html', context)
 
 
@@ -41,3 +51,7 @@ def contact_admins(request):
 @login_required
 def django_admin_page(request):
 	return render(request, 'dmlmain/admin')
+
+
+def register(request):
+	return render(request, 'registration/registration_form.html')

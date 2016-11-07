@@ -13,6 +13,9 @@ urlpatterns = [
 	url(r'^admin/$', views.django_admin_page, name='django_admin_page'), #link to admin
 
 	url(r'^accounts/', include('registration.backends.default.urls')),
+		#names = 'auth_login' /login 'auth_logout' 'registration_register' 'auth_password_reset' 'registration_activate'
+
+	url(r'^accounts/register/$', views.register, name='register'),
 	url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
 	]

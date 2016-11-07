@@ -10,4 +10,4 @@ http://{{ site.domain }}{% url 'registration_activate' activation_key %}
 
 {% blocktrans %}The above link is valid for {{ expiration_days }} days.{% endblocktrans %}
 
--Team CFE
+-DML
