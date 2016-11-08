@@ -48,7 +48,6 @@ ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, u
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
 SITE_ID = 1
 
-COMPRESS_ENABLED = True
 TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3' #or bootstap, bootstrap4, uni-forms
 
