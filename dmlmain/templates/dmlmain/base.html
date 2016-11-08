@@ -2,14 +2,21 @@
 <head>
 {% load staticfiles%}
 {% load sitetree %}
+{% load cookielaw_tags %}
+{% load compress %}
 
 <title>DMLsite</title>
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+{% compress css %}
 <link rel="stylesheet" href="{% static 'dmlmain/css/bootstrap.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'dmlmain/css/bootstrap-theme.min.css' %}"/>
-<link rel="stylesheet" href="{% static 'dmlmain/js/bootstrap.min.js' %}"/>
 <link rel="stylesheet" href="{% static 'dmlmain/css/dmlmain.css' %}"/>
+{% endcompress %}
+{% compress js %}
+<script type="text/javascript" src="{% static 'dmlmain/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+{% endcompress %}
 <link rel="shortcut ico" href="{% static 'dmlmain/icons/favicon.ico' type="image/x-icon" %}"/>
 
 
@@ -64,7 +71,7 @@
 
  <div class="header_footer">
 <footer>
-
+{% cookielaw_banner %}
 	<p class="bottom-menu2">Contact information: <a href="mailto:yobmod@gmail.com">yobmod@gmail.com</a>  <i class="fa fa-bolt fa-spin"></i></p>
 </footer>
 </div>

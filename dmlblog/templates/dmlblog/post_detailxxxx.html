@@ -6,7 +6,7 @@
 
 <h1>
   {{ object.title }}
-  <a href="{% url "posts:list" %}" class="pull-right"><small>Back to list</small></a>
+  <a href="{% url "blog:post_list" %}" class="pull-right"><small>Back to list</small></a>
 </h1>
 
 {% video object.video as my_video %}
