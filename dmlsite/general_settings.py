@@ -5,19 +5,6 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'u8&hn$a@%16^xvg+t5#abg(p6+&+y&qms6!@$cf*$-q3!^lge+'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
-#ALLOWED_HOSTS = []
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'yobmod@gmail.com'
-EMAIL_HOST_PASSWORD = '3Monsters'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-# Application definition
-
 
 INSTALLED_APPS = [
 	'django.contrib.admin',
@@ -48,7 +35,6 @@ ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, u
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
 SITE_ID = 1
 
-COMPRESS_ENABLED = True
 TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3' #or bootstap, bootstrap4, uni-forms
 
@@ -130,10 +116,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-try:
-	from .local_settings import *
-except ImportError:
-	pass
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -144,9 +126,20 @@ STATICFILES_FINDERS = (
 )
 
 STATIC_URL = '/static/'
+
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_root')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static', 'static_root')
 LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'media_root')
+
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
+#COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
+#COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+COMPRESS_OUTPUT_DIR = 'compressed'
+COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
+COMPRESS_JS_BACKEND = 'django_compressor.js.JsCompressor'
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
