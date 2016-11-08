@@ -1,4 +1,5 @@
 {% extends 'dmlmain/base.html' %}
+{% load staticfiles%}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -15,6 +16,12 @@
 		{{form|crispy}}
 		<input type='submit', value='Submit'/>
 
+		<br>
+		<br>
+		<br>
+		<div class ="contact">
+		<a href="https://www.paypal.me/dmlsite"><img src= "{% static "dmlmain/images/donate-button.png" %}" alt="Paypal donate" style="width:210px;height:105px;border:0;"/></a>
+		</div> 
 
     </div>
 {% endblock %}
