@@ -23,6 +23,7 @@ django-extensions==1.7.4
 django-haystack==2.5.0
 django-hitcount==1.2.2
 django-modelcluster==2.0
+django-mptt==0.8.6
 django-registration-redux==1.4
 django-sitetree==1.6.0
 django-storages==1.5.1
@@ -48,6 +49,7 @@ PyMySQL==0.7.9
 python-dateutil==2.5.3
 python3-openid==3.0.10
 pytz==2016.6.1
+PyYAML==3.12
 rcssmin==1.0.6
 requests==2.11.1
 requests-oauthlib==0.6.2

@@ -6,18 +6,20 @@
 {% load compress %}
 
 <title>DMLsite</title>
+<meta charset="utf-8">
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 {% compress css %}
+<link rel="stylesheet" href="{% static 'dmlmain/css/font-awesome.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'dmlmain/css/bootstrap.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'dmlmain/css/bootstrap-theme.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'dmlmain/css/dmlmain.css' %}"/>
 {% endcompress %}
-{% compress js %}
+
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.slim.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'dmlmain/js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
-{% endcompress %}
 <script type="text/javascript" src="{% static 'dmlmain/js/homepage.js' %}"></script>
+<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+
 <link rel="shortcut ico" href="{% static 'dmlmain/icons/favicon.ico' type="image/x-icon" %}"/>
 
 

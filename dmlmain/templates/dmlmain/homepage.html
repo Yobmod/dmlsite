@@ -2,9 +2,11 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
-	<script type="text/javascript" src="{% static 'dmlmain/js/homepage.js' %}"></script>
-	
+
 {% block content %}
+
+
+
 	<div>
 		<h1>{{text}}</h1>
 
@@ -25,11 +27,12 @@
 
 	</div>
 	{% endif %}
-	
-	</div>
 
-	<div class="fade000">
-		<img src= "{% static "dmlmain/images/ghost_icon.png" %}" alt="Ghost!" style="width:210px;height:210px;border:0;"/>
+
+</br></br></br></br></br>
+	<div id="fade">
+		<img id="fade" src= "{% static "dmlmain/images/ghost_icon.png" %}" alt="Ghost!" style="width:210px;height:210px;border:0;"/>
+			<p id="poo">click</p>
 	</div>
 
 
