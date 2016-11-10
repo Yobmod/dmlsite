@@ -1,0 +1,190 @@
+#fade {
+	
+}
+
+
+
+/* header.........................................................................................................................................................................*/
+.header_footer{
+    background-color: darkorange;
+	color: white;
+}
+
+.page-header {
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: white;
+    font-size: 30pt;
+    text-decoration: none;
+}
+
+.page-header h1 a:hover{
+    color: grey;
+	font-size: 30pt;
+}
+
+.top-menu, .top-menu:visited {
+    color: white;
+    float: right;
+    font-size: 20pt;
+    margin-right: 20px;
+}
+
+.top-menu:hover{
+    color: grey;
+    float: right;
+    font-size: 20pt;
+    margin-right: 20px;
+}
+
+.top-menu2{
+    color: white;
+    float: right;
+    font-size: 20pt;
+    margin-right: 20px;
+}
+
+.top-menu2 a{
+    color: darkblue;
+    font-size: 16pt;
+   }
+
+   .top-menu2 a:hover{
+    color: blue;
+
+   }
+
+footer {
+    margin-top: 150;
+    margin-bottom: 0;
+    padding: 15px 20px 5px 40px;
+	}
+
+.bottom-menu2 a{
+    color: darkblue;
+    font-size: 10pt;
+   }
+
+ .bottom-menu2 a:hover{
+    color: blue;
+
+   }
+
+/* header end.........................................................................................................................................................................*/
+
+
+
+
+/* blog and poll post content , 2 columns.........................................................................................................................................................................*/
+
+ .content_left  {
+	color: black;
+}
+
+.date {
+    color: grey;
+}
+
+.save {
+    float: right;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
+
+.post {
+    margin-bottom: 70px;
+}
+
+.thumbnail{
+	height: 20%;
+	width: 20%;
+	border: 10px;
+	margin: 10px;
+	background-color: darkblue;
+}
+
+ul {
+	color: darkblue;
+	font-size: 20pt;
+	margin: 0;
+	padding: 0;
+}
+
+li a {
+    color: darkblue;
+}
+
+li a:hover {
+    color: blue;
+}
+
+}
+.tags {
+	font-size: 12pt;
+	color: grey;
+	white-space: nowrap;
+	overflow:hidden;
+
+}
+
+.comment {
+    margin: 20px 0px 20px 20px;
+}
+/* blog and poll post content, 2 columns end .........................................................................................................................................................................*/
+
+
+
+/* contact content  end.........................................................................................................................................................................*/
+body {
+    background-color: white;
+    background-image: url("../images/tree.png");
+    background-repeat: no-repeat;
+    background-position: bottom;
+	 font-family: 'Arial', cursive;
+	 color: black
+}
+
+h1, h1 a:visited {
+    color: darkblue;
+	font-size: 32px;
+	font-family: 'Arial';
+}
+
+h1 a, h1 a:hover {
+    color: blue;
+	font-size: 32px;
+	font-family: 'Arial';
+}
+
+.contact .glyphicon, .contact .glyphicon a{
+    font-size: 50px;
+	color: darkblue;
+}
+/* contact content end.........................................................................................................................................................................*/
+
+
+/* side nav bar.........................................................................................................................................................................*/
+.sidenav {
+	    margin: 20px 0px 20px 0px;
+		font-size: 20px;
+
+		float: right;
+		text-align: left;
+}
+
+.sitetree, .sitetree a{ 						/* changes bullet and text colors*/
+				color: darkorange;
+				list-style:none;
+
+}
+
+ .sitetree a:hover{ 						/* changes bullet and text colors*/
+	color: orangered;
+
+}
+/* side nav bar end.........................................................................................................................................................................*/
