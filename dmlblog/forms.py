@@ -23,7 +23,6 @@ class TagMixin(object):
 		return context
 		
 class TagIndexView(TagMixin, ListView):
-	paginate_by = "10"
-		
+	paginate_by = "5"
 	def get_queryset(self):
 		return Post.objects.filter(tags__slug=self.kwargs.get(pk))

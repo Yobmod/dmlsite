@@ -3,14 +3,24 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import AddPollForm, ChoiceForm
 from .models import Choice, Question, Opinion
 
 def poll_list(request):
 	questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+	queryset_list = Question.objects.all()
+	query = request.GET.get("q")
+	if query:
+		queryset_list = queryset_list.filter(
+			Q(author_icontains=query)|
+			Q(question_text_icontains=query)
+			
+			).distinct
 	return render(request, 'dmlpolls/poll_list.html', {'questions': questions})
-
+	
+	
 def poll_detail(request, pk):
 	question = get_object_or_404(Post, pk=question_id)
 	return render(request, 'dmlpolls/detail.html', {'question': question})

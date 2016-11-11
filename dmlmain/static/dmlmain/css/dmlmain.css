@@ -1,76 +1,76 @@
 .fadediv {
 	margin: auto;
-    width: 50%;
+	width: 50%;
 }
 
 
 
 /* header.........................................................................................................................................................................*/
 .header_footer{
-    background-color: darkorange;
+	background-color: darkorange;
 	color: white;
 }
 
 .page-header {
-    margin-top: 0;
-    padding: 20px 20px 20px 40px;
+	margin-top: 0;
+	padding: 20px 20px 20px 40px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: white;
-    font-size: 30pt;
-    text-decoration: none;
+	color: white;
+	font-size: 30pt;
+	text-decoration: none;
 }
 
 .page-header h1 a:hover{
-    color: grey;
+	color: grey;
 	font-size: 30pt;
 }
 
 .top-menu, .top-menu:visited {
-    color: white;
-    float: right;
-    font-size: 20pt;
-    margin-right: 20px;
+	color: white;
+	float: right;
+	font-size: 20pt;
+	margin-right: 20px;
 }
 
 .top-menu:hover{
-    color: grey;
-    float: right;
-    font-size: 20pt;
-    margin-right: 20px;
+	color: grey;
+	float: right;
+	font-size: 20pt;
+	margin-right: 20px;
 }
 
 .top-menu2{
-    color: white;
-    float: right;
-    font-size: 20pt;
-    margin-right: 20px;
+	color: white;
+	float: right;
+	font-size: 20pt;
+	margin-right: 20px;
 }
 
 .top-menu2 a{
-    color: darkblue;
-    font-size: 16pt;
+	color: darkblue;
+	font-size: 16pt;
    }
 
    .top-menu2 a:hover{
-    color: blue;
+	color: blue;
 
    }
 
 footer {
-    margin-top: 150;
-    margin-bottom: 0;
-    padding: 15px 20px 5px 40px;
+	margin-top: 150;
+	margin-bottom: 0;
+	padding: 15px 20px 5px 40px;
 	}
 
 .bottom-menu2 a{
-    color: darkblue;
-    font-size: 10pt;
+	color: darkblue;
+	font-size: 10pt;
    }
 
  .bottom-menu2 a:hover{
-    color: blue;
+	color: blue;
 
    }
 
@@ -81,24 +81,21 @@ footer {
 
 /* blog and poll post content , 2 columns.........................................................................................................................................................................*/
 
- .content_left  {
-	color: black;
-}
 
 .date {
-    color: grey;
+	color: grey;
 }
 
 .save {
-    float: right;
+	float: right;
 }
 
 .post-form textarea, .post-form input {
-    width: 100%;
+	width: 100%;
 }
 
 .post {
-    margin-bottom: 70px;
+	margin-bottom: 70px;
 }
 
 .thumbnail{
@@ -117,11 +114,11 @@ ul {
 }
 
 li a {
-    color: darkblue;
+	color: darkblue;
 }
 
 li a:hover {
-    color: blue;
+	color: blue;
 }
 
 }
@@ -134,36 +131,55 @@ li a:hover {
 }
 
 .comment {
-    margin: 20px 0px 20px 20px;
+	margin: 20px 0px 20px 20px;
 }
 /* blog and poll post content, 2 columns end .........................................................................................................................................................................*/
 
 
 
-/* contact content  end.........................................................................................................................................................................*/
+/* contact content	.........................................................................................................................................................................*/
+
+
+
 body {
-    background-color: white;
-    background-image: url("../images/tree.png");
-    background-repeat: no-repeat;
-    background-position: bottom;
+	background-color: white;
+	background-image:  url ("../images/tree.png");
+	background-repeat: no-repeat;
+	background-position: bottom;
 	 font-family: 'Arial', cursive;
-	 color: black
+	 color: black;
+	 }
+	 
+ .content  {
+	background-image: url ("../images/tree.png");
+	background-repeat: no-repeat;
+	background-position: bottom;
+	margin: auto;
+	width: 100%
+}
+
+ .contentleft  {
+	width: 45%
+}
+
+ .contentright {
+	width: 45%
 }
 
 h1, h1 a:visited {
-    color: darkblue;
+	color: darkblue;
 	font-size: 32px;
 	font-family: 'Arial';
 }
 
 h1 a, h1 a:hover {
-    color: blue;
+	color: blue;
 	font-size: 32px;
 	font-family: 'Arial';
 }
 
 .contact .glyphicon, .contact .glyphicon a{
-    font-size: 50px;
+	font-size: 50px;
 	color: darkblue;
 }
 /* contact content end.........................................................................................................................................................................*/
@@ -171,20 +187,20 @@ h1 a, h1 a:hover {
 
 /* side nav bar.........................................................................................................................................................................*/
 .sidenav {
-	    margin: 20px 0px 20px 0px;
+		margin: 20px 0px 20px 0px;
 		font-size: 20px;
 
 		float: right;
 		text-align: left;
 }
 
-.sitetree, .sitetree a{ 						/* changes bullet and text colors*/
+.sitetree, .sitetree a{							/* changes bullet and text colors*/
 				color: darkorange;
 				list-style:none;
 
 }
 
- .sitetree a:hover{ 						/* changes bullet and text colors*/
+ .sitetree a:hover{							/* changes bullet and text colors*/
 	color: orangered;
 
 }

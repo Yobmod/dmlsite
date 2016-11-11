@@ -39,6 +39,7 @@ def post_edit(request, pk):
 			instance.author = request.user
 			instance.save()
 			form.save_m2m()
+			messages.success(request, "Post updated")
 			return redirect('blog:post_detail', pk=post.pk)
 	else:
 		form = PostForm(instance=post)
@@ -60,6 +61,7 @@ def post_publish(request, pk):
 def post_remove(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	post.delete()
+	messages.success(request, "Post deleted")
 	return redirect('blog:post_list')
 
 def add_comment_to_post(request, pk):

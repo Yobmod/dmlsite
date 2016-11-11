@@ -3,6 +3,7 @@ import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
 class Question(models.Model):
 	author = models.ForeignKey('auth.user', null=True)
 	question_text = models.CharField(max_length=200)

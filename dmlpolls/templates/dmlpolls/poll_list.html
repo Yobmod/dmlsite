@@ -2,11 +2,18 @@
 
 {% block content %}
 
+<div class = "list_search">
+<form method='GET' action=''>
+<input type='text' name='q' placeholder='Search Polls' value='{{request.GET.q}}'/>
+<input type='submit' value='Search' />
+</form>
+</div>
 
 <div>
 {% for question in questions%}
 
-    <a href="{% url 'polls:poll_detail' question.id %}">{{ question.question_text }}</a>   	{{poll.author}} - {{poll.pub_date}}
+    <a href="{% url 'polls:poll_detail' question.id %}">{{ question.question_text }}</a>
+  	{{poll.author}} - {{poll.pub_date}}
 
 {% endfor %}
 </div>
