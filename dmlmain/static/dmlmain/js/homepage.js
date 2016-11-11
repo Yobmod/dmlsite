@@ -1,3 +1,5 @@
 $(document).ready(function() {
-	$("#fade").fadeTo("slow", 0.1);
+	$("#fadeimg").click(function(){
+		$("#fadeimg").fadeTo(5000, 0.05);
+});
 });
