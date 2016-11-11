@@ -55,3 +55,6 @@ def django_admin_page(request):
 
 def register(request):
 	return render(request, 'registration/registration_form.html')
+
+def test(request):
+	return render(request, 'test/test.html')

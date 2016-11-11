@@ -1,3 +1,3 @@
 $(document).ready(function() {
-	$("#fade").hide();
+	$("#fade").fadeTo("slow", 0.01);
 });

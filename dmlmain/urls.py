@@ -18,4 +18,6 @@ urlpatterns = [
 	url(r'^accounts/register/$', views.register, name='register'),
 	url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
+
+	url(r'^test/$', views.test, name='test'),
 	]
