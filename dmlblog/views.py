@@ -3,11 +3,26 @@ from django.utils import timezone
 from django.contrib import messages
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, TagIndexView, TagMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
 
 def post_list(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
-	return render(request, 'dmlblog/post_list.html', {'posts': posts})
+	paginator = Paginator(posts, 5)
+	page_request_var = "post_page"
+	page = request.GET.get(page_request_var)
+	print(paginator.count)
+	print(paginator.num_pages)
+	try:
+		queryset = paginator.page(page)
+	except PageNotAnInteger:
+		queryset = paginator.page(1)#if not enough, give first page
+	except(EmptyPage or InvalidPage):
+		queryset = paginator.page(paginator.num_pages)#if too many, give last page
+	context = {'posts':posts, 
+						'page_request_var': page_request_var, 
+						'obj_list':queryset,}
+	return render(request, 'dmlblog/post_list.html', context)
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
@@ -33,7 +48,7 @@ def post_new(request):
 def post_edit(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	if request.method == "POST":
-		form = PostForm(request.POST or None, instance=post)
+		form = PostForm(request.POST or None, request.FILES or None, instance=post)
 		if form.is_valid():
 			instance = form.save(commit=False)
 			instance.author = request.user

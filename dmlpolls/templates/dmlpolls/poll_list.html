@@ -9,15 +9,16 @@
 </form>
 </div>
 
-<div>
-{% for question in questions%}
 
-    <a href="{% url 'polls:poll_detail' question.id %}">{{ question.question_text }}</a>
-  	{{poll.author}} - {{poll.pub_date}}
-
-{% endfor %}
+{% for question in obj_list%}
+<div class="post">
+    <h1><a href="{% url 'polls:poll_detail' question.id %}">{{ question.question_text }}</a></h1>
+  	<div class="date">
+	{{poll.author}} - {{poll.pub_date}}
+	</div>
 </div>
+{% endfor %}
 
-
+{% include "dmlmain/pagination.html" %}
 
 {% endblock %}

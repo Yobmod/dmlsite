@@ -15,8 +15,7 @@ class Post(models.Model):
 	image = models.ImageField(upload_to='', null=True, blank=True, height_field='image_height', width_field='image_width')
 	image_width = models.IntegerField(default=100)
 	image_height = models.IntegerField(default=100)
-	paginate_by = 5
-
+	
 	def publish(self):
 		self.published_date = timezone.now()
 		self.save()

@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import AddPollForm, ChoiceForm
 from .models import Choice, Question, Opinion
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def poll_list(request):
 	questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
@@ -14,11 +15,20 @@ def poll_list(request):
 	query = request.GET.get("q")
 	if query:
 		queryset_list = queryset_list.filter(
-			Q(author_icontains=query)|
-			Q(question_text_icontains=query)
-			
+			#Q(author__icontains=query)|
+			Q(question_text__icontains=query)
 			).distinct
-	return render(request, 'dmlpolls/poll_list.html', {'questions': questions})
+	paginator = Paginator(questions, 5)
+	page_request_var = "polls_page"
+	page = request.GET.get(page_request_var)
+	try:
+		queryset = paginator.page(page)
+	except PageNotAnInteger:
+		queryset = paginator.page(1)#if not enough, give first page
+	except EmptyPage:
+		queryset = paginator.page(paginator.num_pages)#if too many, give last page
+	context = {'questions': questions, 'page_request_var': page_request_var, 'obj_list':queryset }
+	return render(request, 'dmlpolls/poll_list.html', context)
 	
 	
 def poll_detail(request, pk):
