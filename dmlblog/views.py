@@ -11,8 +11,8 @@ def post_list(request):
 	paginator = Paginator(posts, 5)
 	page_request_var = "post_page"
 	page = request.GET.get(page_request_var)
-	print(paginator.count)
-	print(paginator.num_pages)
+	#print(paginator.count)
+	#print(paginator.num_pages)
 	try:
 		queryset = paginator.page(page)
 	except PageNotAnInteger:
