@@ -11,13 +11,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def poll_list(request):
 	questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-	queryset_list = Question.objects.all()
+	#queryset_list = Question.objects.all()
 	query = request.GET.get("q")
 	if query:
-		queryset_list = queryset_list.filter(
-			#Q(author__icontains=query)|
-			Q(question_text__icontains=query)
-			).distinct
+		questions = questions.filter(Q(question_text__icontains=query)|
+									Q(author__username__icontains=query)|
+									Q(author__first_name__icontains=query)|
+									Q(author__last_name__icontains=query)).distinct()
 	paginator = Paginator(questions, 5)
 	page_request_var = "polls_page"
 	page = request.GET.get(page_request_var)
@@ -29,8 +29,8 @@ def poll_list(request):
 		queryset = paginator.page(paginator.num_pages)#if too many, give last page
 	context = {'questions': questions, 'page_request_var': page_request_var, 'obj_list':queryset }
 	return render(request, 'dmlpolls/poll_list.html', context)
-	
-	
+
+
 def poll_detail(request, pk):
 	question = get_object_or_404(Post, pk=question_id)
 	return render(request, 'dmlpolls/detail.html', {'question': question})

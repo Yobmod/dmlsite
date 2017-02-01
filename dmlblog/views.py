@@ -5,9 +5,18 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm, TagIndexView, TagMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def post_list(request):
-	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
+	posts = Post.objects.filter(draft=False).filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
+
+	query = request.GET.get("q")
+	if query:
+		posts = posts.filter(Q(title__icontains=query)|
+							Q(author__username__icontains=query)|
+							Q(author__first_name__icontains=query)|
+							Q(author__last_name__icontains=query)|
+							Q(text__icontains=query)).distinct()
 	paginator = Paginator(posts, 5)
 	page_request_var = "post_page"
 	page = request.GET.get(page_request_var)
