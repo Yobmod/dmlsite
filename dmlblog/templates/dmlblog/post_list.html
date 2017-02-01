@@ -2,6 +2,7 @@
 {% block content %}
 
 {% for post in obj_list %}
+{% if post.draft is False and post.published_date %}
 	<div class="post">
 			<h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
 
@@ -16,12 +17,13 @@
 						<a href="{% url 'blog:post_detail' pk=post.pk %}"><img src="{{ post.image.url }}" class ='img-responsive thumb' /></a>
 						</div>
 				{% endif %}
-				
+
 					<span class="tags"><p># {% for tag in post.tags.all %}{{ tag }}</p>{% endfor %}</span>
 					<a href="{% url 'blog:post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
 	</div>
+	{% endif %}
 {% endfor %}
-	
+
 {% include "dmlmain/pagination.html" %}
-	
+
 {% endblock %}

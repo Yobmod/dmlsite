@@ -61,12 +61,12 @@
 	</div>
 
 	<br>
-	
+
 {% include "dmlmain/messages.html" %}
 	<div class="content container">
         <div class="row">
             <div class="col-md-12">
-						
+
 				{% block content %}
 				{% endblock %}
 
@@ -74,7 +74,7 @@
         </div>
 	</div>
 
-	<div id="fb-root"></div>
+	<div id="fb-root">
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -82,7 +82,7 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-
+</div>
 </body>
 
 

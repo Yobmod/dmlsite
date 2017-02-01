@@ -9,23 +9,30 @@ from django.utils.text import slugify
 
 def upload_location(instance, filename):
 	return "%s/%s" %(instance.slug, filename)
-		
-		
+
+
 class Post(models.Model):
 	author = models.ForeignKey('auth.User')
 	title = models.CharField(max_length=200)
 	text = models.TextField()
+	draft = models.BooleanField(default=True)
 	created_date = models.DateTimeField(default=timezone.now)
-	published_date = models.DateTimeField(blank=True, null=True, auto_now_add=False, auto_now=True)
+	published_date = models.DateTimeField(blank=True, null=True)
 	tags = TaggableManager(blank=True)
 	video = EmbedVideoField(max_length=200, null=True, blank=True)
 	image = models.ImageField(upload_to=upload_location, null=True, blank=True, height_field='image_height', width_field='image_width')
 	image_width = models.IntegerField(default=100)
 	image_height = models.IntegerField(default=100)
 	slug = models.SlugField(unique=True)
-	
+
 	def publish(self):
 		self.published_date = timezone.now()
+		self.draft = False
+		self.save()
+
+	def unpublish(self):
+		self.published_date = self.created_date
+		self.draft = True
 		self.save()
 
 	def __str__(self):
@@ -44,11 +51,11 @@ def create_slug(instance, new_slug=None):
 		new_slug = "%s-%s" %(slug, qs.first().id)
 		return create_slug(instance, new_slug=new_slug)
 	return slug
-	
+
 def pre_save_post_reciever(sender, instance, *args, **kwargs):
 	if not instance.slug:
 		instance.slug = create_slug(instance)
-		
+
 pre_save.connect(pre_save_post_reciever, sender =Post)
 
 
