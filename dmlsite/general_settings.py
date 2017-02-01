@@ -15,7 +15,6 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-
 	'dmlblog',
 	'dmlpolls',
 	'dmlmain',
@@ -28,6 +27,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'storages',
 	'compressor',
+	'hitcount',
 
 ]
 
@@ -116,6 +116,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -126,16 +127,18 @@ STATICFILES_FINDERS = (
 )
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+COMPRESS_URL = STATIC_URL
+
+STATIC_ROOT = os.path.join(BASE_DIR,  'static_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+COMPRESS_ROOT = STATIC_ROOT
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_root')
-LOGIN_REDIRECT_URL = '/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media', 'media_root')
 
-COMPRESS_URL = STATIC_URL
-COMPRESS_ROOT = STATIC_ROOT
+
+
 #COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 #COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_OUTPUT_DIR = 'compressed'

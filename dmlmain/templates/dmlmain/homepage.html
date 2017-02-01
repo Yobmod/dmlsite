@@ -1,6 +1,7 @@
 {% extends 'dmlmain/base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load urlify %}
 
 
 {% block content %}
@@ -27,10 +28,15 @@
 
 	</div>
 	{% endif %}
-	
-	
-	
-	<div class="fb-comments" data-href= "{{ request.build_absolute_uri }}"  data-numposts="5"></div>
+		
+	<div class="social_links">
+	Share this site to: <span><a href = "https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
+	<a href = "https://twitter.com/home?status={{ instance.content|urlify}}%20{{ request.build_absolute_uri }}">Twitter</a>
+	</span>
+	</div>
+		
+	<div class="fb-comments" data-href= "{{ request.build_absolute_uri }}"  data-numposts="5">
+	</div>
 
 
 

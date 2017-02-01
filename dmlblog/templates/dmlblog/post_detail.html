@@ -3,32 +3,24 @@
 
 {% block content %}
 
-
-{% if messages %}
-<ul class="messages">
-	{% for message in messages %}
-		<li{% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{message}}</li>
-	{% endfor %}
-</ul>
-{% endif %}
-
-
     <div class="post">
         {% if post.published_date %}
             <div class="date">
                 <span class="glyphicon glyphicon-saved"></span> {{ post.published_date }}
+
             </div>
         {% else %}
-        	{% if user.is_authenticated %}
-        	<a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}"><span class="glyphicon glyphicon-save"></span></a>
+			{% if user.is_authenticated and post.draft %}
+				<p><span style="color:red;">Draft</span> created: {{ post.created_date }}</p>
+				<a class="btn btn-default" href="{% url 'blog:post_publish' pk=post.pk %}"><span class="glyphicon glyphicon-save"></span></a>
         	{% endif %}
 		{% endif %}
 
         {% if user.is_authenticated %}
         	<a class="btn btn-default" href="{% url 'blog:post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-			<a class="btn btn-default" href="{% url 'blog:post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+			<a class="btn btn-default" href="{% url 'blog:post_unpublish' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 		{% endif %}
-			<a class="btn btn-default" href="/"><span class="glyphicon glyphicon-plus"></span></a>
+			<a class="btn btn-default" href="/blog/drafts/"><span class="glyphicon glyphicon-plus"></span></a>
 
 			<h1>{{ post.title }}</h1>
 			<p>{{ post.text|linebreaksbr }}</p>

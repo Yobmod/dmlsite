@@ -3,11 +3,26 @@ from django.utils import timezone
 from django.contrib import messages
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, TagIndexView, TagMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
 
 def post_list(request):
 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
-	return render(request, 'dmlblog/post_list.html', {'posts': posts})
+	paginator = Paginator(posts, 5)
+	page_request_var = "post_page"
+	page = request.GET.get(page_request_var)
+	#print(paginator.count)
+	#print(paginator.num_pages)
+	try:
+		queryset = paginator.page(page)
+	except PageNotAnInteger:
+		queryset = paginator.page(1)#if not enough, give first page
+	except(EmptyPage or InvalidPage):
+		queryset = paginator.page(paginator.num_pages)#if too many, give last page
+	context = {'posts':posts,
+						'page_request_var': page_request_var,
+						'obj_list':queryset,}
+	return render(request, 'dmlblog/post_list.html', context)
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
@@ -21,8 +36,11 @@ def post_new(request):
 			post = form.save(commit=False)
 			post.author = request.user
 			post.save()
-			messages.success(request, "New post created!")
-			return redirect('blog:post_detail', pk=post.pk)
+			if post.draft:
+				messages.success(request, "New draft created!")
+			else:
+				messages.success(request, "New post created!")
+				return redirect('blog:post_detail', pk=post.pk)
 		else:
 			messages.error(request, "New post failed!")
 	else:
@@ -33,7 +51,7 @@ def post_new(request):
 def post_edit(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	if request.method == "POST":
-		form = PostForm(request.POST or None, instance=post)
+		form = PostForm(request.POST or None, request.FILES or None, instance=post)
 		if form.is_valid():
 			instance = form.save(commit=False)
 			instance.author = request.user
@@ -45,11 +63,17 @@ def post_edit(request, pk):
 		form = PostForm(instance=post)
 	return render(request, 'dmlblog/post_edit.html', {'form': form})
 
+@login_required
+def post_unpublish(request, pk):
+	post = get_object_or_404(Post, pk=pk)
+	post.unpublish()
+	messages.success(request, "Post unpublished to drafts")
+	return redirect('blog:post_list')
 
 @login_required
 def post_draft_list(request):
-	posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
-	return render(request, 'dmlblog/post_draft_list.html', {'posts': posts})
+	drafts = Post.objects.filter(draft=True).order_by('created_date')
+	return render(request, 'dmlblog/post_draft_list.html', {'drafts': drafts})
 
 @login_required
 def post_publish(request, pk):
@@ -58,11 +82,11 @@ def post_publish(request, pk):
 	return redirect('blog:post_detail', pk=post.pk)
 
 @login_required
-def post_remove(request, pk):
+def draft_remove(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	post.delete()
-	messages.success(request, "Post deleted")
-	return redirect('blog:post_list')
+	messages.success(request, "Draft deleted")
+	return redirect('blog:post_draft_list')
 
 def add_comment_to_post(request, pk):
 	post = get_object_or_404(Post, pk=pk)
