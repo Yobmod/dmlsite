@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 {% load urlify %}
 
-
 {% block content %}
 
 
@@ -17,6 +16,7 @@
 
 		Click <a href="/polls">here</a> for polls</h1>
 
+		<img class="randomfade" style="opacity:0;" src="https://i.ytimg.com/vi/EmZ8Fq2zhZU/hqdefault.jpg"/>
 	</div>
 
 	{% if not user.is_authenticated %}
@@ -28,13 +28,13 @@
 
 	</div>
 	{% endif %}
-		
+
 	<div class="social_links">
 	Share this site to: <span><a href = "https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
 	<a href = "https://twitter.com/home?status={{ instance.content|urlify}}%20{{ request.build_absolute_uri }}">Twitter</a>
 	</span>
 	</div>
-		
+
 	<div class="fb-comments" data-href= "{{ request.build_absolute_uri }}"  data-numposts="5">
 	</div>
 

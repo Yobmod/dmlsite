@@ -23,11 +23,7 @@
 
 <link rel="shortcut ico" href="{% static 'dmlmain/icons/favicon.ico' type="image/x-icon" %}"/>
 
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
+
 
 </head>
 
@@ -41,7 +37,7 @@ $(document).ready(function(){
 				<a href="{% url 'polls:add_poll' %}" class="top-menu" data-toggle="tooltip" title="Create Poll"><span class="glyphicon glyphicon-plus"></span></a>
 				<a href="{% url 'blog:post_draft_list' %}" class="top-menu" data-toggle="tooltip" title="See draft posts"><span class="glyphicon glyphicon-edit"></span></a>
 				<a href="{% url 'django_admin_page' %}" class="top-menu" data-toggle="tooltip" title="Admin"><span class="glyphicon glyphicon-cog"></span></a>
-				<p class="top-menu2">Hello {{ user.username }}<small>(<a href="{% url 'logout' %}?next={{request.path}}">Log out</a>)</small></p>
+				<p class="top-menu2">Hello {{ user.username }}.<small>(<a href="{% url 'logout' %}?next={{request.path}}">Log out</a>)</small> {% now "SHORT_DATETIME_FORMAT" %}</p>
 		{% else %}
 			{% if not "/accounts/login" in request.get_full_path %}
 				<form class='navbar-form' method='POST' action='{% url "auth_login" %}'> {% csrf_token %}

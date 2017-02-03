@@ -17,7 +17,7 @@
             		<span>{{ post.published_date }} - {{ post.author }}</span>
 			</div>
 
-					<p>{{ post.text|linebreaksbr }}</p>
+					<p>{{ post.text|safe }}</p>
 
 				{% if post.image %}
 						<div class = "thumbdiv">

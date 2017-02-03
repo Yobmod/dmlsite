@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-{% for post in drafts %}
+			{% for post in drafts %}
 
 				<div class="post">
 				<p class="date"><span style="color:red;">Draft</span> created: {{ post.created_date|date:'d-m-Y' }}</p>
@@ -13,13 +13,12 @@
 				<a class="btn btn-default" href="{% url 'blog:post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 				<a class="btn btn-default" href="{% url 'blog:draft_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 
-				<p>{{ post.text|truncatechars:200 }}</p>
+				<p>{{ post.text|safe|truncatechars:200 }}</p>
 				</div>
-{% endfor %}
-	{% if not post %}
-				<h1>No drafts awaiting publication</h1>
-				<h1>Click here to author a new post:&nbsp;&nbsp;<a href="{% url 'blog:post_new' %}"><span class="glyphicon glyphicon-edit"></span></a></h1>
-	{% endif %}
+			{% empty %}
+					<h1>No drafts awaiting publication</h1>
+					<h1>Click here to author a new post:&nbsp;&nbsp;<a href="{% url 'blog:post_new' %}"><span class="glyphicon glyphicon-edit"></span></a></h1>
+			{% endfor %}
 {% endif %}
 
 {% endblock %}
