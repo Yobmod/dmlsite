@@ -8,3 +8,4 @@ font-awesome.min.css linguist-vendored
 cookielaw.css linguist-vendored
 
 *.css linguist-vendored
+*.js linguist-vendored
