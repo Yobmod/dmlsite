@@ -1,4 +1,6 @@
 JS/* linguist-vendored
 CSS/* linguist-vendored
 
-*.JS linguist-vendored
+*.js linguist-vendored
+
+jquery.js linguist-vendored=true
