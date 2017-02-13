@@ -1,12 +1,15 @@
 from django import forms
 from django.views.generic import DetailView, ListView
 from .models import Post, Comment
+from pagedown.widgets import PagedownWidget
 
 
 class PostForm(forms.ModelForm):
+	text = forms.CharField(widget=PagedownWidget)
+	published_date = forms.DateField(widget=forms.SelectDateWidget)
 	class Meta:
 		model = Post
-		fields = ('title', 'text', "tags", "video", "image", "image_width", "image_height", "draft",)
+		fields = ('title', 'text', "tags", "video", "image", "image_width", "image_height", "draft", "published_date")
 
 
 class CommentForm(forms.ModelForm):

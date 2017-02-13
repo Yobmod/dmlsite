@@ -19,6 +19,8 @@ INSTALLED_APPS = [
 	'dmlpolls',
 	'dmlmain',
 
+	'markdown_deux',
+	'pagedown',
 	'cookielaw',
 	'taggit',
 	'embed_video',

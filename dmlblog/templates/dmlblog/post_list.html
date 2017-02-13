@@ -1,4 +1,5 @@
 {% extends 'dmlmain/base.html' %}
+{% load markdown_deux_tags %}
 {% block content %}
 
 <div class = "list_search">
@@ -17,7 +18,7 @@
             		<span>{{ post.published_date }} - {{ post.author }}</span>
 			</div>
 
-					<p>{{ post.text|safe }}</p>
+					<p>{{ post.text|markdown }}</p>
 
 				{% if post.image %}
 						<div class = "thumbdiv">

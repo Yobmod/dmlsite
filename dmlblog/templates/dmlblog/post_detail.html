@@ -1,7 +1,11 @@
 {% extends 'dmlmain/base.html' %}
 {% load embed_video_tags %}
+{% load markdown_deux_tags %}
+
+
 
 {% block content %}
+
 
     <div class="post">
         {% if post.published_date %}
@@ -23,7 +27,7 @@
 			<a class="btn btn-default" href="/blog/drafts/"><span class="glyphicon glyphicon-plus"></span></a>
 
 			<h1>{{ post.title }}</h1>
-			<p>{{ post.text|safe }}</p>
+			<p>{{ post.text|markdown }}</p>
 
 		{% if post.video %}
 		{% video post.video %}
@@ -46,7 +50,12 @@
 
     </div>
 
+	<script>
+		$(document).ready(function(){
+			$(".post img").addClass("img-responsive")
+		})
 
+		</script>
 
        	<a class="btn btn-default" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add comment</a>
 	{% for comment in post.comments.all %}
@@ -66,4 +75,7 @@
     		<p>No comments here yet :(
     		   Login to comment</p>
 	{% endfor %}
+
+
+
 {% endblock %}
