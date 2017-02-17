@@ -1,3 +1,8 @@
+	$(document).ready(function(){
+		$(".post img").addClass("img-responsive")
+	})
+
+
 var Cookielaw = {
 
     createCookie: function (name, value, days) {

@@ -3,9 +3,13 @@
 {% block content %}
 
 <div class = "list_search">
-<form method='GET' action=''>
-<input type='text' name='q' placeholder='Search Posts' value='{{request.GET.q}}'/>
-<input type='submit' value='Search' />
+<form method='GET' action='' class="row">
+		<div class="input-group col-sm-6 col-sm-offset-6">
+			<input class="form-control" type='text' name='q' placeholder='Search Posts' value='{{request.GET.q}}'/>
+		<span class="input-group-btn">
+			<button class="btn btn-default" type='submit' value='Search'><i class="fa fa-search"></i>&nbsp</button>
+		</span>
+	</div>
 </form>
 </div>
 
@@ -18,7 +22,7 @@
             		<span>{{ post.published_date }} - {{ post.author }}</span>
 			</div>
 
-					{{ post.text|markdown }}
+					{{ post.text|markdown|truncatewords:50 }}
 
 				{% if post.image %}
 						<div class = "thumbdiv">
@@ -31,6 +35,12 @@
 	</div>
 	{% endif %}
 {% endfor %}
+
+<script>
+	$(document).ready(function(){
+		$(".post img").addClass("img-responsive")
+	})
+</script>
 
 {% include "dmlmain/pagination.html" %}
 
