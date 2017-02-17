@@ -1,5 +1,6 @@
 {% extends 'dmlmain/base.html' %}
 {% load crispy_forms_tags %}
+{% load markdown_deux_tags %}
 {% block head_extra %} {{ form.media }} {% endblock head_extra%}
 
 {% block content %}
@@ -15,6 +16,6 @@
 		<div class="post">
 			<p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
             <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|truncatechars:200 }}</p>
+            {{ post.text|markdown|truncatechars:300 }}
 		</div>
 	{% endfor %}

@@ -14,7 +14,7 @@
 				<a class="btn btn-default" href="{% url 'blog:post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 				<a class="btn btn-default" href="{% url 'blog:draft_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 
-				<p>{{ post.text|markdown|truncatechars:300 }}</p>
+			</p>	{{ post.text|markdown|truncatewords:50 }}
 				</div>
 			{% empty %}
 					<h1>No drafts awaiting publication</h1>

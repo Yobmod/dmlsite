@@ -103,7 +103,7 @@ footer {
 
 .thumbdiv{
 	margin: 10px;
-	
+
 }
 .thumb, .thumb a, .thumb a:visited{
 	border: 0.2em solid;
@@ -158,17 +158,22 @@ body {
 	 font-family: 'Arial', cursive;
 	 color: black;
 	 }
-	 
+
  .content  {
 	background-image: url ("../images/tree.png");
 	background-repeat: no-repeat;
 	background-position: bottom;
 	margin: auto;
-	width: 100%
+	width: 100%;
+}
+
+.contentcentre {
+   margin: auto;
+   
 }
 
  .contentleft  {
-	width: 45%
+	width: 45%;
 }
 
  .contentright {

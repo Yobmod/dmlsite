@@ -27,7 +27,7 @@
 			<a class="btn btn-default" href="/blog/drafts/"><span class="glyphicon glyphicon-plus"></span></a>
 
 			<h1>{{ post.title }}</h1>
-			<p>{{ post.text|markdown }}</p>
+			{{ post.text|markdown }}
 
 		{% if post.video %}
 		{% video post.video %}

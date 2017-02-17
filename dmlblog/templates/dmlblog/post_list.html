@@ -18,7 +18,7 @@
             		<span>{{ post.published_date }} - {{ post.author }}</span>
 			</div>
 
-					<p>{{ post.text|markdown }}</p>
+					{{ post.text|markdown }}
 
 				{% if post.image %}
 						<div class = "thumbdiv">
