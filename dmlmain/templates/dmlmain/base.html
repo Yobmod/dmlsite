@@ -1,25 +1,35 @@
 <html>
 <head>
+
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>DMLsite</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 {% load staticfiles %}
 {% load sitetree %}
 {% load cookielaw_tags %}
 {% load compress %}
 
-<title>DMLsite</title>
-<meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<!--<link rel="stylesheet" href="{% static 'dmlmain/css/font-awesome.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'dmlmain/css/vendor/bootstrap.min.css' %}"/>-->
 
 
-<link rel="stylesheet" href="{% static 'dmlmain/css/font-awesome.min.css' %}"/>
-<link rel="stylesheet" href="{% static 'dmlmain/css/vendor/bootstrap.min.css' %}"/>
 {% compress css %}
 <link rel="stylesheet" href="{% static 'dmlmain/css/dmlmain.css' %}"/>
 {% endcompress %}
 
-<script type="text/javascript" src="{% static 'dmlmain/js/vendor/jquery-3.1.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'dmlmain/js/vendor/bootstrap.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{% static 'dmlmain/js/vendor/jquery-3.1.1.min.js' %}"><\/script>')</script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script>window.jQuery.fn.modal || document.write('<script src="{% static 'dmlmain/js/vendor/bootstrap.min.js' %}"><\/script>')</script>-->
+
 
 <link rel="shortcut ico" href="{% static 'dmlmain/icons/favicon.ico' type="image/x-icon" %}"/>
-
 
 {% block head_extra %} {% endblock head_extra %}
 </head>
@@ -28,12 +38,12 @@
 
     <div class="header_footer .col-md-12">
     <div class="page-header header_footer">
-				<a href="{% url 'contact_admins' %}" class="top-menu" data-toggle="tooltip" title="Contact"><span class="glyphicon glyphicon-phone-alt"></span></a>
+				<a href="{% url 'contact_admins' %}" class="top-menu" data-toggle="tooltip" title="Contact" data-placement="auto bottom"><span class="glyphicon glyphicon-phone-alt"></span></a>
         {% if user.is_authenticated %}
-            	<a href="{% url 'blog:post_new' %}" class="top-menu" data-toggle="tooltip" title="Write post"><span class="glyphicon glyphicon-pencil"></span></a>
-				<a href="{% url 'polls:add_poll' %}" class="top-menu" data-toggle="tooltip" title="Create Poll"><span class="glyphicon glyphicon-plus"></span></a>
-				<a href="{% url 'blog:post_draft_list' %}" class="top-menu" data-toggle="tooltip" title="See draft posts"><span class="glyphicon glyphicon-edit"></span></a>
-				<a href="{% url 'django_admin_page' %}" class="top-menu" data-toggle="tooltip" title="Admin"><span class="glyphicon glyphicon-cog"></span></a>
+            	<a href="{% url 'blog:post_new' %}" class="top-menu" data-toggle="tooltip" title="Write post" data-placement="auto bottom"><span class="glyphicon glyphicon-pencil"></span></a>
+				<a href="{% url 'polls:add_poll' %}" class="top-menu" data-toggle="tooltip" title="Create Poll" data-placement="auto bottom"><span class="glyphicon glyphicon-plus"></span></a>
+				<a href="{% url 'blog:post_draft_list' %}" class="top-menu" data-toggle="tooltip" title="See draft posts" data-placement="auto bottom"><span class="glyphicon glyphicon-edit"></span></a>
+				<a href="{% url 'django_admin_page' %}" class="top-menu" data-toggle="tooltip" title="Admin" data-placement="auto bottom"><span class="glyphicon glyphicon-cog"></span></a>
 				<p class="top-menu2">Hello {{ user.username }}.<small>(<a href="{% url 'logout' %}?next={{request.path}}">Log out</a>)</small> {% now "SHORT_DATETIME_FORMAT" %}</p>
 		{% else %}
 			{% if not "/accounts/login" in request.get_full_path %}
