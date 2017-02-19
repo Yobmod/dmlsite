@@ -18,6 +18,7 @@ INSTALLED_APPS = [
 	'dmlblog',
 	'dmlpolls',
 	'dmlmain',
+	'dmlcomments',
 
 	'markdown_deux',
 	'pagedown',
@@ -146,5 +147,5 @@ STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 COMPRESS_OUTPUT_DIR = 'compressed'
 COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
 COMPRESS_JS_BACKEND = 'django_compressor.js.JsCompressor'
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_ENABLED = False
+COMPRESS_OFFLINE = False

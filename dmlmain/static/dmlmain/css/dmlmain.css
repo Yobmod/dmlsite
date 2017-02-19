@@ -10,8 +10,8 @@
 	width: 50%;
 }
 
-.tooltip .tooltip-arrow {
-	border-top: 5px solid red !important;
+.tooltip-arrow .tooltip {
+	border-top: 50px solid blue !important;
 }
 
 

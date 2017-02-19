@@ -3,23 +3,19 @@
 {% load staticfiles %}
 {% load sitetree %}
 {% load cookielaw_tags %}
-{% load compress %}
+<!--{% load compress %}-->
 
 <title>DMLsite</title>
 <meta charset="utf-8">
 
-{% compress css %}
+<!--{% compress css %}-->
 <link rel="stylesheet" href="{% static 'dmlmain/css/font-awesome.min.css' %}"/>
-<link rel="stylesheet" href="{% static 'dmlmain/css/bootstrap.min.css' %}"/>
-<!--<link rel="stylesheet" href="{% static 'dmlmain/css/bootstrap-theme.min.css' %}"/>-->
+<link rel="stylesheet" href="{% static 'dmlmain/css/vendor/bootstrap.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'dmlmain/css/dmlmain.css' %}"/>
-{% endcompress %}
+<!--{% endcompress %}-->
 
-
-
-<script type="text/javascript" src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
+<script type="text/javascript" src="{% static 'dmlmain/js/vendor/jquery-3.1.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dmlmain/js/vendor/bootstrap.min.js' %}"></script>
 
 <link rel="shortcut ico" href="{% static 'dmlmain/icons/favicon.ico' type="image/x-icon" %}"/>
 

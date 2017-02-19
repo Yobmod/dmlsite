@@ -1,11 +1,8 @@
-*/jquery-3.1.1.min.js linguist-vendored
-/bootstrap.min.js linguist-vendored
-*cookielaw.js linguist-vendored
+jquery-3.1.1.min.js linguist-vendored
+bootstrap.min.js linguist-vendored
+cookielaw.js linguist-vendored
 
 bootstrapp.min.css linguist-vendored
 bootstrapp-theme.min.css linguist-vendored
 font-awesome.min.css linguist-vendored
 cookielaw.css linguist-vendored
-
-*.css linguist-vendored
-*.js linguist-vendored

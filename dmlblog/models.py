@@ -42,7 +42,7 @@ class Post(models.Model):
 		return reverse('blog:post_detail', kwargs={"pk":self.pk})
 
 def create_slug(instance, new_slug=None):
-	slug = slugify(instance.title)#turn title to slug
+	slug = slugify(instance.title, allow_unicode=True)#turn title to slug
 	if new_slug is not None:
 		slug = new_slug
 	qs = Post.objects.filter(slug=slug).order_by("-id")
