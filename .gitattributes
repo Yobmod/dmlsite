@@ -1,4 +1,4 @@
-static_root/admin/js/*  linguist-vendored
+static_root/*  linguist-vendored
 
 jquery-3.1.1.min.js linguist-vendored
 bootstrap.min.js linguist-vendored
