@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import AddPollForm, ChoiceForm
 from .models import Choice, Question, Opinion
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.contenttypes.models import ContentType
+from dmlcomments.models import Comment
 
 def poll_list(request):
 	questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
@@ -32,8 +34,10 @@ def poll_list(request):
 
 
 def poll_detail(request, pk):
-	question = get_object_or_404(Post, pk=question_id)
-	return render(request, 'dmlpolls/detail.html', {'question': question})
+	question = get_object_or_404(Question, pk=pk)
+	content_type = ContentType.objects.get_for_model(Question)
+	comments = Comment.objects.filter(content_type=content_type, object_id=question.id)
+	return render(request, 'dmlpolls/detail.html', {'question': question, 'comments': comments})
 
 class IndexView(generic.ListView):
 	template_name = 'dmlpolls/index.html'
@@ -95,8 +99,8 @@ def add_choice(request, question_id):
 
 
 
-def vote(request, question_id):
-	question = get_object_or_404(Question, pk=question_id)
+def vote(request, pk):
+	question = get_object_or_404(Question, pk=pk)
 	try:
 		selected_choice = question.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
@@ -110,5 +114,9 @@ def vote(request, question_id):
 		selected_choice.save()
 		#Always return an HttpResponseRedirect after successfully dealing
 		# with POST data. This prevents data from being posted twice if a user hits the Back button.
-		return HttpResponseRedirect(reverse('poll_results', args=(question.id,)))
+		return HttpResponseRedirect(reverse('poll_detail', args=[question.id, choice.id]))
 		#return HttpResponse("placeholder for votes number %s." % question_id)
+
+def results(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+    return render(request, 'dmlpolls/results.html', {'question': question})
