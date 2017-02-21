@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import AddPollForm, ChoiceForm
 from .models import Choice, Question, Opinion
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.contenttypes.models import ContentType
 from dmlcomments.models import Comment
+from dmlcomments.forms import CommentForm
 
 def poll_list(request):
 	questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
@@ -35,9 +35,12 @@ def poll_list(request):
 
 def poll_detail(request, pk):
 	question = get_object_or_404(Question, pk=pk)
-	content_type = ContentType.objects.get_for_model(Question)
-	comments = Comment.objects.filter(content_type=content_type, object_id=question.id)
+	comments = Comment.objects.filter_by_instance(question)
 	return render(request, 'dmlpolls/detail.html', {'question': question, 'comments': comments})
+
+
+
+
 
 class IndexView(generic.ListView):
 	template_name = 'dmlpolls/index.html'
@@ -114,9 +117,38 @@ def vote(request, pk):
 		selected_choice.save()
 		#Always return an HttpResponseRedirect after successfully dealing
 		# with POST data. This prevents data from being posted twice if a user hits the Back button.
-		return HttpResponseRedirect(reverse('poll_detail', args=[question.id, choice.id]))
+		return HttpResponseRedirect(reverse('dmlpolls:poll_results', args=[question.id]))
 		#return HttpResponse("placeholder for votes number %s." % question_id)
 
 def results(request, pk):
     question = get_object_or_404(Question, pk=pk)
     return render(request, 'dmlpolls/results.html', {'question': question})
+
+def add_comment_to_poll(request, pk):
+	question = get_object_or_404(Question, pk=pk)
+	comments = Comment.objects.filter_by_instance(question)
+	initial_data ={"content_type": question.get_content_type,
+				   "object_id": question.id}
+	if request.method == "POST":
+		form = CommentForm(request.POST or None, initial=initial_data)
+		if form.is_valid():
+			print("woooo")
+			c_type = form.cleaned_data.get("content_type")
+			content_type = ContentType.objects.get(model=c_type)
+			obj_id = form.cleaned_data.get("object_id")
+			comment_text = form.cleaned_data.get("text")
+			new_comment, created = Comment.objects.get_or_create(
+				user = request.user,
+				content_type = content_type,
+				object_id = obj_id,
+				text = comment_text
+			)
+			#comment = form.save(commit=False)
+			form.save()
+			context = {"form": form, 'question': question, "comments": comments}
+			#return render(request, 'dmlpolls:poll_detail', context)
+			return HttpResponseRedirect(reverse('dmlpolls:poll_detail', args=[question.id]))
+			#return redirect('dmlpolls/detail.html', pk=question.id)
+	else:
+		form = CommentForm()
+	return render(request, 'dmlpolls/add_comment_to_poll.html', {'form': form})

@@ -10,7 +10,7 @@
 	<p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<form action="{% url 'polls:poll_vote' question.id %}" method="post">{% csrf_token %}
+<form action="{% url 'dmlpolls:poll_vote' question.id %}" method="post">{% csrf_token %}
 {% for choice in question.choice_set.all %}
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
@@ -19,24 +19,25 @@
 </form>
 
 
+<a class="btn btn-default" href="{% url 'polls:add_comment_to_poll' question.id %}">Add comment</a>
 {% for comment in comments %}
-	{% if user.is_authenticated or comment.approved_comment %}
-		<div class="comment">
-			{{ comment.author }}
-				<div class="date">
-			{{ comment.created_date }}
-	{% elif not comment.approved_comment %}
-			<!--<a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-				<a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-			-->
-	{% endif %}
-				</div>
-			<p>{{ comment.text|linebreaks }}</p>
-		</div>
+{% if user.is_authenticated or comment.approved_comment %}
+ <div class="comment">
+	 {{ comment.author }}
+		 <div class="date">
+	 {{ comment.created_date }}
+{% elif not comment.approved_comment %}
+	 <a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+		 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+{% endif %}
+		 </div>
+	 <p>{{ comment.text|linebreaks }}</p>
+ </div>
 {% empty %}
-		<p>No comments here yet :(
-		   Login to comment</p>
+ <p>No comments here yet :(
+	Login to comment</p>
 {% endfor %}
+
 
 
 {% endblock %}

@@ -2,6 +2,8 @@ from django.db import models
 import datetime
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from dmlcomments.models import Comment
 
 
 class Question(models.Model):
@@ -21,6 +23,19 @@ class Question(models.Model):
 		was_published_recently.boolean = True
 		was_published_recently.short_description = 'Published recently?'
 		poll_author.admin_order_field = 'author'
+
+	@property
+	def comments(self):
+		instance = self
+		qs = Comment.objects.filter_by_instance(instance)
+		return qs
+
+	@property
+	def get_content_type(self):
+		instance = self
+		content_type = ContentType.objects.get_for_model(instance.__class__)
+		return content_type
+
 
 class Choice(models.Model):
 	question = models.ForeignKey(Question, on_delete=models.CASCADE)

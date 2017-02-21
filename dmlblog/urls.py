@@ -17,9 +17,9 @@ urlpatterns = [
 	url(r'^post/(?P<pk>\d+)/unpublish/$', views.post_unpublish, name='post_unpublish'),
 	url(r'^post/(?P<pk>\d+)/dremove/$', views.draft_remove, name='draft_remove'),
 
-	url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
 	url(r'^post/(?P<pk>\d+)/tag/$', views.tag_post, name='tag_post'),
 
+	url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
 	url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
 	url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
 
