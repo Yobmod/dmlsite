@@ -52,11 +52,9 @@ def poll_detail(request, pk):
 		comment = form.save(commit=False)
 		comment.author = request.user
 		comment.save()
-		form = CommentForm(initial=initial_data)
+		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 	context = {"form": form, 'question': question, "comments": comments}
 	return render(request, 'dmlpolls/detail.html', context)
-
-
 
 
 
@@ -69,7 +67,6 @@ class IndexView(generic.ListView):
 		published in the future).    """
 		return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
-
 class DetailView(generic.DetailView):
 	model = Question
 	template_name = 'dmlpolls/detail.html'
@@ -77,7 +74,6 @@ class DetailView(generic.DetailView):
 	def get_queryset(self):
 		"""Excludes any questions that aren't published yet."""
 		return Question.objects.filter(pub_date__lte=timezone.now())
-
 
 class ResultsView(generic.DetailView):
 	model = Question
@@ -141,32 +137,3 @@ def vote(request, pk):
 def results(request, pk):
     question = get_object_or_404(Question, pk=pk)
     return render(request, 'dmlpolls/results.html', {'question': question})
-
-def add_comment_to_poll(request, pk):
-	question = get_object_or_404(Question, pk=pk)
-	comments = Comment.objects.filter_by_instance(question)
-	initial_data ={"content_type": question.get_content_type,
-				   "object_id": question.id}
-	if request.method == "POST":
-		form = CommentForm(request.POST or None, initial=initial_data)
-		if form.is_valid():
-			print("woooo")
-			c_type = form.cleaned_data.get("content_type")
-			content_type = ContentType.objects.get(model=c_type)
-			obj_id = form.cleaned_data.get("object_id")
-			comment_text = form.cleaned_data.get("text")
-			new_comment, created = Comment.objects.get_or_create(
-				user = request.user,
-				content_type = content_type,
-				object_id = obj_id,
-				text = comment_text
-			)
-			#comment = form.save(commit=False)
-			form.save()
-			context = {"form": form, 'question': question, "comments": comments}
-			#return render(request, 'dmlpolls:poll_detail', context)
-			return HttpResponseRedirect(reverse('dmlpolls:poll_detail', args=[question.id]))
-			#return redirect('dmlpolls/detail.html', pk=question.id)
-	else:
-		form = CommentForm()
-	return render(request, 'dmlpolls/add_comment_to_poll.html', {'form': form})

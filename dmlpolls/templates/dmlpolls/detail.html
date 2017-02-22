@@ -40,7 +40,7 @@
  <div class="comment">
 	 {{ comment.author }}
 		 <div class="date">
-	 {{ comment.created_date }}
+	 {{ comment.created_date|naturaltime}}
 {% elif not comment.approved_comment %}
 	 <a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 		 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>

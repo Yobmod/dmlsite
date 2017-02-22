@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.conf import settings
 #from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 from dmlcomments.models import Comment
 
 
@@ -24,6 +25,9 @@ class Question(models.Model):
 		was_published_recently.boolean = True
 		was_published_recently.short_description = 'Published recently?'
 		poll_author.admin_order_field = 'author'
+
+	def get_absolute_url(self):
+		return reverse('dmlpolls:poll_detail', kwargs={"pk":self.pk})
 
 	@property
 	def comments(self):
