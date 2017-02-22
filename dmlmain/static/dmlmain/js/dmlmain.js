@@ -2,6 +2,10 @@
 		$(".post img").addClass("img-responsive")
 	})
 
+	$(document).ready(function() {
+	    $('[data-toggle=tooltip]').tooltip();
+	});
+
 
 var Cookielaw = {
 

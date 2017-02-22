@@ -1,17 +1,18 @@
 from django.db import models
 import datetime
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.conf import settings
+#from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from dmlcomments.models import Comment
 
 
 class Question(models.Model):
-	author = models.ForeignKey('auth.user', null=True)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 	question_text = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published', auto_now_add=True, null=True)
 	end_date = models.DateTimeField(blank=True,null=True)
-	slug = models.SlugField(unique=True)
+	slug = models.SlugField(unique=True,blank=True,null=True)
 
 	def __str__(self):
 		return self.question_text

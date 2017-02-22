@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .forms import AddPollForm, ChoiceForm
@@ -36,7 +37,24 @@ def poll_list(request):
 def poll_detail(request, pk):
 	question = get_object_or_404(Question, pk=pk)
 	comments = Comment.objects.filter_by_instance(question)
-	return render(request, 'dmlpolls/detail.html', {'question': question, 'comments': comments})
+	initial_data ={"content_type": question.get_content_type,
+				   "object_id": question.id,
+				   "author_id": request.user}
+	form = CommentForm(request.POST or None, initial=initial_data)
+	if form.is_valid():
+		print("woooo")
+		c_type = form.cleaned_data.get("content_type")
+		new_comment, created = Comment.objects.get_or_create(
+			author = request.user,
+			content_type = ContentType.objects.get(model=c_type),
+			object_id = form.cleaned_data.get("object_id"),
+			text = form.cleaned_data.get("text"))
+		comment = form.save(commit=False)
+		comment.author = request.user
+		comment.save()
+		form = CommentForm(initial=initial_data)
+	context = {"form": form, 'question': question, "comments": comments}
+	return render(request, 'dmlpolls/detail.html', context)
 
 
 

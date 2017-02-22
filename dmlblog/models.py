@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 from taggit.managers import TaggableManager
 from embed_video.fields import EmbedVideoField
@@ -12,7 +13,7 @@ def upload_location(instance, filename):
 
 
 class Post(models.Model):
-	author = models.ForeignKey('auth.User')
+	author = models.ForeignKey(settings.AUTH_USER_MODEL)
 	title = models.CharField(max_length=200)
 	text = models.TextField()
 	draft = models.BooleanField(default=True)

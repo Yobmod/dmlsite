@@ -1,6 +1,12 @@
 {% extends 'dmlmain/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load markdown_deux_tags %}
+{% block head_extra %} {{ form.media }} {% endblock head_extra%}
+
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'dmlcomments/dmlcomments.css' %}"/>
 
 <h1>{{ question.question_text }}</h1>
 <h2>{{question.author}}</h2>
@@ -15,11 +21,20 @@
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
 {% endfor %}
-<input type="submit" value="vote" />
+<input type="submit" value="vote" class="btn btn-default" />
 </form>
 
 
-<a class="btn btn-default" href="{% url 'polls:add_comment_to_poll' question.id %}">Add comment</a>
+<div class="btn btn-default" id="commentShowButton">Add comment</div>
+
+<div id="commentShow">
+<h3>Add comment:</h3>
+<form action="." method="POST" class="post-form"> {% csrf_token %}
+	{{form|crispy}}
+	<button type="submit" class="save btn btn-default">Submit</button>
+</form>
+</div>
+
 {% for comment in comments %}
 {% if user.is_authenticated or comment.approved_comment %}
  <div class="comment">
@@ -31,13 +46,13 @@
 		 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
 {% endif %}
 		 </div>
-	 <p>{{ comment.text|linebreaks }}</p>
+	 {{ comment.text|markdown }}
  </div>
 {% empty %}
  <p>No comments here yet :(
 	Login to comment</p>
 {% endfor %}
 
-
+<script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>
 
 {% endblock %}
