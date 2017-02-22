@@ -1,5 +1,6 @@
 {% extends 'dmlmain/base.html' %}
 {% load markdown_deux_tags %}
+{% load humanize %}
 {% block content %}
 
 <div class = "list_search">
@@ -19,7 +20,7 @@
 			<h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
 
 			<div class="date">
-            		<span>{{ post.published_date }} - {{ post.author }}</span>
+            		<span>{{ post.author }} - {{ post.published_date|naturaltime }}</span>
 			</div>
 
 					{{ post.text|markdown|truncatewords:50 }}
