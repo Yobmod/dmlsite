@@ -24,44 +24,50 @@
 <input type="submit" value="vote" class="btn btn-default" />
 </form>
 
+<br>
+<hr>
+<br>
 
 <div class="btn btn-default" id="commentShowButton">Add comment</div>
-
 <div id="commentShow">
-<h3>Add comment:</h3>
-<form action="." method="POST" class="post-form"> {% csrf_token %}
-	{{form|crispy}}
-	<button type="submit" class="save btn btn-default">Submit</button>
-</form>
+	<h3>Add comment:</h3>
+		<form action="." method="POST" class="post-form"> {% csrf_token %}
+			{{form|crispy}}
+			<button type="submit" class="save btn btn-default">Submit</button>
+		</form>
 </div>
 
 {% for comment in comments %}
+<blockquote class="comment">
 {% if user.is_authenticated or comment.approved_comment %}
- <div class="comment">
-	 {{ comment.author }}
-		 <div class="date">
-	 {{ comment.created_date|naturaltime}}
-{% elif not comment.approved_comment %}
-	 <a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-		 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+
+	{{ comment.text|markdown }}
+	<span class='date'><p>{{ comment.author }} - {{ comment.created_date|naturaltime}}<p></span>
+
+	{% for child_comment in comment.children %}
+	<blockquote class="reply">
+		{{ child_comment.text|markdown }}
+		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p>
+	</blockquote>
+	{% endfor %}
+
+	<div class="btn btn-default" id="replyShowButton">Reply</div>
+	<div id='replyShow'>
+		<form action="." method="POST"> {% csrf_token %}
+			{{form|crispy}}
+			<input type='hidden' name='parent_id' value="{{ comment.id }}"/>
+			<button type="submit" class="save btn btn-default">Submit</button>
+		</form>
+	</div>
+
+{% elif not comment.approved_comment and user.is_staff %}
+<a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+<a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+
 {% endif %}
-		 </div>
-		 {{ comment.text|markdown }}
-
-		 	<div class="btn btn-default" id="replyShowButton">Add reply</div>
-
-		 	<div id="replyShow">
-		 	<h3>Add reply:</h3>
-		 	<form action="." method="POST" class="post-form"> {% csrf_token %}
-		 	{{form|crispy}}
-			<input type="hidden" name="parent_id" value="{{ comment.id }}"
-		 	<button type="submit" class="save btn btn-default">Reply</button>
-		 	</form>
-		 	</div>
- </div>
+</blockquote>
 {% empty %}
- <p>No comments here yet :(
-	Login to comment</p>
+ 	<p>No comments here yet :(  Login to comment</p>
 {% endfor %}
 
 <script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>

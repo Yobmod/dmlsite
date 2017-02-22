@@ -7,9 +7,11 @@ from django.utils import timezone
 class CommentManager(models.Manager):
 	def all(self):
 		qs = super(CommentManager, self).filter(parent=None)
+		return qs
+
 	def filter_by_instance(self, instance):
 		content_type = ContentType.objects.get_for_model(instance.__class__)
-		qs = super(CommentManager, self).filter(content_type=content_type, object_id=instance.id)
+		qs = super(CommentManager, self).filter(content_type=content_type, object_id=instance.id).filter(parent=None)
 		return qs
 
 
@@ -27,7 +29,7 @@ class Comment(models.Model):
 	objects = CommentManager()
 
 	class Meta:
-		ordering = ['-created_date']
+		ordering = ['created_date']
 
 	def __str__(self):
 		return self.text
@@ -39,8 +41,7 @@ class Comment(models.Model):
 	def is_parent(self):
 		if self.parent is not None:
 			return False
-		else:
-			return True
+		return True
 
 	def approve(self):
 		self.approved_comment = True
