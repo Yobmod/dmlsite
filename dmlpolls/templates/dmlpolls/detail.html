@@ -46,7 +46,18 @@
 		 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
 {% endif %}
 		 </div>
-	 {{ comment.text|markdown }}
+		 {{ comment.text|markdown }}
+
+		 	<div class="btn btn-default" id="replyShowButton">Add reply</div>
+
+		 	<div id="replyShow">
+		 	<h3>Add reply:</h3>
+		 	<form action="." method="POST" class="post-form"> {% csrf_token %}
+		 	{{form|crispy}}
+			<input type="hidden" name="parent_id" value="{{ comment.id }}"
+		 	<button type="submit" class="save btn btn-default">Reply</button>
+		 	</form>
+		 	</div>
  </div>
 {% empty %}
  <p>No comments here yet :(

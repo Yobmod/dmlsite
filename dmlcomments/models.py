@@ -5,6 +5,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
 
 class CommentManager(models.Manager):
+	def all(self):
+		qs = super(CommentManager, self).filter(parent=None)
 	def filter_by_instance(self, instance):
 		content_type = ContentType.objects.get_for_model(instance.__class__)
 		qs = super(CommentManager, self).filter(content_type=content_type, object_id=instance.id)

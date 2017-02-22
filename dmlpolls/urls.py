@@ -15,7 +15,6 @@ urlpatterns = [
 	url(r'^(?P<pk>[0-9]+)/vote/$', views.vote, name='poll_vote'),
 	url(r'^(?P<pk>[0-9]+)/results/$', views.results, name='poll_results'),
 
-	url(r'^(?P<pk>[0-9]+)/comment/$', views.add_comment_to_poll, name='add_comment_to_poll'),
 	#url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
 	#url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
 ]

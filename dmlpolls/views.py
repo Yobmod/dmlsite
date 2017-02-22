@@ -44,11 +44,22 @@ def poll_detail(request, pk):
 	if form.is_valid():
 		print("woooo")
 		c_type = form.cleaned_data.get("content_type")
+		parent_obj = None  #set default value, then check if there is a parent
+		try:
+			parent_id = int(request.POST.get("parent.id"))
+		except:
+			parent_id = None
+		if parent_id:
+			parent_qs = Comment.objects.filter(id=parent_id)
+			if parent_qs.exists() and parent_qs.count == 1:
+				parent_obj = parent_qs.first()
 		new_comment, created = Comment.objects.get_or_create(
 			author = request.user,
 			content_type = ContentType.objects.get(model=c_type),
 			object_id = form.cleaned_data.get("object_id"),
-			text = form.cleaned_data.get("text"))
+			text = form.cleaned_data.get("text"),
+			parent= parent_obj,
+			)
 		comment = form.save(commit=False)
 		comment.author = request.user
 		comment.save()
