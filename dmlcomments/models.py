@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 class CommentManager(models.Manager):
@@ -18,10 +17,11 @@ class CommentManager(models.Manager):
 
 
 class Comment(models.Model):
-	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE( #), null=True, blank=True) #rmv null/blank for new db
-	object_id = models.PositiveIntegerField()#(null=True, blank=True) #rmv null/blank for new db
+	ContentType = apps.get_model('contenttypes', 'ContentType')
+	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True) #rmv null/blank for new db
+	object_id = models.PositiveIntegerField(null=True, blank=True) #rmv null/blank for new db
 	content_object = GenericForeignKey('content_type', 'object_id')
-	author = models.ForeignKey(settings.AUTH_USER_MODEL) #, null=True)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 	visitor = models.CharField(max_length=200)
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
