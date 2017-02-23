@@ -28,6 +28,7 @@
 <hr>
 <br>
 
+{% if comments.count > 0 %}  {{comments.count}} comment{% if comments.count > 1 %}s {% endif %}{% endif %}
 <div class="btn btn-default" id="commentShowButton">Add comment</div>
 <div id="commentShow">
 	<h3>Add comment:</h3>
@@ -42,17 +43,22 @@
 {% if user.is_authenticated or comment.approved_comment %}
 
 	{{ comment.text|markdown }}
-	<span class='date'><p>{{ comment.author }} - {{ comment.created_date|naturaltime}}<p></span>
+	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
+		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
+		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a>{% endif %}</span>
 
+
+	<div class='replyShow'>
 	{% for child_comment in comment.children %}
 	<blockquote class="reply">
 		{{ child_comment.text|markdown }}
-		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p>
+		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p></span>
 	</blockquote>
 	{% endfor %}
+</div>
 
-	<div class="btn btn-default" id="replyShowButton">Reply</div>
-	<div id='replyShow'>
+	<span><a class="addReplyShowButton">| Reply</a></span>
+	<div class='addReplyShow'>
 		<form action="." method="POST"> {% csrf_token %}
 			{{form|crispy}}
 			<input type='hidden' name='parent_id' value="{{ comment.id }}"/>

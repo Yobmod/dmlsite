@@ -5,9 +5,15 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$("#replyShowButton").click(function(){
-		$("#replyShow").toggle(1000);
+	$(".replyShowButton").click(function(event){
+		event.preventDefault()
+		$(this).parent().next(".replyShow").toggle(500);
+	});
+});
 
-
+$(document).ready(function() {
+	$(".addReplyShowButton").click(function(event){
+		event.preventDefault()
+		$(this).parent().next(".addReplyShow").toggle(1000);
 	});
 });
