@@ -138,7 +138,7 @@ STATIC_ROOT = os.path.join(BASE_DIR,  'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 COMPRESS_ROOT = STATIC_ROOT
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 
 
