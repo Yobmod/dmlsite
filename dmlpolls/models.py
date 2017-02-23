@@ -12,7 +12,7 @@ class Question(models.Model):
 	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 	question_text = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published', auto_now_add=True, null=True)
-	end_date = models.DateTimeField(blank=True,null=True)
+	end_date = models.DateTimeField(blank=True, null=True)
 	slug = models.SlugField(unique=True,blank=True,null=True)
 
 	def __str__(self):
