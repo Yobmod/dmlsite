@@ -24,7 +24,7 @@ class Comment(models.Model):
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
 	approved_comment = models.BooleanField(default=False)
-	parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+	parent = models.ForeignKey('Comment', null=True, blank=True)
 
 	objects = CommentManager()
 
