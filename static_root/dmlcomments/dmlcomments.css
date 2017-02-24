@@ -1,3 +1,11 @@
 #commentShow {
 	display: none;
 }
+
+.replyShow {
+	display: none;
+}
+
+.addReplyShow {
+	display: none;
+}
