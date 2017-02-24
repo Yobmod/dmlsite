@@ -17,7 +17,8 @@ class CommentManager(models.Manager):
 
 
 class Comment(models.Model):
-	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE) #rmv null/blank for new db
+	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+	content_type = ContentType.objects.get_for_model(instance.__class__) #rmv null/blank for new db
 	object_id = models.PositiveIntegerField() #rmv null/blank for new db
 	content_object = GenericForeignKey('content_type', 'object_id')
 	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
