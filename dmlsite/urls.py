@@ -29,7 +29,7 @@ urlpatterns = [
 	url(r'^', include('dmlmain.urls')),
 	url(r'^blog/', include('dmlblog.urls', namespace='blog')),
 	url(r'^polls/', include('dmlpolls.urls', namespace='polls')),
-
+	url(r'^comments/', include('dmlcomments.urls', namespace='comments')),
 ]
 
 

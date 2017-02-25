@@ -1,0 +1,49 @@
+{% extends 'dmlmain/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load markdown_deux_tags %}
+{% load humanize %}
+
+{% block head_extra %}
+{{forms.media}}
+<link rel="stylesheet" href="{% static 'dmlcomments/dmlcomments.css' %}"/>
+<script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>
+{% endblock head_extra%}
+
+
+{% block content %}
+
+<blockquote class="comment">
+{% if user.is_authenticated or comment.approved_comment %}
+
+	{{ comment.text|markdown }}
+	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
+		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
+		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a>{% endif %}</span>
+
+
+	<div class='replyShow'>
+	{% for child_comment in comment.children %}
+	<blockquote class="reply">
+		{{ child_comment.text|markdown }}
+		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p></span>
+	</blockquote>
+	{% endfor %}
+</div>
+
+	<span><a class="addReplyShowButton">| Reply</a></span>
+	<div class='addReplyShow'>
+		<form action="." method="POST"> {% csrf_token %}
+			{{form|crispy}}
+			<input type='hidden' name='parent_id' value="{{ comment.id }}"/>
+			<button type="submit" class="save btn btn-default">Submit</button>
+		</form>
+	</div>
+
+{% elif not comment.approved_comment and user.is_staff %}
+<a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+<a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+
+{% endif %}
+</blockquote>
+{% endblock %}
