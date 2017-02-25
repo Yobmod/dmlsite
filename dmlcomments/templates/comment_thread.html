@@ -5,31 +5,29 @@
 {% load humanize %}
 
 {% block head_extra %}
-{{forms.media}}
+{{forms.media}} 
 <link rel="stylesheet" href="{% static 'dmlcomments/dmlcomments.css' %}"/>
 <script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>
 {% endblock head_extra%}
 
-
 {% block content %}
-
-<blockquote class="comment">
+<div class="comment">
 {% if user.is_authenticated or comment.approved_comment %}
 
-	{{ comment.text|markdown }}
-	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
+	<h1 class="comment_title">{{ comment.text|markdown }}</h2>
+	<span class='comment_date'><p>{{ comment.author }} - {{ comment.created_date|naturaltime}}
 		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
-		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a>{% endif %}</span>
+		 {% endif %}{% endif %}</p></span>
 
 
-	<div class='replyShow'>
+	<div class=''>
 	{% for child_comment in comment.children %}
 	<blockquote class="reply">
 		{{ child_comment.text|markdown }}
-		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p></span>
+		<span class='comment_date'>{{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}</span>
 	</blockquote>
 	{% endfor %}
-</div>
+	</div>
 
 	<span><a class="addReplyShowButton">| Reply</a></span>
 	<div class='addReplyShow'>
@@ -45,5 +43,5 @@
 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
 
 {% endif %}
-</blockquote>
+</div>
 {% endblock %}

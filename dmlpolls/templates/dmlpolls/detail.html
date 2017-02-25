@@ -45,7 +45,7 @@
 	{{ comment.text|markdown }}
 	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
 		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
-		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a>{% endif %}</span>
+		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a><a class="" href="{{ comment.get_absolute_url }}">(Link)</a>{% endif %}</span>
 
 
 	<div class='replyShow'>

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 class CommentManager(models.Manager):
@@ -36,7 +37,7 @@ class Comment(models.Model):
 		return self.text
 
 	def get_absolute_url(self):
-		return reverse("comments:thread", kwargs={"id": self.id})
+		return reverse("comments:comment_thread", kwargs={"pk": self.pk})
 
 	def children(self):
 		return Comment.objects.filter(parent=self)

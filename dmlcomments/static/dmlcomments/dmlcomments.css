@@ -9,3 +9,12 @@
 .addReplyShow {
 	display: none;
 }
+
+.comment_thr_parent {
+	font-size: 32px;
+}
+
+.comment_date {
+	font-size: 16px;
+	color: grey;
+}
