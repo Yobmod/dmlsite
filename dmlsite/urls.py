@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 #import django.contrib.auth.views                #The login views redirect to admin here, or to previous page in dmlmain
 from django.contrib import admin
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
 
 admin.autodiscover()
 
@@ -25,13 +27,13 @@ urlpatterns = [
 	url(r'^admin/', include(admin.site.urls)),
 	#url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	#url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
+	url(r'^favicon.ico$', RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), permanent=False), name="favicon"),
 
 	url(r'^', include('dmlmain.urls')),
 	url(r'^blog/', include('dmlblog.urls', namespace='blog')),
 	url(r'^polls/', include('dmlpolls.urls', namespace='polls')),
 	url(r'^comments/', include('dmlcomments.urls', namespace='comments')),
 ]
-
 
 from django.conf.urls.static import static
 from django.conf import settings
