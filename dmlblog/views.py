@@ -1,11 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib import messages
+from .utils import get_read_time
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, TagIndexView, TagMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib.contenttypes.models import ContentType
+#from dmlcomments.models import Comment
+#from dmlcomments.forms import CommentForm
+try:
+    from urllib.parse import quote_plus
+except:
+    pass
 
 def post_list(request):
 	posts = Post.objects.filter(draft=False).filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
@@ -35,7 +43,16 @@ def post_list(request):
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
-	return render(request, 'dmlblog/post_detail.html', {'post': post})
+	share_string = quote_plus(post.text)
+	comments = post.comments
+	form = CommentForm()
+	context = {
+		"post": post,
+		"share_string": share_string,
+		"comments": comments,
+		"form":form,
+	}
+	return render(request, 'dmlblog/post_detail.html', context)
 
 @login_required
 def post_new(request):
