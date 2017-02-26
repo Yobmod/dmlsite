@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from dmlcomments.models import Comment
 from dmlcomments.forms import CommentForm
@@ -37,3 +38,27 @@ def comment_thread(request, pk):
 		return HttpResponseRedirect(comment.get_absolute_url())
 	context = {'comment': comment, 'form': form}
 	return render(request, 'comment_thread.html', context)
+
+@login_required
+def comment_delete(request, pk):
+	comment = get_object_or_404(Comment, pk=pk)
+	if request.method == 'POST':
+		parent_obj_url = comment.content_object.get_absolute_url()
+		comment.delete()
+		messages.success(request, "Comment was deleted")
+		return HttpResponseRedirect(parent_obj_url)
+	context = {'comment':comment}
+	return render(request, 'confirm_delete.html', context)
+
+@login_required
+def comment_approve(request, pk):
+	comment = get_object_or_404(Comment, pk=pk)
+	comment.approve()
+	return redirect('dmlblog.views.post_detail', pk=comment.post.pk)
+
+@login_required
+def comment_remove(request, pk):
+	comment = get_object_or_404(Comment, pk=pk)
+	post_pk = comment.post.pk
+	comment.delete()
+	return redirect('dmlblog.views.post_detail', pk=post_pk)

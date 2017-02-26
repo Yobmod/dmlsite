@@ -1,0 +1,30 @@
+{% extends 'dmlmain/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load markdown_deux_tags %}
+{% load humanize %}
+
+{% block head_extra %}
+{{forms.media}}
+<link rel="stylesheet" href="{% static 'dmlcomments/dmlcomments.css' %}"/>
+<script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>
+{% endblock head_extra%}
+
+{% block content %}
+<div class="comment">
+
+	<h1 class="comment_title">{{ comment.text|markdown }}</h2>
+	<span class='comment_date'><p>{{ comment.author }} - {{ comment.created_date|naturaltime}}
+		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
+		 {% endif %}{% endif %}</p></span>
+
+		<form action="." method="POST"> {% csrf_token %}
+			<p>Are you sure you want to delete this comment?</p>
+			<button type="submit" class="btn btn-warning">Confirm Delete</button>
+			<a href="{{ comment.get_absolute_url }}" class="btn btn-default">Cancel</a>
+		</form>
+	</div>
+
+
+</div>
+{% endblock %}
