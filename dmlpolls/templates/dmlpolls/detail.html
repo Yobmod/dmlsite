@@ -40,19 +40,20 @@
 
 {% for comment in comments %}
 <blockquote class="comment">
-{% if user.is_authenticated or comment.approved_comment %}
+
 
 	{{ comment.text|markdown }}
 	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
 		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
-		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a><a class="" href="{{ comment.get_absolute_url }}">(Link)</a>{% endif %}</span>
+		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a><a class="" href="{{ comment.get_absolute_url }}">(Link)</a>{% endif %}{% if request.user == comment.author %}<a class="" href="{{ comment.get_delete_url }}">Delete</a>{% endif %}</span>
 
 
 	<div class='replyShow'>
 	{% for child_comment in comment.children %}
 	<blockquote class="reply">
 		{{ child_comment.text|markdown }}
-		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p></span>
+		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p>
+		{% if request.user == child_comment.author %}<a class="" href="{{ child_comment.get_delete_url }}">Delete</a>{% endif %}</span>
 	</blockquote>
 	{% endfor %}
 </div>
@@ -66,6 +67,7 @@
 		</form>
 	</div>
 
+{% if user.is_authenticated or comment.approved_comment %}
 {% elif not comment.approved_comment and user.is_staff %}
 <a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 <a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
