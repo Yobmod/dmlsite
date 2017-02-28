@@ -1,15 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import timezone
 from django.contrib import messages
 from .utils import get_read_time
-from .models import Post, Comment
-from .forms import PostForm, CommentForm, TagIndexView, TagMixin
+from .models import Post
+from .forms import PostForm, TagIndexView, TagMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
-#from dmlcomments.models import Comment
-#from dmlcomments.forms import CommentForm
+from dmlcomments.models import Comment
+from dmlcomments.forms import CommentForm
 try:
     from urllib.parse import quote_plus
 except:
@@ -44,8 +45,35 @@ def post_list(request):
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	share_string = quote_plus(post.text)
-	comments = post.comments
-	form = CommentForm()
+	#comments = post.comments #FK changed to GFK
+	#form = CommentForm()
+	comments = Comment.objects.filter_by_instance(post)
+	initial_data ={"content_type": post.get_content_type,
+				   "object_id": post.id,
+				   "author_id": request.user}
+	form = CommentForm(request.POST or None, initial=initial_data)
+	if form.is_valid():
+		c_type = form.cleaned_data.get("content_type")
+		content_type = ContentType.objects.get(model=c_type)
+		obj_id = form.cleaned_data.get('object_id')
+		content_data = form.cleaned_data.get("text")
+		parent_obj = None
+		try:
+			parent_id = int(request.POST.get("parent_id"))
+		except:
+			parent_id = None
+
+		if parent_id:
+			parent_qs = Comment.objects.filter(id=parent_id)
+			if parent_qs.exists() and parent_qs.count() == 1:
+				parent_obj = parent_qs.first()
+		new_comment, created = Comment.objects.get_or_create(
+							author = request.user,
+							content_type= content_type,
+							object_id = obj_id,
+							text = content_data,
+							parent = parent_obj,			)
+		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 	context = {
 		"post": post,
 		"share_string": share_string,
@@ -71,7 +99,8 @@ def post_new(request):
 			messages.error(request, "New post failed!")
 	else:
 		form = PostForm()
-	return render(request, 'dmlblog/post_edit.html', {'form': form})
+	context = {'form': form}
+	return render(request, 'dmlblog/post_edit.html', context)
 
 @login_required
 def post_edit(request, pk):

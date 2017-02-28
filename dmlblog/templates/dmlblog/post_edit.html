@@ -12,10 +12,10 @@
     </form>
 {% endblock %}
 
-{% for post in posts %}
+<!--{% for post in posts %}
 		<div class="post">
 			<p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
             <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
             {{ post.text|markdown|truncatechars:300 }}
 		</div>
-	{% endfor %}
+	{% endfor %}-->

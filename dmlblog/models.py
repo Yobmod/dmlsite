@@ -98,12 +98,6 @@ def pre_save_post_reciever(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_post_reciever, sender=Post)
 
-
-
-
-
-
-
 class Comment(models.Model):
 	post = models.ForeignKey('dmlblog.Post', related_name='comments')
 	author = models.CharField(max_length=200)

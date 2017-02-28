@@ -1,14 +1,15 @@
 {% extends 'dmlmain/base.html' %}
-
+{% load crispy_forms_tags %}
 {% load staticfiles %}
 {% load embed_video_tags %}
 {% load markdown_deux_tags %}
-
-{% block head_title %}
-{{ post.title }} | {{ block.super }}
-{% endblock head_title %}
-
+{% load humanize %}
+{% block head_title %}{{ post.title }} | {{ block.super }}{% endblock head_title %}
+{% block head_extra %} {{ form.media }}
 <link rel="stylesheet" href="{% static 'css/blog.css' %}"/>
+<link rel="stylesheet" href="{% static 'dmlcomments/dmlcomments.css' %}"/>
+<script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>
+{% endblock head_extra%}
 
 {% block content %}
 
@@ -35,12 +36,10 @@
 			<h1>{{ post.title }}</h1>
 			 {{ post.text|markdown }}
 
-			 <p>Read time: 	{% if post.read_time < 1 %} < 1 Minunknte
-				 			{% else %}{{ post.read_time }} minnnutes
+			 <p>Read time: 	{% if post.read_time < 1 %} < 1 minute
+				 			{% else %}{{ post.read_time }} minutes
 							{% endif %}</p>
 			<p>Author: {{ post.author }}</p>
-
-
 
 
 <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
@@ -74,7 +73,7 @@
 
 		</script>
 
-       	<a class="btn btn-default" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add comment</a>
+       <!--	<a class="btn btn-default" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add comment</a>
 	{% for comment in post.comments.all %}
 		{% if user.is_authenticated or comment.approved_comment %}
     		<div class="comment">
@@ -91,7 +90,30 @@
 	{% empty %}
     		<p>No comments here yet :(
     		   Login to comment</p>
+	{% endfor %} -->
+
+	{% if comments.count > 0 %}  {{comments.count}} comment{% if comments.count > 1 %}s {% endif %}{% endif %}
+<div class="btn btn-default" id="commentShowButton">Add comment</div>
+<div id="commentShow">
+	<h3>Add comment:</h3>
+		<form action="." method="POST" class="post-form"> {% csrf_token %}
+			{{form|crispy}}
+			<button type="submit" class="save btn btn-default">Submit</button>
+		</form>
+</div>
+
+{% for comment in comments %}
+<blockquote class="comment">
+
+
+	{{ comment.text|markdown }}
+	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
+		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
+		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a><a class="" href="{{ comment.get_absolute_url }}">(Link)</a>{% endif %}{% if request.user == comment.author %}<a class="" href="{{ comment.get_delete_url }}">Delete</a>{% endif %}</span>
+
 	{% endfor %}
+
+
 
 
 
