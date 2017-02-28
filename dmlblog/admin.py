@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .forms import PostForm
 
 class PostAdmin(admin.ModelAdmin):
 	list_display = ["__str__", "author", "created_date", "published_date"]

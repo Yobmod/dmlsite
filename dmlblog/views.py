@@ -18,7 +18,13 @@ except:
 
 def post_list(request):
 	posts = Post.objects.filter(draft=False).filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
-
+	#postal = Post.objects.all()
+	parent_type = ContentType.objects.get_for_model(posts)
+	#comments = Comment.objects.filter(content_type=parent_type)
+	comm = Comment.objects.filter(content_type=parent_type.id, object_id=posts.id)
+	#post_comments = postal.post_comments
+	#content_object = comment.content_object #gets poll/post the comment is from
+	#content_id = comment.content_object.id
 	query = request.GET.get("q")
 	if query:
 		posts = posts.filter(Q(title__icontains=query)|
@@ -38,8 +44,9 @@ def post_list(request):
 	except(EmptyPage or InvalidPage):
 		queryset = paginator.page(paginator.num_pages)#if too many, give last page
 	context = {'posts':posts,
-						'page_request_var': page_request_var,
-						'obj_list':queryset,}
+				#'post_comments': post_comments,
+				'page_request_var': page_request_var,
+				'obj_list':queryset,}
 	return render(request, 'dmlblog/post_list.html', context)
 
 def post_detail(request, pk):

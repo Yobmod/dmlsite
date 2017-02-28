@@ -64,12 +64,12 @@ def poll_detail(request, pk):
 							parent = parent_obj,			)
 		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 	context = {"form": form, 'question': question, "comments": comments}
-	return render(request, 'dmlpolls/detail.html', context)
+	return render(request, 'dmlpolls/poll_detail.html', context)
 
 
 
 class IndexView(generic.ListView):
-	template_name = 'dmlpolls/index.html'
+	template_name = 'dmlpolls/poll_index.html'
 	context_object_name = 'latest_question_list'
 
 	def get_queryset(self):
@@ -79,7 +79,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
 	model = Question
-	template_name = 'dmlpolls/detail.html'
+	template_name = 'dmlpolls/poll_detail.html'
 
 	def get_queryset(self):
 		"""Excludes any questions that aren't published yet."""
@@ -87,7 +87,7 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
 	model = Question
-	template_name = 'dmlpolls/results.html'
+	template_name = 'dmlpolls/poll_results.html'
 
 	def get_queryset(self):
 		"""Excludes any questions that aren't published yet."""
@@ -118,7 +118,7 @@ def add_choice(request, question_id):
 		#addpoll.vote = 0
 		#addpoll.question.save()
 		form.save()
-		#return render(request, 'dmlpolls/detail.html', {'question': question})
+		#return render(request, 'dmlpolls/poll_detail.html', {'question': question})
 		return HttpResponse('gbhbetg')
 	else:
 		form = ChoiceForm()
@@ -132,7 +132,7 @@ def vote(request, pk):
 		selected_choice = question.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
 		#Redisplay the question voting form.
-		return render(request, 'dmlpolls/detail.html', {
+		return render(request, 'dmlpolls/poll_detail.html', {
 			'question': question,
 			'error_message': "You didn't select a choice.",
 		})
@@ -146,4 +146,4 @@ def vote(request, pk):
 
 def results(request, pk):
     question = get_object_or_404(Question, pk=pk)
-    return render(request, 'dmlpolls/results.html', {'question': question})
+    return render(request, 'dmlpolls/poll_results.html', {'question': question})

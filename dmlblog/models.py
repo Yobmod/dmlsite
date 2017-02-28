@@ -4,6 +4,7 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 from embed_video.fields import EmbedVideoField
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db.models.signals import pre_save
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
@@ -37,6 +38,7 @@ class Post(models.Model):
 	image_width = models.IntegerField(default=100)
 	image_height = models.IntegerField(default=100)
 	slug = models.SlugField(unique=True)
+	post_comments = GenericRelation('Comment', related_query_name='bookmarks')
 
 	objects = PostManager()
 

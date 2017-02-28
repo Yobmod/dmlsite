@@ -11,14 +11,6 @@ class PostForm(forms.ModelForm):
 		model = Post
 		fields = ('title', 'text', "tags", "video", "image", "image_width", "image_height", "draft", "published_date")
 
-
-class CommentForm(forms.ModelForm):
-	class Meta:
-		model = Comment
-		fields = ('author', 'text',)
-		queryset = Post.objects.all()
-
-
 class TagMixin(object):
 	def get_context_data(self, **kwargs):
 		context = super(TagMixin, self).get_context_data(**kwargs)
