@@ -159,17 +159,14 @@ li a:hover {
 
 body {
 	background-color: white;
-	background-image:  url ("../images/tree.png");
+	background-image:  url("/static/dmlmain/images/tree.png?8a907c5a6ba8");
 	background-repeat: no-repeat;
 	background-position: bottom;
-	 font-family: 'Arial', cursive;
-	 color: black;
+	font-family: 'Arial', cursive;
+	color: black;
 	 }
 
  .content  {
-	background-image: url ("../images/tree.png");
-	background-repeat: no-repeat;
-	background-position: bottom;
 	margin: auto;
 	width: 100%;
 }

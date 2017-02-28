@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	var randNum = Math.floor(Math.random() * 10);
-	if(randNum < 10){
+	if(randNum < 1){
 		$(".randomfade").fadeTo("slow", 1.00);
 		$(".randomfade").fadeTo("slow", 0.00);
 	} else{};
