@@ -5,13 +5,20 @@
 
 {% for post in posts %}
 
-	<div class="post">
+		<div class="post">
 			<div>{{ post.title }}</div>
 			<div>{{ post.author }}</div>
 			<div>{{ post.text }}</div>
 			<div>{{ post_comments.count }}</div>
-			<div>{% for post_comment in post_comments %}{{ post_comment }}{% endfor %}</div>
+			<div>{% for post_comment in post_comments %}
+						{% if post_comment.content_object.id == post.id %}
+							{{ post_comment }}
+						{% endif %}
+				{% endfor %}</div>
 
+
+
+		</div>
 {% endfor %}
 
 

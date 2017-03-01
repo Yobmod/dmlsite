@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.conf import settings
 #from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericRelation
 from django.core.urlresolvers import reverse
 from dmlcomments.models import Comment
 
@@ -14,6 +15,7 @@ class Question(models.Model):
 	pub_date = models.DateTimeField('date published', auto_now_add=True, null=True)
 	end_date = models.DateTimeField(blank=True, null=True)
 	slug = models.SlugField(unique=True,blank=True,null=True)
+	poll_comments = GenericRelation(Comment, related_query_name='poll_comments')
 
 	def __str__(self):
 		return self.question_text

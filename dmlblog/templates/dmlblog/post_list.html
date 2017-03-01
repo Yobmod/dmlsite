@@ -32,9 +32,20 @@
 				{% endif %}
 
 					<span class="tags"><p># {% for tag in post.tags.all %}{{ tag }}</p>{% endfor %}</span>
-					<a href="{% url 'blog:post_detail' pk=post.pk %}"> {{post_comments.count}} comment{% if post_comments.count > 1 or post_comments.count == 0 %}s {% endif %}</a>
 
-	</div>
+
+
+				<div>
+						<a href="{% url 'blog:post_detail' pk=post.pk %}"> {{post.post_comments.count}}
+							comment{% if post_comments.count > 1 or post_comments.count == 0 %}s {% endif %}</a>
+
+				</div>
+
+
+
+
+
+				</div>
 	{% endif %}
 {% endfor %}
 

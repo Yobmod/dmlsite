@@ -38,7 +38,7 @@ class Post(models.Model):
 	image_width = models.IntegerField(default=100)
 	image_height = models.IntegerField(default=100)
 	slug = models.SlugField(unique=True)
-	post_comments = GenericRelation('Comment', related_query_name='post_comment')
+	post_comments = GenericRelation(Comment, related_query_name='post_comments')
 
 	objects = PostManager()
 

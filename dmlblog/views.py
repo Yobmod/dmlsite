@@ -7,7 +7,7 @@ from .models import Post
 from .forms import PostForm, TagIndexView, TagMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.contrib.contenttypes.models import ContentType
 from dmlcomments.models import Comment
 from dmlcomments.forms import CommentForm
@@ -17,13 +17,31 @@ except:
 	pass
 
 def post_test(request):
-	pass
+	posts = Post.objects.all()
+	c_type = ContentType.objects.get_for_model(Post)
+	post_id = posts.values_list('id')
+	post_comments = Comment.objects.filter(content_type=c_type)
+	#content_object = post_comment.content_object #gets poll/post the comment is from
+	#content_id = comment.content_object.id
+	#p_c_id = post_comment.content_object.id
+	#post_comments = Post.objects.prefetch_related('post_comments').filter(content_type=c_type, object_id__in=post_id)
+	#post_comments = Comment.objects.filter(content_type__pk=c_type.id, object_id=post_id)
+	context = {'posts': posts,
+			'post_comments': post_comments,}
+	return render(request, 'dmlblog/post_test.html', context)
 
 def post_list(request):
 	posts = Post.objects.filter(draft=False).filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
 	c_type = ContentType.objects.get_for_model(Post)
-	post_id = posts.values_list('id')
-	post_comments = Comment.objects.filter(content_type=c_type, object_id__in=post_id)
+	#post_id = posts.values_list('id')
+	post_comments = Comment.objects.filter(content_type=c_type)
+	counts = 1
+	for post in posts:
+		for comment in post_comments:
+			if comment.content_object.id == post.id:
+				counts += 1
+				post.post_comments.count = counts
+
 	query = request.GET.get("q")
 	if query:
 		posts = posts.filter(Q(title__icontains=query) |
@@ -45,6 +63,7 @@ def post_list(request):
 		queryset = paginator.page(paginator.num_pages)
 	context = {'posts': posts,
 			   'post_comments': post_comments,
+			   'counts': counts,
 			   'page_request_var': page_request_var,
 			   'obj_list': queryset, }
 	return render(request, 'dmlblog/post_list.html', context)
@@ -55,7 +74,12 @@ def post_detail(request, pk):
 	share_string = quote_plus(post.text)
 	# comments = post.comments #FK changed to GFK
 	#form = CommentForm()
-	comments = Comment.objects.filter_by_instance(post)
+	comments = Comment.objects.filter_by_instance(post) #aka = post.comments
+	counts = 1
+	for comment in comments:
+		if comment.content_object.id == post.id:
+			counts += 1
+			post.post_comments.count = counts
 	initial_data = {"content_type": post.get_content_type,
 					"object_id": post.id,
 					"author_id": request.user}

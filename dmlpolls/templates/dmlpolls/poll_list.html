@@ -21,7 +21,15 @@
 	{{poll.author}} - {{poll.pub_date}}
 	</div>
 </div>
+
+
+<div>
+		<a href="{% url 'polls:poll_detail' question.id %}"> {{question.poll_comments.count}}
+			comment{% if question.poll_comments.count > 1 or question.poll_comments.count == 0 %}s {% endif %}</a>
+
+</div>
 {% endfor %}
+
 
 {% include "dmlmain/pagination.html" %}
 

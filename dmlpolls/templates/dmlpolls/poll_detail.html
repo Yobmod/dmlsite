@@ -32,8 +32,8 @@
 <hr>
 <br>
 
-{% if comments.count > 0 %}  {{comments.count}} comment{% if comments.count > 1 %}s {% endif %}{% endif %}
-<div class="btn btn-default" id="commentShowButton">Add comment</div>
+<span>{% if comments.count > 0 %}  {{ question.poll_comments.count }} comments in {{comments.count}} thread{% if comments.count > 1 %}s {% endif %}{% endif %}
+<div class="btn btn-default" id="commentShowButton">Add comment</div></span>
 <div id="commentShow">
 	<h3>Add comment:</h3>
 		<form action="." method="POST" class="post-form"> {% csrf_token %}
@@ -44,9 +44,8 @@
 
 {% for comment in comments %}
 <blockquote class="comment">
-
-
 	{{ comment.text|markdown }}
+
 	<span class='date'>{{ comment.author }} - {{ comment.created_date|naturaltime}}
 		 {% if comment.children.count > 0 %} | {{ comment.children.count }} repl{% if comment.children.count > 1 %}ies {% elif comment.children.count == 1 %}y
 		 {% endif %} |<a class="replyShowButton" href="#">Show Thread</a><a class="" href="{{ comment.get_absolute_url }}">(Link)</a>{% endif %}{% if request.user == comment.author %}<a class="" href="{{ comment.get_delete_url }}">Delete</a>{% endif %}</span>
@@ -58,9 +57,10 @@
 		{{ child_comment.text|markdown }}
 		<span><p> by {{ child_comment.author }} - {{ child_comment.created_date|naturaltime}}<p>
 		{% if request.user == child_comment.author %}<a class="" href="{{ child_comment.get_delete_url }}">Delete</a>{% endif %}</span>
+
 	</blockquote>
 	{% endfor %}
-</div>
+	</div>
 
 	<span><a class="addReplyShowButton">| Reply</a></span>
 	<div class='addReplyShow'>

@@ -15,6 +15,15 @@ from dmlcomments.forms import CommentForm
 def poll_list(request):
 	questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 	#queryset_list = Question.objects.all()
+	c_type = ContentType.objects.get_for_model(Question)
+		#post_id = posts.values_list('id')
+	poll_comments = Comment.objects.filter(content_type=c_type)
+	counts = 1
+	for question in questions:
+		for comment in poll_comments:
+			if comment.content_object.id == question.id:
+				counts += 1
+				question.poll_comments.count = counts
 	query = request.GET.get("q")
 	if query:
 		questions = questions.filter(Q(question_text__icontains=query)|
@@ -36,7 +45,12 @@ def poll_list(request):
 
 def poll_detail(request, pk):
 	question = get_object_or_404(Question, pk=pk)
-	comments = Comment.objects.filter_by_instance(question)
+	comments = question.comments
+	counts = 1
+	for comment in comments:
+		if comment.content_object.id == question.id:
+			counts += 1
+			question.poll_comments.count = counts
 	initial_data ={"content_type": question.get_content_type,
 				   "object_id": question.id,
 				   "author_id": request.user}
@@ -63,7 +77,7 @@ def poll_detail(request, pk):
 							text = content_data,
 							parent = parent_obj,			)
 		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
-	context = {"form": form, 'question': question, "comments": comments}
+	context = {"form": form, 'question': question, "comments": comments, }
 	return render(request, 'dmlpolls/poll_detail.html', context)
 
 
