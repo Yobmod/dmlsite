@@ -19,5 +19,6 @@ urlpatterns = [
 	url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
 
-	url(r'^test/$', views.test, name='test'),
+	url(r'^test/$', views.GeneratePdf.as_view(), name='test'),
+	url(r'^invoice/$', views.GenerateInvoice.as_view(), name='invoice'),
 	]

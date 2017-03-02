@@ -5,6 +5,11 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .forms import SignUpForm, ContactForm
 from .models import SignUp
+from django.http import HttpResponse
+from django.views.generic import View
+from dmlmain.utils import render_to_pdf
+import datetime
+
 
 def homepage(request):
 	form = SignUpForm(request.POST or None)
@@ -56,5 +61,39 @@ def django_admin_page(request):
 def register(request):
 	return render(request, 'registration/registration_form.html')
 
-def test(request):
-	return render(request, 'test/test.html')
+from django.template.loader import get_template
+
+class GenerateInvoice(View):
+     def get(self, request, *args, **kwargs):
+         data = {
+              'today': datetime.date.today(),
+              'amount': 39.99,
+             'customer_name': 'Cooper Mann',
+             'invoice_id': 1233434,
+         }
+         pdf = render_to_pdf('pdf/test.html', data)
+         return HttpResponse(pdf, content_type='application/pdf')
+
+class GeneratePdf(View):
+	def get(self, request, *args, **kwargs):
+		template = get_template('pdf/test.html')
+		amount = 13490
+		invoice_id = 12345
+		context = {
+			"invoice_id": invoice_id,
+			"customer_name": "John Cooper",
+			"amount": amount,
+			"today": datetime.date.today(),
+		}
+		html = template.render(context)
+		pdf = render_to_pdf('pdf/test.html', context)
+		if pdf:
+			response = HttpResponse(pdf, content_type='application/pdf')
+			filename = "Invoice_%s.pdf" %("company_name " + str(invoice_id))
+			content = "inline; filename='%s'" %(filename)
+			download = request.GET.get("download")
+			if download:
+				content = "attachment; filename='%s'" %(filename)
+			response['Content-Disposition'] = content
+			return response
+		return HttpResponse("Not found")
