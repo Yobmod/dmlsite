@@ -30,7 +30,7 @@ class Post(models.Model):
 	text = models.TextField()
 	draft = models.BooleanField(default=True)
 	created_date = models.DateTimeField(default=timezone.now)
-	published_date = models.DateTimeField(blank=True, null=True)
+	published_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
 	read_time = models.TimeField(blank=True, null=True)
 	tags = TaggableManager(blank=True)
 	video = EmbedVideoField(max_length=200, null=True, blank=True)

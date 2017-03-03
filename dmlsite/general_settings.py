@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 	'storages',
 	'compressor',
 	'hitcount',
+	#'emoji',
 
 ]
 

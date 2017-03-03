@@ -64,27 +64,31 @@ def register(request):
 from django.template.loader import get_template
 
 class GenerateInvoice(View):
-     def get(self, request, *args, **kwargs):
-         data = {
-              'today': datetime.date.today(),
-              'amount': 39.99,
-             'customer_name': 'Cooper Mann',
-             'invoice_id': 1233434,
-         }
-         pdf = render_to_pdf('pdf/test.html', data)
-         return HttpResponse(pdf, content_type='application/pdf')
+	def get(self, request, *args, **kwargs):
+		amount = 13490
+		invoice_id = 12345
+		customer_name = "John Cooper"
+		context = {
+			'today': datetime.date.today(),
+			'amount': 39.99,
+			'customer_name': 'Cooper Mann',
+			'invoice_id': 1233434,
+			}
+		pdf = render_to_pdf('pdf/test.html', context)
+		return HttpResponse(pdf, content_type='application/pdf')
 
 class GeneratePdf(View):
 	def get(self, request, *args, **kwargs):
 		template = get_template('pdf/test.html')
-		amount = 13490
+		amount = 13490 # = Invoice.amount etc from a model. Then can be added by form
 		invoice_id = 12345
+		customer_name = "John Cooper"
 		context = {
 			"invoice_id": invoice_id,
-			"customer_name": "John Cooper",
+			"customer_name": customer_name,
 			"amount": amount,
 			"today": datetime.date.today(),
-		}
+			}
 		html = template.render(context)
 		pdf = render_to_pdf('pdf/test.html', context)
 		if pdf:
@@ -97,3 +101,7 @@ class GeneratePdf(View):
 			response['Content-Disposition'] = content
 			return response
 		return HttpResponse("Not found")
+
+		# response = HttpResponseRedirect("URL u want to redirect to"
+		# response['Content-Disposition'] = "attachment; filename='%s'" % ("attachment; filename='yourpdffilename')
+		# return response﻿
