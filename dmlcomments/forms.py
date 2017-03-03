@@ -1,8 +1,10 @@
 from django import forms
 from .models import Comment
 from pagedown.widgets import PagedownWidget
-#from dmlsite.widgets import MyWidget
-#text = forms.CharField(widget=MyWidget)
+
+from dmlsite.fields import AddressField
+from dmlsite.widgets import MyWidget
+
 
 class CommentForm(forms.ModelForm):
 	content_type = forms.CharField(widget=forms.HiddenInput)

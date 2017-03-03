@@ -8,7 +8,7 @@ click==6.6
 cookiecutter==1.4.0
 defusedxml==0.4.1
 dj-database-url==0.4.1
-Django==1.10.5
+Django==1.10.1
 django-allauth==0.27.0
 django-angular==0.8.4
 django-appconf==1.0.2
@@ -22,6 +22,7 @@ django-embed-video==1.1.0
 django-emoji==2.2.0
 django-environ==0.4.0
 django-extensions==1.7.4
+django-form-utils==1.0.3
 django-haystack==2.5.0
 django-hitcount==1.2.2
 django-jquery==3.1.0
@@ -37,6 +38,7 @@ django-tagging==0.4.5
 django-taggit==0.18.3
 django-treebeard==4.0.1
 djangorestframework==3.4.6
+first==2.0.1
 Flask==0.11.1
 freeze==1.0.10
 future==0.15.2
@@ -52,6 +54,7 @@ markdown2==2.3.3
 MarkupSafe==0.23
 oauthlib==2.0.0
 Pillow==3.3.1
+pip-tools==1.8.0
 poyo==0.4.0
 psycopg2==2.6.2
 PyMySQL==0.7.9
@@ -66,6 +69,7 @@ requests==2.11.1
 requests-oauthlib==0.6.2
 rjsmin==1.0.12
 six==1.10.0
+sorl-thumbnail==12.3
 South==1.0.2
 Unidecode==0.4.19
 wagtail==1.6.2
