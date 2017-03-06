@@ -2,7 +2,7 @@ from django import forms
 from .models import Comment
 from pagedown.widgets import PagedownWidget
 
-from dmlsite.fields import AddressField
+#from dmlsite.fields import AddressField
 from dmlsite.widgets import MyWidget
 
 

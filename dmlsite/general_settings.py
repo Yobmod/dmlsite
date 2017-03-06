@@ -16,10 +16,13 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.humanize',
 	'django.contrib.staticfiles',
+	'rest_framework',
+
 	'dmlblog',
 	'dmlpolls',
 	'dmlmain',
 	'dmlcomments',
+	'dmlresearch',
 
 	'markdown_deux',
 	'pagedown',

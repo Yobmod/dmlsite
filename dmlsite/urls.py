@@ -33,6 +33,7 @@ urlpatterns = [
 	url(r'^blog/', include('dmlblog.urls', namespace='blog')),
 	url(r'^polls/', include('dmlpolls.urls', namespace='polls')),
 	url(r'^comments/', include('dmlcomments.urls', namespace='comments')),
+	url(r'^research/', include('dmlresearch.urls', namespace='research')),
 ]
 
 from django.conf.urls.static import static

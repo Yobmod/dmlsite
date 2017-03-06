@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+<script>
+{% block jquery %}
+var endpoint = 'api/data/'
+var defaultData = []
+var labels = [];
+$.ajax({
+    method: "GET",
+    url: endpoint,
+    success: function(data){
+    },
+    error: function(error_data){
+        console.log("error")
+        console.log(error_data)
+    }
+})
+
+{% endblock %}
+</script>
+
+{% block content %}
+
+<div class='row'>
+    <div class='col-sm-12' url-endpoint='{% url "dmlresearch:api-data" %}'>
+        <h1>Hello World</h1>
+
+
+
+    </div>
+</div>
+
+{% endblock content %}
