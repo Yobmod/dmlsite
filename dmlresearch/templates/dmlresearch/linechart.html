@@ -1,0 +1,29 @@
+{% extends 'chartbase.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script> <!--overwrites with old version of chart.js-->
+
+<script type="text/javascript">
+	$.get('{% url "dmlresearch:line_chart_json" %}', function(data) {
+		var ctx = $("#myChart").get(0).getContext("2d");
+		new Chart(ctx).Line(data);
+	});
+</script>
+
+<div class='row'>
+    <div class='col-sm-12' url-endpoint=''>
+
+		<h1>Some Line Charts loaded in Ajax!</h1>
+
+		<canvas id="myChart" width="500" height="400"></canvas>
+
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 	'taggit',
 	'embed_video',
 	'registration',
+	'chartjs',
 	'sitetree',
 	'crispy_forms',
 	'storages',
