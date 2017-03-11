@@ -5,7 +5,7 @@
 {% load humanize %}
 
 {% block head_extra %}
-{{forms.media}} 
+{{forms.media}}
 <link rel="stylesheet" href="{% static 'dmlcomments/dmlcomments.css' %}"/>
 <script type="text/javascript" src="{% static 'dmlcomments/dmlcomments.js' %}" defer></script>
 {% endblock head_extra%}
@@ -34,7 +34,7 @@
 		<form action="." method="POST"> {% csrf_token %}
 			{{form|crispy}}
 			<input type='hidden' name='parent_id' value="{{ comment.id }}"/>
-			<button type="submit" class="save btn btn-default">Submit</button>
+			<button type="submit" id="commentsubmit" class="save btn btn-default">Submit</button>
 		</form>
 	</div>
 
