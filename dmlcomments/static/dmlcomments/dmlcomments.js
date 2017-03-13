@@ -22,10 +22,11 @@ $(document).ready(function() {
 $(document).ready(function() {
 $("button#commentsubmit").prop("disabled", true);
 $("textarea#id_text").on("input", function() {
-  if ($(this).val().length > 0) {
-    $("button#commentsubmit").prop("disabled", false);
-  } else {
-    $("button#commentsubmit").prop("disabled", true);
+	$("span#comment_length").text(140 - $(this).val().length);
+  	if ($(this).val().length > 0) {
+    	$("button#commentsubmit").prop("disabled", false);
+  	} else {
+    	$("button#commentsubmit").prop("disabled", true);
   }
 });
 });

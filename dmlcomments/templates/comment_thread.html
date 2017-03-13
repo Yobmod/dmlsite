@@ -34,6 +34,7 @@
 		<form action="." method="POST"> {% csrf_token %}
 			{{form|crispy}}
 			<input type='hidden' name='parent_id' value="{{ comment.id }}"/>
+			<span id="comment_length">140</span>
 			<button type="submit" id="commentsubmit" class="save btn btn-default">Submit</button>
 		</form>
 	</div>
