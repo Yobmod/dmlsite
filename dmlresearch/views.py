@@ -11,7 +11,7 @@ User = get_user_model()
 
 class HomeView(View):
 	def get(self, request, *args, **kwargs):
-		return render(request, 'dmlresearch/charts.html', {"customers": 10})
+		return render(request, 'research.html')
 
 def get_data(request, *args, **kwargs):
 	data = {
