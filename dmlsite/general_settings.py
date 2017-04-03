@@ -146,7 +146,7 @@ COMPRESS_ROOT = STATIC_ROOT
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 
-
+#STATICFILES_STORAGE = os.path.join(BASE_DIR,  'static_root')
 
 #COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 #COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']

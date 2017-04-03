@@ -1,17 +1,36 @@
 from django.contrib.auth import get_user_model
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse, Http404, HttpResponse
 from django.shortcuts import render
 from django.views.generic import View
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 User = get_user_model()
 
 class HomeView(View):
 	def get(self, request, *args, **kwargs):
 		return render(request, 'research.html')
+
+def poster_view(request):
+	# try:
+	# 	return FileResponse(open('/static/poster.pdf', 'rb'), content_type='application/pdf')
+	# except FileNotFoundError:
+	# 	raise Http404()
+	#file_path = staticfiles_storage.url('Poster.txt')
+	#file_path = staticfiles_storage.url(os.path.join(BASE_DIR, 'static_root/Poster.pdf'))
+	#file_path = static('dmlresearch/static/Poster.pdf')
+	with open('Poster.pdf', 'rb') as pdf:
+		response = HttpResponse(pdf.read(), content_type='application/pdf')
+		response['Content-Disposition'] = 'inline;filename=poster.pdf'
+		return response
+
+#dmlresearch\static\Poster.pdf
+
+
+
 
 def get_data(request, *args, **kwargs):
 	data = {
