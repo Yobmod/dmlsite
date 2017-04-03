@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 	'pagedown',
 	'cookielaw',
 	'taggit',
+	'sorl.thumbnail',
 	'embed_video',
 	'registration',
 	'chartjs',
