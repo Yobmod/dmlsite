@@ -95,7 +95,6 @@ PyMySQL==0.7.9
 pyOpenSSL==17.2.0
 pyparsing==2.2.0
 PyPDF2==1.26.0
-pypiwin32==219
 pysolr==3.6.0
 python-dateutil==2.5.3
 python-twitter==3.3
