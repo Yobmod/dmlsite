@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 	'dmlcomments',
 	'dmlresearch',
 
+	'django_extensions',
 	'markdown_deux',
 	'pagedown',
 	'cookielaw',
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
 	'storages',
 	'compressor',
 	#'hitcount',
+	#'jchart',
 	#'emoji',
 
 ]
