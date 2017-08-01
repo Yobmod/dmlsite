@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'storages',
 	'compressor',
-	'hitcount',
+	#'hitcount',
 	#'emoji',
 
 ]
