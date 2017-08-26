@@ -35,9 +35,9 @@ INSTALLED_APPS = [
 	'chartjs',
 	'sitetree',
 	'crispy_forms',
-	#'storages',
+	'storages',
 	'compressor',
-	#'django_user_agents',
+	'django_user_agents',
 	#'hitcount',
 	#'jchart',
 	#'emoji',
@@ -59,7 +59,7 @@ MIDDLEWARE = [
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	#'django_user_agents.middleware.UserAgentMiddleware',
+	'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'dmlsite.urls'
