@@ -10,12 +10,12 @@ from django.views.generic import View
 from dmlmain.utils import render_to_pdf
 import datetime
 
-#from django_user_agents.utils import get_user_agent
+from django_user_agents.utils import get_user_agent
 
 
 def homepage(request):
-	#user_agent = get_user_agent(request)
-	#if user_agent.is_mobile == False:
+	user_agent = get_user_agent(request)
+	if user_agent.is_mobile == False:
 		form = SignUpForm(request.POST or None)
 		if form.is_valid():
 			instance = form.save(commit=False)
@@ -38,8 +38,8 @@ def homepage(request):
 				text = "Welcome visitor"
 		context = {'text': text, 'form':form,}
 		return render(request, 'dmlmain/homepage.html', context)
-	#else:
-		#return HttpResponse("you are on a mobile")
+	else:
+		return HttpResponse("you are on a mobile")
 
 
 def contact_admins(request):
