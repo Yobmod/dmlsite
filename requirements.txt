@@ -23,6 +23,7 @@ django-registration-redux==1.7
 django-sitetree==1.8.0
 django-storages==1.6.5
 django-taggit==0.22.1
+django-user-agents==0.3.2
 djangorestframework==3.6.3
 docutils==0.13.1
 first==2.0.1
@@ -51,7 +52,9 @@ rjsmin==1.0.12
 s3transfer==0.1.10
 six==1.10.0
 sorl-thumbnail==12.3
+ua-parser==0.7.3
 urllib3==1.22
+user-agents==1.1.0
 webencodings==0.5.1
 Werkzeug==0.12.2
 whitenoise==3.3.0

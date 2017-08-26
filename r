@@ -1,1 +1,1 @@
-Collecting requirments.txt
+Collecting requirements.txt

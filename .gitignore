@@ -1,9 +1,13 @@
 *.pyc
 __pycache__
 myvenv
+
 local_settings.py
 
-db.sqlite3
+
+
 /static
+/media
+db.sqlite3
 .DS_Store
-media
+.boto

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 	'crispy_forms',
 	'storages',
 	'compressor',
+	#'django_user_agents',
 	#'hitcount',
 	#'jchart',
 	#'emoji',
@@ -57,7 +58,8 @@ MIDDLEWARE = [
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
-	'django.middleware.clickjacking.XFrameOptionsMiddleware'
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	#'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'dmlsite.urls'
@@ -101,6 +103,13 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 DEBUG = False
 
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     }
+# }
+# USER_AGENTS_CACHE = 'default' # or none to use djangocache
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

@@ -1,6 +1,0 @@
-[Credentials]
-AWS_ACCESS_KEY_ID = 'AKIAIC3XZR7SNQEGZONQ'
-AWS_SECRET_ACCESS_KEY = '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'
-
-[s3]
-host=s3.eu-central-1.amazonaws.com
