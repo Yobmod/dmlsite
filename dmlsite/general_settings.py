@@ -35,7 +35,7 @@ INSTALLED_APPS = [
 	'chartjs',
 	'sitetree',
 	'crispy_forms',
-	'storages',
+	#'storages',
 	'compressor',
 	#'django_user_agents',
 	#'hitcount',
@@ -144,7 +144,7 @@ LOGIN_REDIRECT_URL = '/'
 STATICFILES_FINDERS = (
 	'django.contrib.staticfiles.finders.FileSystemFinder',
 	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-	'compressor.finders.CompressorFinder',
+	'compressor.finders.CompressorFinder'
 )
 
 STATIC_URL = '/static/'

@@ -19,11 +19,14 @@ $(document).ready(function() {
 });
 
 // Initially disable submit button until text present. How get text bog id in django form?
-$("button.commentsubmit").prop("disabled", true);
-$("textarea.xxxx").on("input", function() {
-  if ($(this).val().length > 0) {
-    $("button.commentsubmit").prop("disabled", false);
-  } else {
-    $("button.commentsubmit").prop("disabled", true);
+$(document).ready(function() {
+$("button#commentsubmit").prop("disabled", true);
+$("textarea#id_text").on("input", function() {
+	$("span#comment_length").text(140 - $(this).val().length);
+  	if ($(this).val().length > 0) {
+    	$("button#commentsubmit").prop("disabled", false);
+  	} else {
+    	$("button#commentsubmit").prop("disabled", true);
   }
+});
 });
