@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 	'dmlresearch',
 
 	'django_extensions',
+	'django_nose',
 	'markdown_deux',
 	'pagedown',
 	'cookielaw',
@@ -61,6 +62,8 @@ MIDDLEWARE = [
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django_user_agents.middleware.UserAgentMiddleware',
 ]
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 ROOT_URLCONF = 'dmlsite.urls'
 

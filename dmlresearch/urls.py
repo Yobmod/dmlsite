@@ -18,9 +18,9 @@ urlpatterns = [
 
 	#url(r'^restchart/$', HomeView.as_view(), name='home'),
     url(r'^api/data/$', get_data, name='api-data'),
-    url(r'^api/chart/data/$', ChartData.as_view()),
+    url(r'^api/chart/data/$', ChartData.as_view(), name='chart_data_json'),
 
-	url(r'^linechart/$', LineChartView.as_view()),
+	url(r'^linechart/$', LineChartView.as_view(), name='line_chart_view'),
 	url(r'^linechart/data/$', LineChartJSONView.as_view(), name='line_chart_json'),
 
 	url(r'^visitorchart/$', AnalyticsIndexView.as_view()),

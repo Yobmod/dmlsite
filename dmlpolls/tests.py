@@ -5,8 +5,15 @@ from django.urls import reverse
 
 from .models import Question
 
-class QuestionMethodTests(TestCase):
 
+class PollsViewsTestCase(TestCase):
+    def test_index(self):
+        resp = self.client.get('/polls/')
+        self.assertEqual(resp.status_code, 200)
+
+
+
+class QuestionMethodTests(TestCase):
 	def test_was_published_recently_with_future_question(self):
 		"""  was_published_recently() should return False for questions whose
 		pub_date is in the future."""
