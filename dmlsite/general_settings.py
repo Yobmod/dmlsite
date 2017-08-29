@@ -24,7 +24,7 @@ INSTALLED_APPS = [
 	'dmlcomments',
 	'dmlresearch',
 
-	'django_extensions',
+	'django_extensions', # werkzeug, pytest-django
 	'markdown_deux',
 	'pagedown',
 	'cookielaw',
