@@ -1,4 +1,4 @@
-
+SECRET_KEY = os.environ['SECRET_KEY']
 import os
 import dj_database_url
 
@@ -83,6 +83,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
+
+TEST_RUNNER = 'dmlsite.testrunners.PytestTestRunner'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
