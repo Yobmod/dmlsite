@@ -16,24 +16,15 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.humanize',
 	'django.contrib.staticfiles',
-
-	#essentials
 	'rest_framework',
-	'storages',
 
-	#myapps
 	'dmlblog',
 	'dmlpolls',
 	'dmlmain',
 	'dmlcomments',
 	'dmlresearch',
 
-	#dev tools
 	'django_extensions',
-	#'pytest_django',
-
-
-	#other tools
 	'markdown_deux',
 	'pagedown',
 	'cookielaw',
@@ -44,6 +35,7 @@ INSTALLED_APPS = [
 	'chartjs',
 	'sitetree',
 	'crispy_forms',
+	'storages',
 	'compressor',
 	'django_user_agents',
 	#'hitcount',
