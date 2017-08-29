@@ -25,7 +25,7 @@ INSTALLED_APPS = [
 	'dmlresearch',
 
 	'django_extensions',
-	'django_nose',
+	#'django_nose',
 	'markdown_deux',
 	'pagedown',
 	'cookielaw',
