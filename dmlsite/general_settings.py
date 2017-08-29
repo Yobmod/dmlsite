@@ -63,7 +63,7 @@ MIDDLEWARE = [
 	'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+#TEST_RUNNER = ''
 
 ROOT_URLCONF = 'dmlsite.urls'
 
