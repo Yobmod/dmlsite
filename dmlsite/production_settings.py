@@ -46,15 +46,15 @@ DATABASES = {
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
- # AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
- # AWS_ACCESS_KEY_ID = os.environ['AWSAccessKeyId']
- # AWS_SECRET_ACCESS_KEY = os.environ['AWSSecretKey']
- # AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
- # STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
- # STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
- # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
- # AWS_S3_HOST = 's3.eu-central-1.amazonaws.com'
- #
- # AWS_S3_OBJECT_PARAMETERS = {
- # 	 'CacheControl': 'max-age=864000',    #86400 = 1 day
- # 	 }
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = os.environ['AWSAccessKeyId']
+AWS_SECRET_ACCESS_KEY = os.environ['AWSSecretKey']
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_HOST = 's3.eu-central-1.amazonaws.com'
+
+AWS_S3_OBJECT_PARAMETERS = {
+	'CacheControl': 'max-age=864000',    #86400 = 1 day
+	}
