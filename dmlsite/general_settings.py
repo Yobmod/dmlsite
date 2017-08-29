@@ -19,7 +19,7 @@ INSTALLED_APPS = [
 
 	#essentials
 	'rest_framework',
-	'storages',
+	#'storages',
 
 	#myapps
 	'dmlblog',
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 
 	#dev tools
 	'django_extensions',
-	'pytest_django',
+	#'pytest_django',
 
 
 	#other tools
