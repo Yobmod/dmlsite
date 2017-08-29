@@ -8,13 +8,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ['*']
 DEBUG = False
-SECRET_KEY = os.environ['SECRET_KEY']
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+try:
+	SECRET_KEY = os.environ['SECRET_KEY']
+except:
+	pass
+
+try:
+	EMAIL_HOST = 'smtp.gmail.com'
+	EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+	EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+	EMAIL_PORT = 587
+	EMAIL_USE_TLS = True
+except:
+	pass
+
 
 
 ROOT_URLCONF = 'dmlsite.urls'
