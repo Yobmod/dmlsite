@@ -19,7 +19,10 @@ INSTALLED_APPS = [
 	#django essentials
 	'rest_framework',
 	'storages',
+	'compressor',
 	'django_user_agents',
+	'django_q',
+
 
 	#my apps
 	'dmlblog',
@@ -36,7 +39,8 @@ INSTALLED_APPS = [
 
 	#dev tools
 	'django_extensions', # werkzeug, pytest-django
-	'compressor',
+	'controlcenter',
+
 
 	#other tools
 	'markdown_deux',
@@ -58,6 +62,10 @@ INSTALLED_APPS = [
 ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
 SITE_ID = 1
+
+CONTROLCENTER_DASHBOARDS = (
+	'dmlsite.dashboard.MyDashboard',
+)
 
 TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3' #or bootstap, bootstrap4, uni-forms
