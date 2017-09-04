@@ -16,6 +16,7 @@ django-classy-tags==0.8.0
 django-compressor==2.1.1
 django-cookie-law==1.0.13
 django-crispy-forms==1.6.1
+django-dotenv==1.4.1
 django-embed-video==1.1.2
 django-extensions==1.8.1
 django-markdown-deux==1.0.5
