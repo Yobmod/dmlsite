@@ -8,7 +8,7 @@ def create_html_report(user):
 
 def test_hook(task):
 	pass
-	
+
 # report mailer
 def email_report(task):
 	if task.success:
@@ -18,8 +18,8 @@ def email_report(task):
 			task.result,
 			settings.EMAIL_HOST_USER,
 			task.args[0].email)
-	else:
-		# Tell the admins something went wrong
-		async('django.core.mail.mail_admins',
-			'Report generation failed',
-			task.result)
+	# else:
+	# 	# Tell the admins something went wrong
+	# 	async('django.core.mail.mail_admins',
+	# 		'Report generation failed',
+	# 		task.result)
