@@ -107,17 +107,17 @@ TEST_RUNNER = 'dmlsite.testrunners.PytestTestRunner'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'dmlsite',
-		'USER': 'dmlsite',
-		'PASSWORD': '',
-		'HOST': 'localhost',
-		'PORT': '',
-		'CONN_MAX_AGE': 600,
-	}
-}
+# DATABASES = {
+# 	'default': {
+# 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+# 		'NAME': 'dmlsite',
+# 		'USER': 'dmlsite',
+# 		'PASSWORD': '',
+# 		'HOST': 'localhost',
+# 		'PORT': '',
+# 		'CONN_MAX_AGE': 600,
+# 	}
+# }
 
 Q_CLUSTER = {
 	'name': 'dmlsite',

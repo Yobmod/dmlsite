@@ -43,6 +43,16 @@ DATABASES = {
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+Q_CLUSTER = {
+	'name': 'dmlsite',
+	'workers': 4,
+	'timeout': 90,
+	'retry': 120,
+	'queue_limit': 50,
+	'bulk': 10,
+	'orm': 'default'
+}
+
 try:
 	AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 	AWS_ACCESS_KEY_ID = os.environ['AWSAccessKeyId']
