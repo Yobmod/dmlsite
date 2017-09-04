@@ -152,6 +152,12 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = '/'
 
+COMPRESS_PRECOMPILERS = (
+	('text/x-scss', 'django_libsass.SassCompiler'),
+)
+LIBSASS_OUTPUT_STYLE = 'nested' #'compressed'
+LIBSASS_PRECISION = 8
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATICFILES_FINDERS = (
@@ -166,12 +172,17 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR,  'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 COMPRESS_ROOT = STATIC_ROOT
+
+#WHITENOISE_AUTOREFRESH # =DEBUG
 WHITENOISE_ROOT = STATIC_ROOT
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 
-COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_CSS_FILTERS = [
+	'compressor.filters.css_default.CssAbsoluteFilter',
+	'compressor.filters.cssmin.rCSSMinFilter' #default
+]
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_OUTPUT_DIR = 'compressed'
 COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
