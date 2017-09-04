@@ -162,20 +162,19 @@ STATICFILES_FINDERS = (
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-COMPRESS_URL = STATIC_URL
 
 STATIC_ROOT = os.path.join(BASE_DIR,  'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 COMPRESS_ROOT = STATIC_ROOT
+WHITENOISE_ROOT = STATIC_ROOT
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
-
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_OUTPUT_DIR = 'compressed'
 COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
 COMPRESS_JS_BACKEND = 'django_compressor.js.JsCompressor'
-COMPRESS_ENABLED = False
-COMPRESS_OFFLINE = False
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True

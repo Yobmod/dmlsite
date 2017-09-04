@@ -48,12 +48,21 @@ try:
 	AWS_ACCESS_KEY_ID = os.environ['AWSAccessKeyId']
 	AWS_SECRET_ACCESS_KEY = os.environ['AWSSecretKey']
 	AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-	STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-	STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-	DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 	AWS_S3_HOST = 's3.eu-central-1.amazonaws.com'
 	AWS_S3_OBJECT_PARAMETERS = {
 		'CacheControl': 'max-age=864000',    #86400 = 1 day
 		}
 except:
 	pass
+
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'dmlsite.storages_custom.MediaStorage'
+
+
+STATICFILES_LOCATION = 'static'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATICFILES_STORAGE = 'dmlsite.storages_custom.CachedS3BotoStorage'
+
+COMPRESS_URL = STATIC_URL
+COMPRESS_STORAGE = STATICFILES_STORAGE

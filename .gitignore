@@ -1,13 +1,15 @@
-*.pyc
-__pycache__
+
 myvenv
 .env
 
 local_settings.py
 
-
-/static
-/media
+/static_root
+/media_root
 db.sqlite3
 .DS_Store
 .boto
+
+
+*.pyc
+__pycache__
