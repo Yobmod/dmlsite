@@ -43,7 +43,7 @@ def homepage(request):
 		return HttpResponse("you are on a mobile")
 
 from django_q.tasks import async, result
-import . import tasks
+from . import tasks
 
 def contact_admins(request):
 	form = ContactForm(request.POST or None)
