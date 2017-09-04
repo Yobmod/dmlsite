@@ -1,3 +1,4 @@
+from django.conf import settings
 from django_q.tasks import async
 
 # report generator
