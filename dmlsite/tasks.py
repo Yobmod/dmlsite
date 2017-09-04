@@ -1,5 +1,5 @@
 from django.conf import settings
-from django_q.tasks import async
+from django_q.tasks import async, result
 
 # report generator
 def create_html_report():
