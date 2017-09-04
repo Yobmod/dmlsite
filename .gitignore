@@ -1,5 +1,5 @@
 myvenv
-.env
+/.env
 
 local_settings.py
 
