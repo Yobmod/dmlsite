@@ -10,12 +10,12 @@ def test_hook(task):
 	pass
 
 # report mailer
-def email_report(task):
+def email_report():
 	#if task.success:
 		# Email the report
 	async('django.core.mail.send_mail', #task2 to run
 		'The report you requested', #subject
-		'what what',   #task.result,	#hook, does task2 once task done
+		'what what',   #task.result,
 		'yobmod@gmail.com',  #settings.EMAIL_HOST_USER, #from email
 		'yobmod@yahoo.co.uk') #task.args[0].email) #to email
 	# else:
