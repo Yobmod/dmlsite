@@ -42,6 +42,8 @@ def homepage(request):
 		#return render(request, 'dmlmain/homepage_mob.html', context)
 		return HttpResponse("you are on a mobile")
 
+from django_q.tasks import async, result
+
 
 def contact_admins(request):
 	form = ContactForm(request.POST or None)
@@ -55,6 +57,8 @@ def contact_admins(request):
 		to_email = [from_email, form_email] #send copy to myself
 		contact_message = "%s: %s via %s"%(form_name, form_message, from_email)
 		send_mail(subject, contact_message, from_email, to_email, fail_silently=False)
+
+		async('tasks.create_html_report', form_email, hook='tasks.email_report')
 
 	context = {'form':form,}
 	return render(request, 'dmlmain/contact_admins.html', context)

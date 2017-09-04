@@ -119,17 +119,31 @@ DATABASES = {
 	}
 }
 
+Q_CLUSTER = {
+	'name': 'dmlsite',
+	'workers': 4,
+	'timeout': 90,
+	'retry': 120,
+	'queue_limit': 50,
+	'bulk': 10,
+	'orm': 'default'
+}
+
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 DEBUG = False
 
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-#         'LOCATION': '127.0.0.1:11211',
-#     }
-# }
+CACHES = {
+	'default': {
+		#'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+		'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+		#'django.core.cache.backends.memcached.MemcachedCache',
+		#'django.core.cache.backends.memcached.PyLibMCCache',
+		#'LOCATION': '/var/tmp/django_cache',
+		'LOCATION': 'djangoq-localmem',
+	}
+}
 # USER_AGENTS_CACHE = 'default' # or none to use djangocache
 
 # Password validation
