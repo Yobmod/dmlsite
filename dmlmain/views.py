@@ -58,7 +58,7 @@ def contact_admins(request):
 		contact_message = "%s: %s via %s"%(form_name, form_message, from_email)
 		send_mail(subject, contact_message, from_email, to_email, fail_silently=False)
 
-		async('create_html_report', hook='test_hook')
+		async('create_html_report', hook='dmlmain.tasks.test_hook')
 
 	context = {'form':form,}
 	return render(request, 'dmlmain/contact_admins.html', context)
