@@ -6,7 +6,7 @@ def create_html_report():
 	html_report = 'We had a great quarter!'
 	return html_report
 
-def test_hook(task):
+def test_hook():
 	pass
 
 # report mailer
