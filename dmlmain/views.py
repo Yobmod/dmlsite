@@ -44,6 +44,8 @@ def homepage(request):
 
 from django_q.tasks import async, result
 from .tasks import create_html_report, email_report, test_hook
+from twilio.rest import Client
+import os
 
 def contact_admins(request):
 	form = ContactForm(request.POST or None)
@@ -52,13 +54,19 @@ def contact_admins(request):
 		form_email = form.cleaned_data.get('email')
 		form_message = form.cleaned_data.get('message')
 
-		subject = 'Site contact form'
+		subject = 'dmlsite contact'
 		from_email = settings.EMAIL_HOST_USER
 		to_email = [from_email, form_email] #send copy to myself
 		contact_message = "%s: %s via %s"%(form_name, form_message, from_email)
 		send_mail(subject, contact_message, from_email, to_email, fail_silently=False)
 
-		async('create_html_report', hook='dmlmain.tasks.test_hook')
+		#async('dmlmain.tasks.create_html_report', , hook='dmlmain.tasks.test_hook')
+		PHONE_NUMBER=os.environ['PHONE_NUMBER']
+		TWILIO_NUMBER=os.environ['TWILIO_NUMBER']
+		TWILIO_ACC_SID=os.environ['TWILIO_ACC_SID']
+		TWILIO_AUTH_TOKEN=os.environ['TWILIO_AUTH_TOKEN']
+		client = Client(TWILIO_ACC_SID, TWILIO_AUTH_TOKEN)
+		client.messages.create(to=PHONE_NUMBER, from_=TWILIO_NUMBER, body="%s: %s via %s"%(form_name, form_message, from_email))
 
 	context = {'form':form,}
 	return render(request, 'dmlmain/contact_admins.html', context)
