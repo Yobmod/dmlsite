@@ -48,15 +48,23 @@ oauthlib==2.0.2
 olefile==0.44
 Pillow==4.2.1
 pip-tools==1.9.0
+protobuf==3.4.0
 psutil==5.3.0
 psycopg2==2.7.3
 py==1.4.34
+pycrypto==2.6.1
+PyJWT==1.5.2
 PyPDF2==1.26.0
+pyreadline==2.1
+PySocks==1.6.7
 pytest==3.2.1
 pytest-django==3.1.2
+python-axolotl==0.1.39
+python-axolotl-curve25519==0.1
 python-dateutil==2.6.1
 python3-openid==3.1.0
 pytz==2017.2
+pywhatsapp==0.0.7
 rcssmin==1.0.6
 reportlab==3.4.0
 requests==2.18.2
@@ -65,6 +73,7 @@ rjsmin==1.0.12
 s3transfer==0.1.10
 six==1.10.0
 sorl-thumbnail==12.3
+twilio==6.6.1
 ua-parser==0.7.3
 urllib3==1.22
 user-agents==1.1.0
@@ -73,3 +82,4 @@ webencodings==0.5.1
 Werkzeug==0.12.2
 whitenoise==3.3.0
 xhtml2pdf==0.2b1
+yowsup2==2.5.0
