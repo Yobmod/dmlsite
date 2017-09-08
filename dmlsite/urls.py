@@ -29,7 +29,7 @@ urlpatterns = [
 	url(r'^admin/dashboard/', controlcenter.urls),
 	#url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	#url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
-	url(r'^favicon.ico$', RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), permanent=False), name="favicon"),
+	url(r'^accounts/', include('allauth.urls')),
 
 	url(r'^', include('dmlmain.urls')),
 	url(r'^blog/', include('dmlblog.urls', namespace='blog')),
