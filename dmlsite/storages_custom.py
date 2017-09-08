@@ -39,8 +39,8 @@ class CachedS3BotoStorage(S3Boto3Storage):
 MEDIAFILES_LOCATION = 'media'
 STATICFILES_LOCATION = 'static'
 
-# class StaticStorage(S3Boto3Storage):
-# 	location = settings.STATICFILES_LOCATION
+class StaticStorage(S3Boto3Storage):
+	location = settings.STATICFILES_LOCATION
 
 class MediaStorage(S3Boto3Storage):
 	location = settings.MEDIAFILES_LOCATION

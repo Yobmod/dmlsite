@@ -3,7 +3,7 @@ import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 INSTALLED_APPS = [
 	'django.contrib.admin',
@@ -35,8 +35,8 @@ INSTALLED_APPS = [
 	'allauth.account',
 	'allauth.socialaccount',
 	'allauth.socialaccount.providers.google',
-	'allauth.socialaccount.providers.twitter',
-	'allauth.socialaccount.providers.facebook',
+	#'allauth.socialaccount.providers.twitter',
+	#'allauth.socialaccount.providers.facebook',
 	# 'django_otp',
 	# 'django_otp.plugins.otp_static',
 	# 'django_otp.plugins.otp_totp',
@@ -68,6 +68,8 @@ INSTALLED_APPS = [
 ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
 SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
 
 CONTROLCENTER_DASHBOARDS = (
 	'dmlsite.dashboard.MyDashboard',
@@ -92,7 +94,10 @@ ROOT_URLCONF = 'dmlsite.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [os.path.join(BASE_DIR, 'templates')],
+		'DIRS': [	os.path.join(BASE_DIR, 'templates'),
+					os.path.join(BASE_DIR, 'dmlmain', 'templates', 'allauth', 'accounts'),
+					os.path.join(PROJECT_ROOT, 'dmlmain', 'templates', 'allauth', 'accounts')
+				],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -207,7 +212,7 @@ COMPRESS_ROOT = STATIC_ROOT
 #WHITENOISE_AUTOREFRESH # =DEBUG
 WHITENOISE_ROOT = STATIC_ROOT
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
 
 COMPRESS_CSS_FILTERS = [
