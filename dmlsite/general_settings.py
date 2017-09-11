@@ -70,6 +70,7 @@ REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registratio
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "optional"
 
 CONTROLCENTER_DASHBOARDS = (
 	'dmlsite.dashboard.MyDashboard',
