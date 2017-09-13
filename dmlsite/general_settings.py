@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 
 ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
-SITE_ID = 1
+SITE_ID = 2
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
