@@ -1,4 +1,5 @@
 from django.contrib import admin
+django.contrib.sites.models import Site
 
 
 admin.site.unregister(Site)
