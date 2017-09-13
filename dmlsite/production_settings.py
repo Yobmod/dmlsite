@@ -7,6 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ['dmlsite.herokuapp.com']
+SITE_ID = None
 ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
 DEBUG = False
