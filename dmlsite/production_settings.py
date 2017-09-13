@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['dmlsite.herokuapp.com']
 SITE_ID = 3
 ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
-DEBUG = False
+DEBUG = True
 
 try:
 	SECRET_KEY = os.environ['SECRET_KEY']
