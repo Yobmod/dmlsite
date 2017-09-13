@@ -1,17 +1,18 @@
 from django.test import TestCase
+from django.urls import reverse
+from .urls import urlpatterns
 #unittest / unittest2
 #doctest
+#from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+#from django.utils.translation import activate
 
 class MainViewsTestCase(TestCase):
 	def test_homepage(self):
 		resp = self.client.get('/')
 		self.assertEqual(resp.status_code, 200)
 
-from django.urls import reverse
-from .urls import urlpatterns
 
 class UrlsTest(TestCase):
-
 	def test_responses(self):
 		for pattern in urlpatterns:
 			if hasattr(pattern, "name") and pattern.name:

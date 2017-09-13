@@ -11,6 +11,7 @@
 {% load sitetree %}
 {% load cookielaw_tags %}
 {% load compress %}
+{% load socialaccount %}
 
 
 
@@ -35,22 +36,30 @@
 <body>
 
     <div class="header_footer .col-md-12">
-    <div class="page-header header_footer">
+    <div class="container page-header header_footer">
 				<a href="{% url 'contact_admins' %}" class="top-menu" data-toggle="tooltip" title="Contact" data-placement="auto bottom"><span class="glyphicon glyphicon-phone-alt"></span></a>
         {% if user.is_authenticated %}
+				<a id="logout" href="{% url 'logout' %}?next={{request.path}}" class="top-menu btn btn-success">Logout</a>
+
             	<a href="{% url 'blog:post_new' %}" class="top-menu" data-toggle="tooltip" title="Write post" data-placement="auto bottom"><span class="glyphicon glyphicon-pencil"></span></a>
 				<a href="{% url 'polls:add_poll' %}" class="top-menu" data-toggle="tooltip" title="Create Poll" data-placement="auto bottom"><span class="glyphicon glyphicon-plus"></span></a>
 				<a href="{% url 'blog:post_draft_list' %}" class="top-menu" data-toggle="tooltip" title="See draft posts" data-placement="auto bottom"><span class="glyphicon glyphicon-edit"></span></a>
 				<a href="{% url 'django_admin_page' %}" class="top-menu" data-toggle="tooltip" title="Admin" data-placement="auto bottom"><span class="glyphicon glyphicon-cog"></span></a>
 				<p class="top-menu2">Hello {{ user.username }}.<small>(<a href="{% url 'logout' %}?next={{request.path}}">Log out</a>)</small> {% now "SHORT_DATETIME_FORMAT" %}</p>
-		{% else %}
+				<p><a href="{% provider_login_url "twitter" process="connect" %}">Connect a social account</a></p>
+			{% else %}
 			{% if not "/accounts/login" in request.get_full_path %}
 				<form class='navbar-form' method='POST' action='{% url "auth_login" %}'> {% csrf_token %}
 					<div class='form-group'>
 						<input type='text' class='form-control' name='username' placeholder='Username' />
 						<input type='text' class='form-control' name='password' placeholder='Password' />
-					</div>
+
 					<button type='submit' class='btn btn-default'>Login</button>
+
+				    	<a id="twitter_login" href="/accounts/twitter/login" class="btn btn-success">Sign in with Twitter</a>
+
+				    </div>
+
 			{% endif %}
 				<a href="{% url 'login' %}?next={{request.path}}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
 				<a href="{% url 'register' %}" class="top-menu"><span class="glyphicon glyphicon-list-alt"></span></a>
@@ -70,7 +79,7 @@
 	<br>
 
 {% include "dmlmain/messages.html" %}
-	<div class="content container">
+	<div class="container">
         <div class="row">
             <div class="contentcentre col-md-6">
 

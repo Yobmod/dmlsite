@@ -35,7 +35,7 @@ INSTALLED_APPS = [
 	'allauth.account',
 	'allauth.socialaccount',
 	#'allauth.socialaccount.providers.google',
-	#'allauth.socialaccount.providers.twitter',
+	'allauth.socialaccount.providers.twitter',
 	#'allauth.socialaccount.providers.facebook',
 	# 'django_otp',
 	# 'django_otp.plugins.otp_static',
@@ -65,11 +65,14 @@ INSTALLED_APPS = [
 
 ]
 
-ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, use a different value.
+ACCOUNT_ACTIVATION_DAYS = 28 # activation window if using verifcation etc;
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "none" #"mandatory", "optional", or "none"
+ACCOUNT_EMAIL_VERIFICATION = "none" #"mandatory", "optional"
+LOGIN_REDIRECT_URL = '/'
+#SOCIALACCOUNT_QUERY_EMAIL=True   email from me or twitter?
+
 
 CONTROLCENTER_DASHBOARDS = (
 	'dmlsite.dashboard.MyDashboard',
@@ -186,8 +189,6 @@ TIME_ZONE = 'GB'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-LOGIN_REDIRECT_URL = '/'
 
 COMPRESS_PRECOMPILERS = (
 	('text/x-scss', 'django_libsass.SassCompiler'),

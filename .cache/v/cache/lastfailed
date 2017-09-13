@@ -1,5 +1,1 @@
-{
-  "dmlmain/tests.py::MainViewsTestCase::test_homepage": true,
-  "dmlmain/tests.py::UrlsTest::test_responses": true,
-  "dmlsite/tests.py::GenericTestCase::test_links": true
-}
+{}
