@@ -69,7 +69,7 @@ ACCOUNT_ACTIVATION_DAYS = 28 # One-week activation window; you may, of course, u
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in after registration.
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_VERIFICATION = "none" #"mandatory", "optional", or "none"
 
 CONTROLCENTER_DASHBOARDS = (
 	'dmlsite.dashboard.MyDashboard',
@@ -107,6 +107,7 @@ TEMPLATES = [
 				'django.contrib.messages.context_processors.messages',
 				"django.template.context_processors.i18n",
 				"django.template.context_processors.media",
+
 			],
 		},
 	},
