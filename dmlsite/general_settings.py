@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 	'compressor',
 	'django_user_agents',
 	'django_q',
+	'channels',
 
 
 	#my apps

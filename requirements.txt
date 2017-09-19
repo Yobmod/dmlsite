@@ -1,12 +1,19 @@
 arrow==0.10.0
+asgiref==1.1.2
+attrs==17.2.0
+autobahn==17.9.2
+Automat==0.6.0
 blessed==1.14.2
 boto==2.48.0
 boto3==1.4.5
 botocore==1.5.92
 certifi==2017.7.27.1
+channels==1.1.8
 chardet==3.0.4
 click==6.7
 colorama==0.3.9
+constantly==15.1.0
+daphne==1.3.0
 defusedxml==0.5.0
 dj-database-url==0.4.2
 Django==1.11.5
@@ -41,7 +48,9 @@ gunicorn==19.7.1
 html5==0.0.9
 html5lib==1.0b10
 httplib2==0.10.3
+hyperlink==17.3.1
 idna==2.5
+incremental==17.5.0
 jmespath==0.9.3
 libsass==0.13.2
 markdown2==2.3.4
@@ -75,6 +84,8 @@ s3transfer==0.1.10
 six==1.10.0
 sorl-thumbnail==12.3
 twilio==6.6.1
+Twisted==17.5.0
+txaio==2.8.2
 ua-parser==0.7.3
 urllib3==1.22
 user-agents==1.1.0
@@ -84,3 +95,4 @@ Werkzeug==0.12.2
 whitenoise==3.3.0
 xhtml2pdf==0.2b1
 yowsup2==2.5.0
+zope.interface==4.4.2
