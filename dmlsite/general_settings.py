@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 	'dmlmain',
 	'dmlcomments',
 	'dmlresearch',
+	'dmlchat',
 
 	'allauth',
 	'allauth.account',
@@ -143,6 +144,14 @@ Q_CLUSTER = {
 	'queue_limit': 50,
 	'bulk': 10,
 	'orm': 'default'
+}
+
+CHANNEL_LAYERS = {
+	"default": {
+		"BACKEND": "asgiref.inmemory.ChannelLayer",
+		#'CONFIG': {	'hosts': [('localhost', 8000)], },
+		"ROUTING": "dmlsite.routing.channel_routing",
+	},
 }
 
 DATABASES['default'] = dj_database_url.config()

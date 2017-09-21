@@ -36,6 +36,7 @@ urlpatterns = [
 	url(r'^polls/', include('dmlpolls.urls', namespace='polls')),
 	url(r'^comments/', include('dmlcomments.urls', namespace='comments')),
 	url(r'^research/', include('dmlresearch.urls', namespace='research')),
+	url(r'^chat/', include('dmlchat.urls', namespace='chat')),
 ]
 
 from django.conf.urls.static import static

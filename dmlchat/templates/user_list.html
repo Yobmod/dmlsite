@@ -1,0 +1,31 @@
+{% extends 'dmlmain/base.html' %}
+
+{% block content %}
+<ul class="rooms">
+	{% for room in rooms %}
+		<li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
+	{% empty %}
+		<p class="empty">No chat rooms defined. Maybe make some in the <a href="{% url 'admin:index' %}">admin</a>?</p>
+	{% endfor %}
+</ul>
+
+<div id="chats">
+</div>
+
+
+  <script>
+    var socket = new WebSocket('ws://' + window.location.host + window.location.pathname);
+	socket.onmessage = function(e) {
+    	alert(e.data);
+	}
+    socket.onopen = function open() {
+      	console.log('WebSockets connection created.');
+	  	socket.send("hello world");
+    };
+
+    if (socket.readyState == WebSocket.OPEN) {
+      	socket.onopen();
+    }
+  </script>
+
+{% endblock content %}
