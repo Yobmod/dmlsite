@@ -21,7 +21,6 @@ INSTALLED_APPS = [
 	'storages',
 	'compressor',
 	'django_user_agents',
-	'django_q',
 	'channels',
 
 
@@ -64,6 +63,9 @@ INSTALLED_APPS = [
 	#'hitcount',
 	#'jchart',
 	#'emoji',
+
+	'django_q',
+	'django_whoshere',
 
 ]
 
