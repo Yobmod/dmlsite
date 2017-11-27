@@ -6,7 +6,7 @@ from embed_video.fields import EmbedVideoField
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db.models.signals import pre_save
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from markdown_deux import markdown
 from django.utils.text import slugify
