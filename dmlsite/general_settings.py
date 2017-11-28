@@ -30,7 +30,7 @@ INSTALLED_APPS = [
 	'dmlmain',
 	'dmlcomments',
 	'dmlresearch',
-	#'dmlchat',
+	'dmlchat',
 	#'dmlgeo',
 
 	'allauth',
