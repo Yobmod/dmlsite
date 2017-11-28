@@ -40,8 +40,6 @@ django-sitetree==1.8.0
 django-storages==1.6.5
 django-taggit==0.22.1
 django-user-agents==0.3.2
--e git+https://github.com/chrisglass/django-xhtml2pdf.git@94c0d1e42c4ac05ba6ec8f1535700ab78ae1bb26#egg=django_xhtml2pdf
-djangorestframework==3.7.3
 docutils==0.14
 gunicorn==19.7.1
 html5lib==1.0b10
