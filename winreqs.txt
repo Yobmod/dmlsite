@@ -40,6 +40,7 @@ django-sitetree==1.8.0
 django-storages==1.6.5
 django-taggit==0.22.1
 django-user-agents==0.3.2
+-e git+https://github.com/chrisglass/django-xhtml2pdf.git@94c0d1e42c4ac05ba6ec8f1535700ab78ae1bb26#egg=django_xhtml2pdf
 djangorestframework==3.7.3
 docutils==0.14
 gunicorn==19.7.1
@@ -57,6 +58,7 @@ olefile==0.44
 Pillow==4.3.0
 pluggy==0.6.0
 portend==2.2
+psycopg2==2.7.3.2
 py==1.5.2
 PyJWT==1.5.3
 PyPDF2==1.26.0

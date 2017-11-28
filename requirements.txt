@@ -57,6 +57,7 @@ olefile==0.44
 Pillow==4.3.0
 pluggy==0.6.0
 portend==2.2
+psycopg2==2.7.3.2
 py==1.5.2
 PyJWT==1.5.3
 PyPDF2==1.26.0
