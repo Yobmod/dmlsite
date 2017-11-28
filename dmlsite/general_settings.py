@@ -211,9 +211,9 @@ COMPRESS_PRECOMPILERS = (
 LIBSASS_OUTPUT_STYLE = 'nested' #'compressed'
 LIBSASS_PRECISION = 8
 
-GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH'] #overwritten in prod
-GEOIP_CITY=os.environ['GEOIP_GEOLITE2_CITY_FILENAME']
-GEOIP_COUNTRY=os.environ['GEOIP_GEOLITE2_COUNTRY_FILENAME']
+#GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH'] #overwritten in prod
+#GEOIP_CITY=os.environ['GEOIP_GEOLITE2_CITY_FILENAME']
+#GEOIP_COUNTRY=os.environ['GEOIP_GEOLITE2_COUNTRY_FILENAME']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
