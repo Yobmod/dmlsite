@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 	'dmlcomments',
 	'dmlresearch',
 	'dmlchat',
+	'dmlgeo',
 
 	'allauth',
 	'allauth.account',
@@ -65,7 +66,7 @@ INSTALLED_APPS = [
 	#'emoji',
 
 	'django_q',
-	'django_whoshere',
+	#'django_whoshere', #django-ipware
 
 ]
 
@@ -91,9 +92,11 @@ MIDDLEWARE = [
 	'django.middleware.common.CommonMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	#'django_whoshere.middleware.TrackMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django_user_agents.middleware.UserAgentMiddleware',
+
 ]
 
 ROOT_URLCONF = 'dmlsite.urls'
@@ -208,7 +211,7 @@ COMPRESS_PRECOMPILERS = (
 LIBSASS_OUTPUT_STYLE = 'nested' #'compressed'
 LIBSASS_PRECISION = 8
 
-GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH']
+GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH'] #overwritten in prod
 GEOIP_CITY=os.environ['GEOIP_GEOLITE2_CITY_FILENAME']
 GEOIP_COUNTRY=os.environ['GEOIP_GEOLITE2_COUNTRY_FILENAME']
 

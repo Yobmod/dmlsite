@@ -16,6 +16,8 @@ try:
 	SECRET_KEY = os.environ['SECRET_KEY']
 except:
  	pass
+	
+GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH']
 
 try:
 	EMAIL_HOST = 'smtp.gmail.com'
