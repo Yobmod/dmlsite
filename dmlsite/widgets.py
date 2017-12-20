@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 
 class MyWidget(forms.Widget):
-	template_name = 'dmlmain/my_widget.html' #must be in namesapced templates folder
+	template_name = 'dmlmain/my_widget.html'  # must be in namesapced templates folder
 
 	def get_context(self, name, value, attrs=None):
 		return {'widget': {

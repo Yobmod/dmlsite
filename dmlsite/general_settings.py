@@ -104,7 +104,8 @@ ROOT_URLCONF = 'dmlsite.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [	os.path.join(BASE_DIR, 'templates'),
+		'DIRS': [
+					os.path.join(BASE_DIR, 'templates'),
 					os.path.join(BASE_DIR, 'templates', 'allauth', 'accounts'),
 					os.path.join(PROJECT_ROOT, 'dmlmain', 'templates', 'allauth', 'accounts')
 				],
@@ -179,13 +180,17 @@ CACHES = {
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-	{'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	{
+		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
 	},
-	{'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	{
+		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
 	},
-	{'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	{
+		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
 	},
-	{'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	{
+		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
 	},
 ]
 
@@ -226,7 +231,7 @@ STATICFILES_FINDERS = (
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,  'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 COMPRESS_ROOT = STATIC_ROOT
 

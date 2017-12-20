@@ -14,7 +14,7 @@ DEBUG = True
 
 try:
 	SECRET_KEY = os.environ['SECRET_KEY']
-except:
+except KeyError:
  	pass
 
 #GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH']
@@ -25,8 +25,8 @@ try:
 	EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 	EMAIL_PORT = 587
 	EMAIL_USE_TLS = True
-	DEFAULT_FROM_EMAIL = "" # use in view if different from host
-except:
+	DEFAULT_FROM_EMAIL = ""  # use in view if different from host
+except KeyError:
 	pass
 
 # Database
@@ -63,9 +63,9 @@ try:
 	AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 	AWS_S3_HOST = 's3.eu-central-1.amazonaws.com'
 	AWS_S3_OBJECT_PARAMETERS = {
-		'CacheControl': 'max-age=864000',    #86400 = 1 day
-		}
-except:
+		'CacheControl': 'max-age=864000',    # 86400 = 1 day
+	}
+except KeyError:
 	pass
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
