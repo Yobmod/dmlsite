@@ -2,6 +2,10 @@ myvenv
 /.env
 
 local_settings.py
+.cache/
+.mypy_cache/
+.coverage
+
 
 /static_root
 /media_root

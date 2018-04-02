@@ -1,0 +1,56 @@
+{
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true
+    },
+    "workbench.iconTheme": "material-icon-theme",
+
+
+        "material-icon-theme.folders.associations": {
+            "typings": "typescript",
+
+            "static": "resource",
+            "static_cdn": "resource",
+            "static_root": "resource",
+
+            "media": "video",
+            "media_cdn": "video",
+            "media_root": "video",
+
+            "templates": "jinja",
+
+            "utilities": "tools",
+            "utils": "tools",
+
+            ".mypy_cache": "circleci",
+            ".cache": "circleci",
+            
+        },
+
+        
+            "python.linting.pylintEnabled": true,
+            "python.linting.mypyEnabled": true,
+            "python.linting.enabled": true,
+            "python.linting.flake8Enabled": true,
+            "python.linting.pep8Enabled": false,
+            "python.linting.pydocstyleEnabled": false,
+        
+            "python.linting.lintOnSave": true,
+        
+            "editor.fontSize": 16,
+        
+            "workbench.colorTheme": "Default High Contrast",
+            "git.enableSmartCommit": true,
+            "git.confirmSync": false,
+            "git.autofetch": true,
+            "[python]": {
+                
+            }
+        
+    }
