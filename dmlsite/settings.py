@@ -1,14 +1,14 @@
-import os
-import dj_database_url
+# import os
+# import dj_database_url
 from .general_settings import *
 DEBUG = False
 
 try:
-	from .production_settings import *
+    from .production_settings import *
 except ImportError:
-	pass
+    pass
 
 try:
-	from .local_settings import *
+    from .local_settings import *
 except ImportError:
-	pass
+    pass
