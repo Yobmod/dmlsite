@@ -23,14 +23,14 @@ def homepage(request):
 		instance.save()
 		  #'text' is name of template tag, text is what is shown
 
-	if request.user.is_authenticated() and request.user.is_staff:
+	if request.user.is_authenticated and request.user.is_staff:
 		text = "Hello %s, valued employee, printing signups" %(request.user)
 		i = 1
 		for instance in SignUp.objects.all():
 			print(i)
 			print(instance)
 			i += 1
-	elif request.user.is_authenticated():
+	elif request.user.is_authenticated:
 			text = "Hello %s" %(request.user)
 	else:
 			text = "Welcome visitor"

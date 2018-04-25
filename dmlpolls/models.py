@@ -10,7 +10,7 @@ from dmlcomments.models import Comment
 
 
 class Question(models.Model):
-	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
 	question_text = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published', auto_now_add=True, null=True)
 	end_date = models.DateTimeField(blank=True, null=True)
@@ -53,5 +53,5 @@ class Choice(models.Model):
 		return self.choice_text
 
 class Opinion(models.Model):
-	question = models.ForeignKey(Question)
-	choice_vote = models.ForeignKey(Choice)
+	question = models.ForeignKey(Question, on_delete=models.CASCADE)
+	choice_vote = models.ForeignKey(Choice, on_delete=models.CASCADE)

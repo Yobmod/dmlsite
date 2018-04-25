@@ -25,7 +25,7 @@ class PostManager(models.Manager):
 		return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 class Post(models.Model):
-	author = models.ForeignKey(settings.AUTH_USER_MODEL)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
 	title = models.CharField(max_length=200)
 	text = models.TextField()
 	draft = models.BooleanField(default=True)
@@ -101,7 +101,7 @@ def pre_save_post_reciever(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_post_reciever, sender=Post)
 
 class Comment(models.Model):
-	post = models.ForeignKey('dmlblog.Post', related_name='comments')
+	post = models.ForeignKey('dmlblog.Post', related_name='comments', on_delete=models.CASCADE)
 	author = models.CharField(max_length=200)
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)

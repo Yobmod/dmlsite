@@ -21,12 +21,12 @@ class Comment(models.Model):
 	content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
 	object_id = models.PositiveIntegerField(default=1)
 	content_object = GenericForeignKey('content_type', 'object_id')
-	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
 	visitor = models.CharField(max_length=200)
 	text = models.TextField()
 	created_date = models.DateTimeField(default=timezone.now)
 	approved_comment = models.BooleanField(default=False)
-	parent = models.ForeignKey('self', null=True, blank=True)
+	parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
 
 	objects = CommentManager()
 
