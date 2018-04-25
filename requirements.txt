@@ -36,7 +36,7 @@ django-picklefield==1.0.0
 django-pkgconf==0.3.0
 django-q==0.8.1
 django-registration-redux==2.0a3
-django-sitetree==1.8.0
+django-sitetree==1.10.0
 django-storages==1.6.5
 django-taggit==0.22.1
 django-user-agents==0.3.2
@@ -75,6 +75,7 @@ requests==2.18.4
 requests-oauthlib==0.8.0
 rjsmin==1.0.12
 s3transfer==0.1.11
+service_identity==17.0.0
 six==1.11.0
 sorl-thumbnail==12.4.1
 tempora==1.9
