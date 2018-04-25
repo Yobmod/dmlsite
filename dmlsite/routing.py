@@ -1,11 +1,14 @@
-from channels.routing import route
-from dmlchat.consumers import ws_connect, ws_message, ws_disconnect#, http_consumer
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
+
+import dmlchat.routing
+
+application = ProtocolTypeRouter({
+    'websocket': AuthMiddlewareStack(
+        URLRouter(
+            dmlchat.routing.websocket_urlpatterns
+        )
+    ),
+})
 
 
-channel_routing = [
-	#route("http.request", http_consumer),
-	route('websocket.connect', ws_connect),
-	route('websocket.connect', ws_message),
-	route('websocket.disconnect', ws_disconnect),
-
-]
