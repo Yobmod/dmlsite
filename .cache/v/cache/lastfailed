@@ -1,4 +1,0 @@
-{
-  "dmlchat/tests.py::UrlsTest::test_responses": true,
-  "dmlsite/tests.py::GenericTestCase::test_links": true
-}
