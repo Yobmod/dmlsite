@@ -12,6 +12,15 @@ ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
 DEBUG = False
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+    },
+}
+
 try:
     SECRET_KEY = os.environ['SECRET_KEY']
 except KeyError:
@@ -39,7 +48,7 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
-        'CONN_MAX_AGE': 600,
+        # 'CONN_MAX_AGE': 600,
     }
 }
 

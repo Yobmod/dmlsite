@@ -154,20 +154,6 @@ Q_CLUSTER = {
 
 ASGI_APPLICATION = 'dmlsite.routing.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-    # "default": {
-        # "BACKEND": "asgiref.inmemory.ChannelLayer",
-        # 'CONFIG': {	'hosts': [('localhost', 8000)], },
-        # "ROUTING": "dmlsite.routing.channel_routing",
-    # },
-}
-
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
