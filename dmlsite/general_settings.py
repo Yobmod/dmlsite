@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'storages',
     'compressor',
     'django_user_agents',
-    'channels',
+    #'channels',
 
 
     # my apps
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'dmlmain',
     'dmlcomments',
     'dmlresearch',
-    'dmlchat',
+    #'dmlchat',
     'dmlgeo',
 
     'allauth',
