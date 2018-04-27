@@ -7,4 +7,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dmlsite.settings')
 django.setup()
 
 application = get_default_application()
-# application = DjangoWhiteNoise(application)
+application = DjangoWhiteNoise(application)
