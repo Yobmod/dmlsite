@@ -17,7 +17,7 @@ constantly==15.1.0
 daphne==2.1.1
 defusedxml==0.5.0
 dj-database-url==0.4.2
-Django==1.11.7
+Django==2.0.4
 django-allauth==0.35.0
 django-appconf==1.0.2
 django-chartjs==1.2

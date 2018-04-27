@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'storages',
     'compressor',
     'django_user_agents',
-    #'channels',
+    'channels',
 
 
     # my apps
