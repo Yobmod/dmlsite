@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.urls import re_path, path
 #import django.contrib.auth.views                #The login views redirect to admin here, or to previous page in dmlmain
 from django.contrib import admin
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -32,7 +33,7 @@ urlpatterns = [
 	#url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
 	url(r'^accounts/', include('allauth.urls')),
 	url(r'^', include('dmlmain.urls')),
-	url(r'^blog/', include('dmlblog.urls', namespace='blog')),
+	path(r'^blog/', include('dmlblog.urls', namespace='blog')),
 	url(r'^polls/', include('dmlpolls.urls', namespace='polls')),
 	url(r'^comments/', include('dmlcomments.urls', namespace='comments')),
 	url(r'^research/', include('dmlresearch.urls', namespace='research')),
