@@ -1,2 +1,2 @@
-web: daphne dmlsite.asgi:application -p 8001
+web: daphne dmlsite.asgi:application
 worker: python manage.py qcluster
