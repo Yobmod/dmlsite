@@ -1,17 +1,18 @@
 # import os
 # import dj_database_url
 import dotenv
-
-try:
-    dotenv.read_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
-
 from .general_settings import *
 DEBUG = False
 
 try:
-    ##from .production_settings import *
+    dotenv.read_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
+except:
+    pass
+
+try:
+    from .production_settings import *
 except ImportError:
-   # pass
+   pass
 
 
 try:
