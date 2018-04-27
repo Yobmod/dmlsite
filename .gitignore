@@ -4,8 +4,7 @@ myvenv
 local_settings.py
 .cache/
 .mypy_cache/
-.coverage
-*.coverage
+
 
 
 /static_root
