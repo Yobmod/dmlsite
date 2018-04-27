@@ -1,3 +1,2 @@
-web2: gunicorn dmlsite.wsgi:application
-
-
+web: gunicorn dmlsite.wsgi:application
+worker: python manage.py qcluster
