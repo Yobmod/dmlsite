@@ -87,7 +87,7 @@ TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3'  # or bootstap, bootstrap4, uni-forms
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,6 +96,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 
 ]
 
