@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['dmlsite.herokuapp.com', "127.0.0.1"]
 SITE_ID = 3
 ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
-DEBUG = True
+DEBUG = False
 
 CHANNEL_LAYERS = {
      'default': {
