@@ -12,6 +12,10 @@ ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
 DEBUG = False
 
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True  # [1]
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 CHANNEL_LAYERS = {
      'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
