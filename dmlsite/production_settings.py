@@ -12,11 +12,9 @@ ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
 DEBUG = False
 
-SECURE_SSL_REDIRECT = False
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-""" if not DEBUG:   # redirects to https on heroku, but breaks websockets
+if not DEBUG:   # redirects to https on heroku
     SECURE_SSL_REDIRECT = True  # [1]
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')"""
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CHANNEL_LAYERS = {
      'default': {
