@@ -1,12 +1,12 @@
 from django.test import TestCase
-from django.urls import reverse
+# from django.urls import reverse
 
-import pytest
+# import pytest
 
-from channels.testing import ChannelsLiveServerTestCase
-from selenium import webdriver
+# from channels.testing import ChannelsLiveServerTestCase
+# from selenium import webdriver
 
-from .urls import urlpatterns
+# from .urls import urlpatterns
 # unittest / unittest2
 # doctest
 # from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -16,7 +16,7 @@ from django.conf import settings
 # DJANGO_SETTINGS_MODULE =    
 settings.configure()
 class ChatViewsTestCase(TestCase):
-	def test_homepage(self):
+	def test_homepage(self) -> None:
 		resp = self.client.get('/')
 		self.assertEqual(resp.status_code, 200)
 
