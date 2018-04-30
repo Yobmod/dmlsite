@@ -17,11 +17,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # django essentials
+    'channels',
     'rest_framework',
     'storages',
     'compressor',
     'django_user_agents',
-    'channels',
+
 
 
     # my apps

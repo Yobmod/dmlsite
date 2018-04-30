@@ -3,6 +3,7 @@ from django.urls import re_path  # , path, include
 
 from . import views
 
+
 app_name = 'dmlchat'
 
 urlpatterns = [
