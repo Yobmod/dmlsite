@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # dev tools
     'django_extensions',  # werkzeug, pytest-django
+    'sslserver',
     'controlcenter',
 
 
@@ -134,7 +135,7 @@ TEST_RUNNER = 'dmlsite.testrunners.PytestTestRunner'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dmlsite',
         'USER': 'dmlsite',
         'PASSWORD': '',
@@ -159,7 +160,7 @@ ASGI_APPLICATION = 'dmlsite.routing.application'
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
-DEBUG = False
+DEBUG = True
 
 CACHES = {
     'default': {
