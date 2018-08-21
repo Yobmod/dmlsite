@@ -25,7 +25,7 @@ daphne==2.1.1
 defusedxml==0.5.0
 dj-database-url==0.5.0
 Django==2.1
-django-allauth==0.35.0
+django-allauth==0.36.0
 django-appconf==1.0.2
 django-chartjs==1.2
 django-classy-tags==0.8.0
