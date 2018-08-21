@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.github',
     # 'allauth.socialaccount.providers.facebook',
     # 'django_otp',
     # 'django_otp.plugins.otp_static',

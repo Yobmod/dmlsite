@@ -53,5 +53,6 @@
             "[python]": {
                 
             },
-            "python.pythonPath": "C:\\Users\\laventin.LANCS\\envs\\rest\\Scripts\\python.exe"
+            "python.pythonPath": "C:\\Users\\laventin.LANCS\\envs\\rest\\Scripts\\python.exe",
+            "python.formatting.provider": "black"
         }
