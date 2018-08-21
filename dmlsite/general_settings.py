@@ -81,12 +81,12 @@ ACCOUNT_EMAIL_VERIFICATION = "none"  # "mandatory", "optional"
 LOGIN_REDIRECT_URL = '/'
 # SOCIALACCOUNT_QUERY_EMAIL=True   email from me or twitter?
 
-SOCIALACCOUNT_PROVIDERS = {
+# SOCIALACCOUNT_PROVIDERS = {
     #'facebook': {}, 
     #'google':{}, 
-    'github':{},
-    'twitter':{},
-}
+    #'github':{},
+    #'twitter':{},
+#}
 
 CONTROLCENTER_DASHBOARDS = (
     'dmlsite.dashboard.MyDashboard',
