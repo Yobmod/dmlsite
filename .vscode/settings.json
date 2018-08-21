@@ -52,6 +52,6 @@
             "git.autofetch": true,
             "[python]": {
                 
-            }
-        
-    }
+            },
+            "python.pythonPath": "/home/yobmod/anaconda3/bin/python"
+        }
