@@ -23,12 +23,12 @@ from controlcenter.views import controlcenter
 from django.conf.urls.static import static
 from django.conf import settings
 
-admin.autodiscover()
+# admin.autodiscover()
 
 urlpatterns = [
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	url(r'^admin/', admin.site.urls),
-	url(r'^admin/dashboard/', controlcenter.urls),
+	path('admin/dashboard/', controlcenter.urls),
 	#url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),
 	#url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
 	url(r'^accounts/', include('allauth.urls')),

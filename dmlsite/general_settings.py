@@ -47,10 +47,10 @@ INSTALLED_APPS = [
     # 'two_factor',
     # 'user_sessions',
 
-    # dev tools
+    # dev tools  ## move to Local_settings?
     'django_extensions',  # werkzeug, pytest-django
-    'sslserver',
-    'controlcenter',
+    # 'sslserver',
+    #'controlcenter',
 
 
     # other tools
@@ -81,16 +81,16 @@ ACCOUNT_EMAIL_VERIFICATION = "none"  # "mandatory", "optional"
 LOGIN_REDIRECT_URL = '/'
 # SOCIALACCOUNT_QUERY_EMAIL=True   email from me or twitter?
 
-# SOCIALACCOUNT_PROVIDERS = {
+SOCIALACCOUNT_PROVIDERS = {
     #'facebook': {}, 
     #'google':{}, 
-    #'github':{},
-    #'twitter':{},
-#}
+    'github':{},
+    'twitter':{},
+}
 
-CONTROLCENTER_DASHBOARDS = (
-    'dmlsite.dashboard.MyDashboard',
-)
+#CONTROLCENTER_DASHBOARDS = (
+#    'dmlsite.dashboard.MyDashboard',
+#)
 
 TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3'  # or bootstap, bootstrap4, uni-forms
