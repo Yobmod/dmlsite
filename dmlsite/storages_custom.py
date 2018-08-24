@@ -4,6 +4,8 @@ from storages.backends.s3boto3 import S3Boto3Storage
 from compressor.storage import CompressorFileStorage
 import copy
 from django.conf import settings
+from django.contrib.staticfiles.storage import ManifestFilesMixin, CachedFilesMixin
+from pipeline.storage import PipelineMixin
 
 
 class CachedS3BotoStorage(S3Boto3Storage):
@@ -38,6 +40,10 @@ class CachedS3BotoStorage(S3Boto3Storage):
 
 MEDIAFILES_LOCATION = 'media'
 STATICFILES_LOCATION = 'static'
+
+
+class PipelineStaticStorage(PipelineMixin, ManifestFilesMixin, S3BotoStorage):
+	location = settings.STATICFILES_LOCATION
 
 
 class StaticStorage(S3Boto3Storage):

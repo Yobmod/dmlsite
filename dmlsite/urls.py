@@ -17,8 +17,8 @@ from django.conf.urls import url, include
 from django.urls import re_path, path
 #import django.contrib.auth.views                #The login views redirect to admin here, or to previous page in dmlmain
 from django.contrib import admin
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.views.generic.base import RedirectView
+# from django.contrib.staticfiles.storage import staticfiles_storage
+# from django.views.generic.base import RedirectView
 from controlcenter.views import controlcenter
 from django.conf.urls.static import static
 from django.conf import settings
@@ -39,6 +39,13 @@ urlpatterns = [
 	url(r'^research/', include('dmlresearch.urls', namespace='research')),
 	url(r'^chat/', include('dmlchat.urls', namespace='chat')),
 ]
+
+from django_jinja import views
+
+handler400 = views.BadRequest.as_view()
+handler403 = views.PermissionDenied.as_view()
+handler404 = views.PageNotFound.as_view()
+handler500 = views.ServerError.as_view()
 
 if settings.DEBUG:
 	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

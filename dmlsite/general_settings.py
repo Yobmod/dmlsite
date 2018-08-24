@@ -1,6 +1,7 @@
 import os
 import dj_database_url
 
+DEBUG = True
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -21,7 +22,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'storages',
     'compressor',
+    'pipeline',
     'django_user_agents',
+    'django_jinja',
 
 
 
@@ -111,13 +114,41 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'dmlsite.urls'
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS
+
 TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        'DIRS': [
+                    os.path.join(BASE_DIR, 'dmlmain', 'templates', 'errors'),
+                ],
+        "APP_DIRS": True,
+        'OPTIONS': {
+            "match_extension": ".jinja",
+            "environment": 'dmlsite.jinja2.environment',
+            "extensions": [
+                'pipeline.jinja2.PipelineExtension',
+                # 'compressor.contrib.jinja2ext.CompressorExtension',
+                "jinja2.ext.do",
+                "jinja2.ext.loopcontrols",
+                "jinja2.ext.with_",
+                "jinja2.ext.i18n",
+                "jinja2.ext.autoescape",
+                #"django_jinja.builtins.extensions.CsrfExtension",
+                #"django_jinja.builtins.extensions.CacheExtension",
+                #"django_jinja.builtins.extensions.TimezoneExtension",
+                #"django_jinja.builtins.extensions.UrlsExtension",
+                #"django_jinja.builtins.extensions.StaticFilesExtension",
+                #"django_jinja.builtins.extensions.DjangoFiltersExtension",
+            ],
+             "autoescape": True,
+             "auto_reload": DEBUG,
+        },
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                    os.path.join(BASE_DIR, 'templates'),
-                    os.path.join(BASE_DIR, 'templates', 'allauth', 'accounts'),
-                    os.path.join(PROJECT_ROOT, 'dmlmain', 'templates', 'allauth', 'accounts')
+                    os.path.join(BASE_DIR, 'dmlmain', 'templates', 'allauth'),
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -128,7 +159,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 "django.template.context_processors.i18n",
                 "django.template.context_processors.media",
-
             ],
         },
     },
@@ -220,6 +250,42 @@ COMPRESS_PRECOMPILERS = (
 LIBSASS_OUTPUT_STYLE = 'nested'  # 'compressed'
 LIBSASS_PRECISION = 8
 
+PIPELINE = {
+    'STYLESHEETS': {
+        'vendor': {
+            'source_filenames': (
+              'dmlmain/css/vendor/font-awesome.min.css',
+              'dmlmain/css/vendor/bootstrap.min.css',
+            ),
+            'output_filename': 'css/vendor.css',
+        },
+    },
+    'JAVASCRIPT': {
+        'vendor': {
+            'source_filenames': (
+              'dmlmain/js/vendor/jquery-3.2.1.min.js',
+              'dmlmain/js/vendor/bootstrap.min.js',
+            ),
+            'extra_context': {
+                # 'async': True,  # defer
+            },
+            'output_filename': 'js/vendor.js',
+        },
+        'dmlmain': {
+            'source_filenames': (
+                'dmlmain/js/homepage.js',
+            ),
+            'extra_context': {
+                'defer': True,
+            },
+            'output_filename': 'js/dmlmain.js',
+        }
+    }
+}
+
+PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.jsmin.JSMinCompressor'
+
+
 # GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH'] #overwritten in prod
 # GEOIP_CITY=os.environ['GEOIP_GEOLITE2_CITY_FILENAME']
 # GEOIP_COUNTRY=os.environ['GEOIP_GEOLITE2_COUNTRY_FILENAME']
@@ -229,7 +295,8 @@ LIBSASS_PRECISION = 8
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder'
+    'compressor.finders.CompressorFinder',
+    'pipeline.finders.PipelineFinder',
 )
 
 STATIC_URL = '/static/'

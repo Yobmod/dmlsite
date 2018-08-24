@@ -22,13 +22,13 @@
 <link rel="stylesheet" href="{% static 'dmlmain/css/dmlmain.scss' %}"/>
 {% endcompress %}
 
-{% compress js file base%}
+{% compress js file base %}
 <script src="{% static 'dmlmain/js/vendor/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'dmlmain/js/vendor/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'dmlmain/js/homepage.js' %}" defer></script>
 {% endcompress %}
 
-<link rel="icon" href="{% static 'dmlmain/icons/favicon.ico' type="image/x-icon" %}"/>
+<link rel="icon"  type="image/x-icon" href="{% static 'dmlmain/icons/favicon.ico' %}"/>
 
 {% block head_extra %} {% endblock head_extra %}
 </head>
