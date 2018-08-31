@@ -53,6 +53,6 @@
             "[python]": {
                 
             },
-            "python.pythonPath": "C:\\Users\\laventin.LANCS\\envs\\rest\\Scripts\\python.exe",
+            "python.pythonPath": "C:\\Users\\Yobmod\\AppData\\Local\\conda\\conda\\envs\\exe\\python.exe",
             "python.formatting.provider": "black"
         }

@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+from typing import Dict
 
 DEBUG = True
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -84,7 +85,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"  # "mandatory", "optional"
 LOGIN_REDIRECT_URL = '/'
 # SOCIALACCOUNT_QUERY_EMAIL=True   email from me or twitter?
 
-SOCIALACCOUNT_PROVIDERS = {
+SOCIALACCOUNT_PROVIDERS: Dict[str, Dict] = {
     #'facebook': {}, 
     #'google':{}, 
     'github':{},
@@ -125,21 +126,21 @@ TEMPLATES = [
         "APP_DIRS": True,
         'OPTIONS': {
             "match_extension": ".jinja",
-            "environment": 'dmlsite.jinja2.environment',
+            # "environment": 'dmlsite.jinja2.environment',
             "extensions": [
                 'pipeline.jinja2.PipelineExtension',
-                # 'compressor.contrib.jinja2ext.CompressorExtension',
+                'compressor.contrib.jinja2ext.CompressorExtension',
                 "jinja2.ext.do",
                 "jinja2.ext.loopcontrols",
                 "jinja2.ext.with_",
                 "jinja2.ext.i18n",
                 "jinja2.ext.autoescape",
-                #"django_jinja.builtins.extensions.CsrfExtension",
-                #"django_jinja.builtins.extensions.CacheExtension",
-                #"django_jinja.builtins.extensions.TimezoneExtension",
-                #"django_jinja.builtins.extensions.UrlsExtension",
-                #"django_jinja.builtins.extensions.StaticFilesExtension",
-                #"django_jinja.builtins.extensions.DjangoFiltersExtension",
+                "django_jinja.builtins.extensions.CsrfExtension",
+                "django_jinja.builtins.extensions.CacheExtension",
+                "django_jinja.builtins.extensions.TimezoneExtension",
+                "django_jinja.builtins.extensions.UrlsExtension",
+                "django_jinja.builtins.extensions.StaticFilesExtension",
+                "django_jinja.builtins.extensions.DjangoFiltersExtension",
             ],
              "autoescape": True,
              "auto_reload": DEBUG,
@@ -197,7 +198,6 @@ ASGI_APPLICATION = 'dmlsite.routing.application'
 DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
-DEBUG = True
 
 CACHES = {
     'default': {
@@ -283,7 +283,7 @@ PIPELINE = {
     }
 }
 
-PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.jsmin.JSMinCompressor'
+# PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.jsmin.JSMinCompressor'
 
 
 # GEOIP_PATH=os.environ['GEOIP_GEOLITE2_PATH'] #overwritten in prod
