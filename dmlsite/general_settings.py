@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+from typing import Dict
 
 DEBUG = True
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -84,7 +85,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"  # "mandatory", "optional"
 LOGIN_REDIRECT_URL = '/'
 # SOCIALACCOUNT_QUERY_EMAIL=True   email from me or twitter?
 
-SOCIALACCOUNT_PROVIDERS = {
+SOCIALACCOUNT_PROVIDERS: Dict[str, Dict] = {
     #'facebook': {}, 
     #'google':{}, 
     'github':{},
@@ -333,8 +334,8 @@ from jinja2.ext import do, loopcontrols, with_, i18n, autoescape
 # from compressor.contrib.jinja2ext import CompressorExtension
 # from compressor.offline.jinja2 import url_for, SpacelessExtension
 
-TEMPLATE_LOADERS = [
-
+TEMPLATE_LOADERS = ['django_jinja.loaders.FileSystemLoader',
+                    'django_jinja.loaders.AppLoader',
 ]
 
 def gett_env():
