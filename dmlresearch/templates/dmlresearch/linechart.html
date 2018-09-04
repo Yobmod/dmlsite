@@ -1,14 +1,13 @@
 {% extends 'chartbase.html' %}
-{% load staticfiles %}
 
 {% block content %}
-
-<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script> <!--overwrites with old version of chart.js-->
 
 <script type="text/javascript">
 	$.get('{% url "dmlresearch:line_chart_json" %}', function(data) {
 		var ctx = $("#myChart").get(0).getContext("2d");
-		new Chart(ctx).Line(data);
+		var chart = new Chart(ctx, 
+		{type: 'line',
+		data: data});
 	});
 </script>
 

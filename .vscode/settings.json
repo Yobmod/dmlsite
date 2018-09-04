@@ -1,14 +1,5 @@
 {
-    "gitlens.advanced.messages": {
-        "suppressCommitHasNoPreviousCommitWarning": false,
-        "suppressCommitNotFoundWarning": false,
-        "suppressFileNotUnderSourceControlWarning": false,
-        "suppressGitVersionWarning": false,
-        "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false,
-        "suppressResultsExplorerNotice": false,
-        "suppressShowKeyBindingsNotice": true
-    },
+    
     "workbench.iconTheme": "material-icon-theme",
 
 
@@ -39,7 +30,7 @@
             "python.linting.enabled": true,
             "python.linting.pylamaEnabled": true,
             "python.linting.flake8Enabled": false,
-            "python.linting.pep8Enabled": false,
+            "python.linting.pep8Enabled": true,
             "python.linting.pydocstyleEnabled": false,
         
             "python.linting.lintOnSave": true,
@@ -53,6 +44,6 @@
             "[python]": {
                 
             },
-            "python.pythonPath": "C:\\Users\\Yobmod\\AppData\\Local\\conda\\conda\\envs\\exe\\python.exe",
-            "python.formatting.provider": "black"
+            "python.pythonPath": "C:\\Users\\laventin.LANCS\\envs\\rest\\Scripts\\python.exe",
+            "python.formatting.provider": "autopep8"
         }

@@ -1,9 +1,6 @@
 {% extends 'chartbase.html' %}
-{% load staticfiles %}
 
 {% block content %}
-
-<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script> <!--overwrites with old version of chart.js-->
 
 <script type="text/javascript">
 $( document ).ready(function() {
@@ -18,12 +15,16 @@ $( document ).ready(function() {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: {{ monthly_registrations }}
+                data: {{ monthly_registrations }},
             }
         ]
     };
     var ctx = document.getElementById("myChart").getContext("2d");
-    var myLineChart = new Chart(ctx).Line(data);
+    var myLineChart = new Chart(ctx,
+            {
+                type: 'line',
+                data: data
+            });
 });
 </script>
 
