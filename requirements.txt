@@ -110,7 +110,7 @@ urllib3==1.22
 user-agents==1.1.0
 wcwidth==0.1.7
 webencodings==0.5.1
-Werkzeug==0.12.2
+Werkzeug==0.14.1
 whitenoise==3.3.1
 xhtml2pdf==0.2b1
 zope.interface==4.5.0

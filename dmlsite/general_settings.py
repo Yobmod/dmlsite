@@ -114,32 +114,34 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'dmlsite.urls'
 
-from django_jinja.builtins import DEFAULT_EXTENSIONS
+# from django_jinja.builtins import DEFAULT_EXTENSIONS
 
 TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
         'DIRS': [
-                    os.path.join(BASE_DIR, 'dmlmain', 'templates', 'errors'),
+                    os.path.join(BASE_DIR, 'dmlmain', 'templates'),
+                    os.path.join(PROJECT_ROOT, 'templates', 'errors'), # dmlsite
+
                 ],
         "APP_DIRS": True,
         'OPTIONS': {
             "match_extension": ".jinja",
-            "environment": 'dmlsite.jinja2.environment',
+            # "environment": 'dmlsite.jinja2.environment',
             "extensions": [
                 'pipeline.jinja2.PipelineExtension',
-                # 'compressor.contrib.jinja2ext.CompressorExtension',
+                'compressor.contrib.jinja2ext.CompressorExtension',
                 "jinja2.ext.do",
                 "jinja2.ext.loopcontrols",
                 "jinja2.ext.with_",
                 "jinja2.ext.i18n",
                 "jinja2.ext.autoescape",
-                #"django_jinja.builtins.extensions.CsrfExtension",
-                #"django_jinja.builtins.extensions.CacheExtension",
-                #"django_jinja.builtins.extensions.TimezoneExtension",
-                #"django_jinja.builtins.extensions.UrlsExtension",
-                #"django_jinja.builtins.extensions.StaticFilesExtension",
-                #"django_jinja.builtins.extensions.DjangoFiltersExtension",
+                "django_jinja.builtins.extensions.CsrfExtension",
+                "django_jinja.builtins.extensions.CacheExtension",
+                "django_jinja.builtins.extensions.TimezoneExtension",
+                "django_jinja.builtins.extensions.UrlsExtension",
+                "django_jinja.builtins.extensions.StaticFilesExtension",
+                "django_jinja.builtins.extensions.DjangoFiltersExtension",
             ],
              "autoescape": True,
              "auto_reload": DEBUG,
@@ -321,4 +323,22 @@ COMPRESS_OUTPUT_DIR = 'compressed'
 COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
 COMPRESS_JS_BACKEND = 'django_compressor.js.JsCompressor'
 COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
+
+"""
+from jinja2 import Environment
+from jinja2.ext import do, loopcontrols, with_, i18n, autoescape
+
+# from pipeline.jinja2 import PipelineExtension
+# from compressor.contrib.jinja2ext import CompressorExtension
+# from compressor.offline.jinja2 import url_for, SpacelessExtension
+
+TEMPLATE_LOADERS = [
+
+]
+
+def gett_env():
+    jn_env = Environment(loader='django.template.loaders.filesystem.Loader', extensions=[do, loopcontrols, with_, i18n, autoescape])
+    return jn_env
+
+COMPRESS_JINJA2_GET_ENVIRONMENT = lambda: gett_env()"""

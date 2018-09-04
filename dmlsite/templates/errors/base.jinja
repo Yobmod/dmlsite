@@ -6,27 +6,23 @@
 <title>DMLsite</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head_extra %} {% endblock head_extra %}
 
-{% stylesheet 'vendor' %}
-{% javascript 'vendor' %}
-{% javascript 'dmlmain' %}
-
-
+{% compress css %}
 <link rel="stylesheet" href="{{ static('dmlmain/css/vendor/bootstrap.min.css') }}"/>
 <link rel="stylesheet" href="{{ static('dmlmain/css/vendor/font-awesome.min.css') }}"/>
+{% endcompress %}
 
-
-{% compress js file base %}
-<script src="{{ static('dmlmain/js/vendor/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ static('dmlmain/js/vendor/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ static('dmlmain/js/homepage.js') }}" defer></script>
+{% compress js %}
+<script src="{{ static('dmlmain/js/vendor/jquery-3.2.1.min.js') }}" type="text/javascript" ></script>
+<script src="{{ static('dmlmain/js/vendor/bootstrap.min.js') }}" type="text/javascript" ></script>
+<script src="{{ static('dmlmain/js/homepage.js') }}" type="text/javascript" defer></script>
 {% endcompress %}
 
 <link rel="icon" type="image/x-icon" href="{{ static('dmlmain/icons/favicon.ico') }}"/>
 
-
-{% block head_extra %} {% endblock head_extra %}
 </head>
+
 
 <body>
 
@@ -36,7 +32,8 @@
 	<a href="/polls">Polls</a> /
 	<a href="/chat">Chat</a>
 </h1>
-	<br>
+<br>
+
 {% block content %} {% endblock content %}
 
 </body>

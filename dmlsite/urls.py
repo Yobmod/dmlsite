@@ -23,7 +23,6 @@ from controlcenter.views import controlcenter
 from django.conf.urls.static import static
 from django.conf import settings
 
-# admin.autodiscover()
 
 urlpatterns = [
 	url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
