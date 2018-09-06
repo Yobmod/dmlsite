@@ -1,6 +1,6 @@
 import os
 import dj_database_url
-from typing import Dict
+from typing import Dict, Union, Any
 
 DEBUG = True
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'pipeline',
     'django_user_agents',
     'django_jinja',
+    'django_jinja.contrib._humanize',
 
 
 
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
     # dev tools  ## move to Local_settings?
     'django_extensions',  # werkzeug, pytest-django
     # 'sslserver',
-    #'controlcenter',
+    # 'controlcenter',
 
 
     # other tools
@@ -86,15 +87,15 @@ LOGIN_REDIRECT_URL = '/'
 # SOCIALACCOUNT_QUERY_EMAIL=True   email from me or twitter?
 
 SOCIALACCOUNT_PROVIDERS: Dict[str, Dict] = {
-    #'facebook': {}, 
-    #'google':{}, 
-    'github':{},
-    'twitter':{},
+    # 'facebook': {}, 
+    # 'google':{}, 
+    'github': {},
+    'twitter': {},
 }
 
-#CONTROLCENTER_DASHBOARDS = (
-#    'dmlsite.dashboard.MyDashboard',
-#)
+# CONTROLCENTER_DASHBOARDS = (
+#    # 'dmlsite.dashboard.MyDashboard',
+# )
 
 TAGGIT_CASE_INSENSITIVE = True
 CRISPY_TEMPLATE_PACK = 'bootstrap3'  # or bootstap, bootstrap4, uni-forms
@@ -121,10 +122,10 @@ TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
         'DIRS': [
-                    os.path.join(BASE_DIR, 'dmlmain', 'templates'),
-                    os.path.join(PROJECT_ROOT, 'templates', 'errors'), # dmlsite
+            os.path.join(BASE_DIR, 'dmlmain', 'templates'),
+            os.path.join(PROJECT_ROOT, 'templates', 'errors'),  # dmlsite
 
-                ],
+        ],
         "APP_DIRS": True,
         'OPTIONS': {
             "match_extension": ".jinja",
@@ -143,16 +144,18 @@ TEMPLATES = [
                 "django_jinja.builtins.extensions.UrlsExtension",
                 "django_jinja.builtins.extensions.StaticFilesExtension",
                 "django_jinja.builtins.extensions.DjangoFiltersExtension",
+                "dmlsite.jinja.djangonow_jinja.DjangoNow",
+                "dmlsite.jinja.djjn_tag.Django",
             ],
-             "autoescape": True,
-             "auto_reload": DEBUG,
+            "autoescape": True,
+            "auto_reload": DEBUG,
         },
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                    os.path.join(BASE_DIR, 'dmlmain', 'templates', 'allauth'),
-                ],
+            os.path.join(BASE_DIR, 'dmlmain', 'templates', 'allauth'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -253,12 +256,12 @@ COMPRESS_PRECOMPILERS = (
 LIBSASS_OUTPUT_STYLE = 'nested'  # 'compressed'
 LIBSASS_PRECISION = 8
 
-PIPELINE = {
+PIPELINE: Dict[str, Union[str, Dict[str, Any]]] = {
     'STYLESHEETS': {
         'vendor': {
             'source_filenames': (
-              'dmlmain/css/vendor/font-awesome.min.css',
-              'dmlmain/css/vendor/bootstrap.min.css',
+                'dmlmain/css/vendor/font-awesome.min.css',
+                'dmlmain/css/vendor/bootstrap.min.css',
             ),
             'output_filename': 'css/vendor.css',
         },
@@ -266,8 +269,8 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-              'dmlmain/js/vendor/jquery-3.2.1.min.js',
-              'dmlmain/js/vendor/bootstrap.min.js',
+                'dmlmain/js/vendor/jquery-3.2.1.min.js',
+                'dmlmain/js/vendor/bootstrap.min.js',
             ),
             'extra_context': {
                 # 'async': True,  # defer
@@ -339,7 +342,8 @@ TEMPLATE_LOADERS = ['django_jinja.loaders.FileSystemLoader',
 ]
 
 def gett_env():
-    jn_env = Environment(loader='django.template.loaders.filesystem.Loader', extensions=[do, loopcontrols, with_, i18n, autoescape])
+    jn_env = Environment(loader=django.template.loaders.filesystem.Loader, 
+    extensions=[do, loopcontrols, with_, i18n, autoescape])
     return jn_env
 
 COMPRESS_JINJA2_GET_ENVIRONMENT = lambda: gett_env()"""

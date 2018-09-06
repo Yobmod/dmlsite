@@ -1,10 +1,12 @@
-from jinja2 import Environment, FileSystemLoader
-from jinja2.ext import do, loopcontrols, with_, i18n, autoescape
+from jinja2 import Environment, ext  # , FileSystemLoader
+
+from django_jinja.builtins import extensions as djjn_extensions
+from django_jinja.loaders import FileSystemLoader as djjn_FileStstemLoader
 
 from compressor.contrib.jinja2ext import CompressorExtension
 # from pipeline.jinja2 import PipelineExtension
 # from compressor.offline.jinja2 import url_for, SpacelessExtension
-from typing import Any
+# from typing import Any
 
 
 loaders = [
@@ -13,23 +15,26 @@ loaders = [
     'jina2.FileSystemLoader'
 ]
 
-extensions = [CompressorExtension, do, loopcontrols, with_, i18n, autoescape]
+extensions = [
+    CompressorExtension, 
+    ext.do, 
+    ext.loopcontrols, 
+    ext.with_, 
+    ext.i18n, 
+    ext.autoescape,
+    djjn_extensions.CsrfExtensionCacheExtension, 
+    djjn_extensions.TimezoneExtension, 
+    djjn_extensions.UrlsExtension, 
+    djjn_extensions.StaticFilesExtension, 
+    djjn_extensions.DjangoFiltersExtension,
+    # PipelineExtension,
+]
 
 
-def dmlsite_jinja_env(**options: Any):
-    env = Environment(loaders=FileSystemLoader('templates/'), extensions=extensions)
+def dmlsite_jinja_env(**options: dict) -> Environment:
+    env = Environment(loader=djjn_FileStstemLoader('templates/'), extensions=extensions)
     return env
 
-
-"""
-                "django_jinja.builtins.extensions.CsrfExtension",
-                "django_jinja.builtins.extensions.CacheExtension",
-                "django_jinja.builtins.extensions.TimezoneExtension",
-                "django_jinja.builtins.extensions.UrlsExtension",
-                "django_jinja.builtins.extensions.StaticFilesExtension",
-                "django_jinja.builtins.extensions.DjangoFiltersExtension",
-            ]
-"""
 
 """from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import reverse

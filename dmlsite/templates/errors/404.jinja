@@ -2,12 +2,23 @@
 
 {% block content %}
 
-<h2>404 Not Found</h2>
+<h2>{{ "%s %s"|format("404", "Not Found") }}</h2>
 <p>The good old “chap, you made a mistake typing that URL” message. 
 So common that even novices to the internet know that 404 means: 
 damn, the thing I was looking for is not there. 
 It’s a very good idea to make sure there is actually something useful on a 404 page, 
 at least a link back to the index.
 </p>
+
+{{ "Urlify: turn spaces to plus" | urlify_jn() }}
+{{ urlify_tag("fhlk v cdl;") }}
+
+{% now "22" as today %}
+<p>Time: {{ today }} </p>
+
+{# {% django %}{% enddjango %} #}
+
+{% django %}
+
 
 {% endblock %}
