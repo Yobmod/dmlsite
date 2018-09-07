@@ -21,4 +21,6 @@ urlpatterns = [
 
 	url(r'^test/$', views.GeneratePdf.as_view(), name='test'),
 	url(r'^invoice/$', views.GenerateInvoice.as_view(), name='invoice'),
+
+	url(r'^contactjn/$', views.contact_jinja, name='contact_jinja'),
 	]

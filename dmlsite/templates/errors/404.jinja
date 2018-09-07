@@ -10,15 +10,30 @@ It’s a very good idea to make sure there is actually something useful on a 404
 at least a link back to the index.
 </p>
 
-{{ "Urlify: turn spaces to plus" | urlify_jn() }}
+{{ "Urlify: turn spaces to plus" | urlify_filter() }}
 {{ urlify_tag("fhlk v cdl;") }}
 
-{% now "22" as today %}
+<br><br><br><br>
+{% now "h:i:s A" as today %}
+
+<p>Date: {% now "d m Y" %} </p>
 <p>Time: {{ today }} </p>
 
 {# {% django %}{% enddjango %} #}
+<a href="/">Homepage</a>
 
-{% django %}
+
+    <form method='POST' action='' class="post-form">{%csrf_token %}
+     {{ crispify(form) }}
+      <dl>
+        <dt>Title:
+        <dd><input type='text' size='30' name='title'>
+        <dt>Text:
+        <dd><textarea name='text' rows='5' cols='40'></textarea>
+        <dd><input type='submit' value='Share'>
+      </dl>
+    </form>
+
 
 
 {% endblock %}

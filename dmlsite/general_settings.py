@@ -147,6 +147,16 @@ TEMPLATES = [
                 "dmlsite.jinja.djangonow_jinja.DjangoNow",
                 "dmlsite.jinja.djjn_tag.Django",
             ],
+            "filters": {
+
+            },
+            "constants": {
+                "hello": "hello world",
+            },
+            "globals": {
+                "urlifytext": "dmlmain.templatetags.urlify.urlify_tag",
+                # "crispify": "dmlmain.templatetags.crispy_form_jinja.crispify",
+            },
             "autoescape": True,
             "auto_reload": DEBUG,
         },

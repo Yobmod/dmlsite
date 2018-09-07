@@ -23,7 +23,7 @@ def urlify(value: str) -> str:
 
 
 @djjn_library.filter
-def urlify_jn(value: str) -> str:
+def urlify_filter(value: str) -> str:
     try:
         urlified = quote_plus(value)
     except TemplateSyntaxError as te:
@@ -31,7 +31,6 @@ def urlify_jn(value: str) -> str:
         print(message)
     except Exception as e:
         print(e)
-    print(bytes.decode(bcolors.WARNING) + "Warning: No active frommets remain. Continue?")
     return urlified
 
 

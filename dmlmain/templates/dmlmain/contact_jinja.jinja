@@ -1,0 +1,26 @@
+{% extends 'base.jinja' %}
+
+
+{% block content %}
+    <div class="contact">
+        <p> If you have any comments or queries, please contact the webmaster using one of the following methods:</p>
+		<br>
+		<span class="glyphicon glyphicon-envelope"></span>
+		<br>
+		<br>
+		<br>
+		<span class="glyphicon glyphicon-phone"></span>
+
+		<form method='POST' action=''>{% csrf_token %}
+		{{ form|crispy(template_pack=bootstrap4) }}
+		<input type='submit', value='Submit'/>
+
+		<br>
+		<br>
+		<br>
+		<div class ="contact">
+		<a href="https://www.paypal.me/dmlsite"><img src= "{{ static('dmlmain/images/donate-button.png') }}" alt="Paypal donate" style="width:210px;height:105px;border:0;"/></a>
+		</div>
+
+    </div>
+{% endblock %}
