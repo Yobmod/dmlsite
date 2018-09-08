@@ -122,8 +122,11 @@ TEMPLATES = [
     {
         "BACKEND": "django_jinja.backend.Jinja2",
         'DIRS': [
+
             os.path.join(BASE_DIR, 'dmlmain', 'templates'),
+            os.path.join(PROJECT_ROOT, 'templates'),  # dmlsite
             os.path.join(PROJECT_ROOT, 'templates', 'errors'),  # dmlsite
+            os.path.join(PROJECT_ROOT, 'templates', 'cookielaw'),  # dmlsite
 
         ],
         "APP_DIRS": True,
@@ -155,6 +158,7 @@ TEMPLATES = [
             },
             "globals": {
                 "urlifytext": "dmlmain.templatetags.urlify.urlify_tag",
+                "clb": "dmlsite.templatetags.cookielaw_jinja.clb",
                 # "crispify": "dmlmain.templatetags.crispy_form_jinja.crispify",
             },
             "autoescape": True,
