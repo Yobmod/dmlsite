@@ -17,7 +17,7 @@ if not DEBUG:   # redirects to https on heroku
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CHANNEL_LAYERS = {
-     'default': {
+    'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [os.environ.get("REDIS_URL")],
@@ -90,7 +90,7 @@ DEFAULT_FILE_STORAGE = 'dmlsite.storages_custom.MediaStorage'
 
 STATICFILES_LOCATION = 'static'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-STATICFILES_STORAGE = 'dmlsite.storages_custom.CachedS3BotoStorage'
+STATICFILES_STORAGE = 'dmlsite.storages_custom.StaticStorage'
 
 COMPRESS_URL = STATIC_URL
 COMPRESS_STORAGE = STATICFILES_STORAGE

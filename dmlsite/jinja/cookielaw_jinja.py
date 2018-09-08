@@ -8,7 +8,6 @@ from django.template.loader import render_to_string
 
 import warnings
 from typing import Optional as Opt, Dict
-import jinja2
 
 # from jinja2.runtime import Context
 
@@ -84,7 +83,7 @@ class InclusionTag(Tag):
 class CookielawBanner(InclusionTag):
     """ Displays cookie law banner only if user has not dismissed it yet."""
 
-    template = 'cookielaw/banner.html'
+    template = 'cookielaw/banner.jinja'
 
     def render_tag(self, context: Context, **kwargs: dict) -> str:
         template_filename = self.get_template(context, **kwargs)
@@ -99,19 +98,6 @@ class CookielawBanner(InclusionTag):
             return render_to_string(template_filename, data, context_instance=context)
         else:
             return render_to_string(template_filename, data, context.request)
-
-
-@jinja2.contextfunction
-@library.global_function
-def clb(context: Context, **kwargs) -> str:
-    template = 'cookielaw/banner.jinja'
-    if 'request' not in context:
-        warnings.warn('No request object in context. '
-                        'Are you sure you have django.core.context_processors.request enabled?')
-    if context['request'].COOKIES.get('cookielaw_accepted', False):
-        return ''
-    context=dict(context)
-    return render_to_string(template, context)
 
 
 # library.extension(CookielawBanner)

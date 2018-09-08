@@ -230,18 +230,10 @@ CACHES = {
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -338,22 +330,3 @@ COMPRESS_CSS_BACKEND = 'django_compressor.css.CssCompressor'
 COMPRESS_JS_BACKEND = 'django_compressor.js.JsCompressor'
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
-
-"""
-from jinja2 import Environment
-from jinja2.ext import do, loopcontrols, with_, i18n, autoescape
-
-# from pipeline.jinja2 import PipelineExtension
-# from compressor.contrib.jinja2ext import CompressorExtension
-# from compressor.offline.jinja2 import url_for, SpacelessExtension
-
-TEMPLATE_LOADERS = ['django_jinja.loaders.FileSystemLoader',
-                    'django_jinja.loaders.AppLoader',
-]
-
-def gett_env():
-    jn_env = Environment(loader=django.template.loaders.filesystem.Loader, 
-    extensions=[do, loopcontrols, with_, i18n, autoescape])
-    return jn_env
-
-COMPRESS_JINJA2_GET_ENVIRONMENT = lambda: gett_env()"""
