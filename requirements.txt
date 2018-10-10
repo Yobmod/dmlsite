@@ -26,7 +26,7 @@ cryptography==2.3.1
 daphne==2.2.2
 defusedxml==0.5.0
 dj-database-url==0.5.0
-Django==2.1.1
+Django==2.1.2
 django-allauth==0.36.0
 django-appconf==1.0.2
 django-chartjs==1.2
