@@ -101,7 +101,6 @@ PyJWT==1.5.3
 pylama==7.4.3
 pyOpenSSL==18.0.0
 PyPDF2==1.26.0
-pypiwin32==220
 PySocks==1.6.7
 pytest==3.3.0
 pytest-cov==2.5.1
@@ -112,7 +111,6 @@ pytest-mypy==0.3.1
 python-dateutil==2.6.1
 python3-openid==3.1.0
 pytz==2018.4
-pywin32==223
 rcssmin==1.0.6
 redis==2.10.6
 reportlab==3.4.0
