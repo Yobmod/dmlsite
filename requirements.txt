@@ -26,7 +26,7 @@ cryptography==2.3.1
 daphne==2.2.2
 defusedxml==0.5.0
 dj-database-url==0.5.0
-Django==2.1.8
+Django==2.1.9
 django-allauth==0.36.0
 django-appconf==1.0.2
 django-chartjs==1.2
@@ -125,7 +125,7 @@ snowballstemmer==1.2.1
 sorl-thumbnail==12.4.1
 tempora==1.9
 twilio==6.9.0
-Twisted==18.7.0
+Twisted==19.2.1
 txaio==2.10.0
 typed-ast==1.1.0
 typing==3.6.2
