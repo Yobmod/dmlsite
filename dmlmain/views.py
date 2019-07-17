@@ -1,6 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
+
+from django.template.loader import get_template
+import os
+from twilio.rest import Client
+from .tasks import create_html_report, email_report, test_hook
+from django_q.tasks import async_task, result
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from datetime import timezone
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import SignUpForm, ContactForm
@@ -18,7 +24,7 @@ def homepage(request):
     if form.is_valid():
         instance = form.save(commit=False)
         # if not instance.name:
-        #	instance.name = "Visitor"
+        # instance.name = "Visitor"
         name = form.cleaned_data.get('name')
         instance.save()
         # 'text' is name of template tag, text is what is shown
@@ -43,12 +49,6 @@ def homepage(request):
         return HttpResponse("you are on a mobile")
 
 
-from django_q.tasks import async, result
-from .tasks import create_html_report, email_report, test_hook
-from twilio.rest import Client
-import os
-
-
 def contact_admins(request):
     form = ContactForm(request.POST or None)
     if form.is_valid():
@@ -60,7 +60,7 @@ def contact_admins(request):
         to_email = [from_email, form_email]  # send copy to myself
         contact_message = "%s: %s via %s" % (form_name, form_message, from_email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently=False)
-        # async('dmlmain.tasks.create_html_report', , hook='dmlmain.tasks.test_hook')
+        # async_task('dmlmain.tasks.create_html_report', , hook='dmlmain.tasks.test_hook')
     context = {'form': form, }
     return render(request, 'dmlmain/contact_admins.html', context)
 
@@ -76,7 +76,7 @@ def contact_jinja(request):
         to_email = [from_email, form_email]  # send copy to myself
         contact_message = "%s: %s via %s" % (form_name, form_message, from_email)
         send_mail(subject, contact_message, from_email, to_email, fail_silently=False)
-        # async('dmlmain.tasks.create_html_report', , hook='dmlmain.tasks.test_hook')
+        # async_task('dmlmain.tasks.create_html_report', , hook='dmlmain.tasks.test_hook')
     context = {'form': form, }
     return render(request, 'dmlmain/contact_jinja.jinja', context)
 
@@ -105,9 +105,6 @@ def django_admin_page(request):
 
 def register(request):
     return render(request, 'registration/registration_form.html')
-
-
-from django.template.loader import get_template
 
 
 class GenerateInvoice(View):

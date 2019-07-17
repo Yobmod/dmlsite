@@ -44,6 +44,6 @@
             "[python]": {
                 
             },
-            "python.pythonPath": "C:\\Users\\laventin.LANCS\\envs\\site\\Scripts\\python.exe",
+            "python.pythonPath": "C:\\Users\\laventin.LANCS\\.virtualenvs\\dmlsite-n8-43umq\\Scripts\\python.exe",
             "python.formatting.provider": "autopep8"
         }

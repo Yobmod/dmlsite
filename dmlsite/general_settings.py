@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.staticfiles',
+    # 'whitenoise.runserver_nostatic',
 
     # django essentials
     'channels',
@@ -111,6 +112,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
 
@@ -319,7 +321,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 COMPRESS_ROOT = STATIC_ROOT
 
 # WHITENOISE_AUTOREFRESH # =DEBUG
-WHITENOISE_ROOT = STATIC_ROOT
+# WHITENOISE_ROOT = STATIC_ROOT
 
 
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'), )
