@@ -1,0 +1,93 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+boto3 = "*"
+channels = "*"
+channels-redis = "*"
+daphne = "*"
+dj-database-url = "*"  # req_by postgres
+django-allauth = "*"
+django-appconf = "*"   # ?
+django-chartjs = "*"
+# django-classy-tags = "*"  # rq_by cookie-law
+django-compressor = "*"
+django-controlcenter = "*"
+django-cookie-law = "*"
+django-crispy-forms = "*"
+django-dotenv = "*"
+django-embed-video = "*"
+django-extensions = "*"
+django-libsass = "*"
+django-markdown-deux = "*"
+django-pagedown = "*"
+django-picklefield = "*"  
+# django-pkgconf = "*"  # req_by controlcenter
+django-q = "*"
+django-redis = "*"
+django-registration-redux = "*"
+django-sitetree = "*"
+django-storages = "*"
+django-taggit = "*"
+django-user-agents = "*"
+djangorestframework = "*"
+gunicorn = "*"
+html5lib = "*"
+psycopg2 = "*"
+redis = "*"
+sorl-thumbnail = "*"
+twilio = "*"
+whitenoise = {version = "*", extras = ["brotli"]}
+
+xhtml2pdf = "*" # -> pillow
+CherryPy = "*"
+Django = "==2.1.10"
+PyJWT = "*"
+pyOpenSSL = "*"
+PyPDF2 = "*"
+Werkzeug = "*"  # -> for extensions
+service-identity = "*"  ## <- twisted <- channels-redis
+django-pipeline = "*"
+django-jinja = "*"
+django-webpack-loader = "*"
+django-sslserver = "*"
+
+# django-axes = "==4.4.0"
+# django-celery-results = "==1.0.1"
+# django-clever-selects = "==0.8.2"
+# django-choices = "==1.6.1"
+# django-extra-views = "==0.11.0"
+# django-filter = "==2.0.0"
+# django-hijack = "==2.1.10"
+# django-hijack-admin = "==2.1.10"
+# django-js-reverse = "==0.8.2"
+# django-model-utils = "==3.1.2"
+# django-phonenumber-field = "==2.0.1"
+# django-polymorphic = "==2.0.3"
+# django-redis-cache = "==1.7.1"
+# django-role-permissions = "==2.2.0"
+# django-s3direct = "==1.0.4"
+# django-tables2 = "==1.21.2"
+# django-tagulous = "==0.13.2"
+# django-widget-tweaks = "==1.4.3"
+
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+pytest-mypy = "*"
+pytest-sugar = "*"
+pytest-xdist = "*"
+coverage = "*"
+mypy = "*"  # typing-extensions
+django-stubs = "*"
+djangorestframework-stubs = "*"
+pylama = "*"
+autopep8 = "*"
+pep8 = "*"
+
+[requires]
+python_version = "3.7"
