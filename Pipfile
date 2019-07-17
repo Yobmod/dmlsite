@@ -42,7 +42,7 @@ whitenoise = {version = "*", extras = ["brotli"]}
 
 xhtml2pdf = "*" # -> pillow
 CherryPy = "*"
-Django = "==2.1.10"
+Django = "==2.2.3"
 PyJWT = "*"
 pyOpenSSL = "*"
 PyPDF2 = "*"
