@@ -48,7 +48,8 @@ PyJWT = "*"
 pyOpenSSL = "*"
 PyPDF2 = "*"
 Werkzeug = "*"  # -> for extensions
-service-identity = "*"  ## <- twisted <- channels-redis
+# service-identity = "*"  ## <- twisted[tls] <- channels-redis
+twisted = {version = "*", extras = ["http2", "tls"]}  #-> service-identity
 django-pipeline = "*"
 django-jinja = "*"
 django-webpack-loader = "*"
