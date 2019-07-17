@@ -19,7 +19,6 @@ django-cookie-law = "*"
 django-crispy-forms = "*"
 django-dotenv = "*"
 django-embed-video = "*"
-django-extensions = "*"
 django-libsass = "*"
 django-markdown-deux = "*"
 django-pagedown = "*"
@@ -47,13 +46,12 @@ Django = "==2.1.10"
 PyJWT = "*"
 pyOpenSSL = "*"
 PyPDF2 = "*"
-Werkzeug = "*"  # -> for extensions
 # service-identity = "*"  ## <- twisted[tls] <- channels-redis
 twisted = {version = "*", extras = ["http2", "tls"]}  #-> service-identity
 django-pipeline = "*"
 django-jinja = "*"
 django-webpack-loader = "*"
-django-sslserver = "*"
+
 
 # django-axes = "==4.4.0"
 # django-celery-results = "==1.0.1"
@@ -73,9 +71,15 @@ django-sslserver = "*"
 # django-tables2 = "==1.21.2"
 # django-tagulous = "==0.13.2"
 # django-widget-tweaks = "==1.4.3"
+[dev]
+# django-debug-toolbar = "==1.10.1"
 
 
 [dev-packages]
+django-extensions = "*"
+django-sslserver = "*"
+Werkzeug = "*"  # -> for extensions
+
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
