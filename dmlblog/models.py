@@ -87,9 +87,9 @@ class Post(models.Model):
         return marked_safe_text
 
     @property
-    def comments(self) -> QuerySet[Comment, "Post"]:
+    def comments(self) -> "QuerySet[Comment, Post]":
         instance = self
-        qs: QuerySet[Comment, Post] = Comment.objects.filter_by_instance(instance)
+        qs: "QuerySet[Comment, Post]" = Comment.objects.filter_by_instance(instance)
         return qs
 
     @property
