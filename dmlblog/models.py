@@ -101,7 +101,9 @@ class Post(models.Model):
         return content_type
 
 
-def create_slug(instance: Post, new_slug: Union[str, SafeText, None] = None) -> SafeText:
+def create_slug(
+    instance: Post, new_slug: Union[str, SafeText, None] = None
+) -> SafeText:
     slug_inp: Union[str, SafeText, CharField]
     # if give a slug, it uses that
     if new_slug is not None:
@@ -136,10 +138,11 @@ def pre_save_post_reciever(
 pre_save.connect(pre_save_post_reciever, sender=Post)
 
 
-
 # Is this redundant to dmlcomments now?
 class Comment(models.Model):
-    post = models.ForeignKey('dmlblog.Post', related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        "dmlblog.Post", related_name="comments", on_delete=models.CASCADE
+    )
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -152,6 +155,6 @@ class Comment(models.Model):
     def __str__(self) -> str:
         return self.text
 
-    def approved_comments(self) -> QuerySet[Comment]:
+    def approved_comments(self) -> "QuerySet[Comment]":
         # return self.comments.filter(approved_comment=True)
         return self.post.comments.filter(approved_comment=True)
