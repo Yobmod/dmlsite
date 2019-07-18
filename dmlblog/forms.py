@@ -16,7 +16,7 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'text', "tags", "video", "image", "image_width", "image_height", "draft", "published_date")
 
 
-"""
+
 class TagMixin(object):
     def get_context_data(self, **kwargs):
         context = super(TagMixin, self).get_context_data(**kwargs)
@@ -29,4 +29,3 @@ class TagIndexView(TagMixin, ListView):
 
     def get_queryset(self) -> 'QuerySet[Post]':
         return Post.objects.filter(tags__slug=self.kwargs.get('pk'))
-"""
