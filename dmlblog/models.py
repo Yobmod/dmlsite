@@ -155,6 +155,6 @@ class Comment(models.Model):
     def __str__(self) -> str:
         return self.text
 
-    def approved_comments(self) -> "QuerySet[Comment]":
+    def approved_comments(self) -> QuerySet[Comment]:
         # return self.comments.filter(approved_comment=True)
         return self.post.comments.filter(approved_comment=True)
