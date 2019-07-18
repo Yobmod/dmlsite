@@ -2,10 +2,10 @@
 import os
 import dj_database_url
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...) 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production! 
 ALLOWED_HOSTS = ['dmlsite.herokuapp.com', "127.0.0.1"]
 SITE_ID = 2
 ROOT_URLCONF = 'dmlsite.urls'
@@ -52,7 +52,7 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
-        # 'CONN_MAX_AGE': 600,
+        'CONN_MAX_AGE': 600,
     }
 }
 

@@ -39,7 +39,6 @@ redis = "*"
 sorl-thumbnail = "*"
 twilio = "*"
 whitenoise = {version = "*", extras = ["brotli"]}
-
 xhtml2pdf = "*" # -> pillow
 CherryPy = "*"
 Django = "==2.2.3"
@@ -51,8 +50,6 @@ twisted = {version = "*", extras = ["http2", "tls"]}  #-> service-identity
 django-pipeline = "*"
 django-jinja = "*"
 django-webpack-loader = "*"
-
-
 # django-axes = "==4.4.0"
 # django-celery-results = "==1.0.1"
 # django-clever-selects = "==0.8.2"
@@ -71,15 +68,13 @@ django-webpack-loader = "*"
 # django-tables2 = "==1.21.2"
 # django-tagulous = "==0.13.2"
 # django-widget-tweaks = "==1.4.3"
-[dev]
+# [dev]
 # django-debug-toolbar = "==1.10.1"
-
 
 [dev-packages]
 django-extensions = "*"
 django-sslserver = "*"
 Werkzeug = "*"  # -> for extensions
-
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
@@ -92,7 +87,11 @@ django-stubs = "*"
 djangorestframework-stubs = "*"
 pylama = "*"
 autopep8 = "*"
+black = "*"
 pep8 = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

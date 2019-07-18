@@ -12,7 +12,7 @@ except:
 try:
     from .production_settings import *
 except ImportError:
-   pass
+    pass
 
 
 try:
