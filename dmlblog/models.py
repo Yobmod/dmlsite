@@ -136,7 +136,7 @@ def pre_save_post_reciever(
 pre_save.connect(pre_save_post_reciever, sender=Post)
 
 
-"""
+
 # Is this redundant to dmlcomments now?
 class Comment(models.Model):
     post = models.ForeignKey('dmlblog.Post', related_name='comments', on_delete=models.CASCADE)
@@ -155,4 +155,3 @@ class Comment(models.Model):
     def approved_comments(self) -> QuerySet[Comment]:
         # return self.comments.filter(approved_comment=True)
         return self.post.comments.filter(approved_comment=True)
-"""
