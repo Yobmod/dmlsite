@@ -19,7 +19,7 @@ try:
 except ImportError:
     pass
 
-from typing import cast
+from typing import cast, Union
 
 
 def post_test(request: HttpRequest) -> HttpResponse:
@@ -64,10 +64,12 @@ def post_list(request: HttpRequest) -> HttpResponse:
         ).distinct()
     paginator = Paginator(posts, 5)
     page_request_var = "post_page"
-    page = request.GET.get(page_request_var)
+    page: Union[int, str, None] = request.GET.get(page_request_var)
     # print(paginator.count)
     # print(paginator.num_pages)
     try:
+        if page is None:
+            page = 1
         queryset = paginator.page(page)
     except PageNotAnInteger:
         queryset = paginator.page(1)  # if not enough, give first page
