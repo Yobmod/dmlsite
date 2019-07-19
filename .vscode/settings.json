@@ -31,8 +31,8 @@
             "python.linting.mypyEnabled": true,
             "python.linting.enabled": true,
             "python.linting.pylamaEnabled": true,
-            "python.linting.flake8Enabled": false,
-            "python.linting.pep8Enabled": true,
+            "python.linting.flake8Enabled": true,
+            "python.linting.pep8Enabled": false,
             "python.linting.pydocstyleEnabled": false,
         
             "python.linting.lintOnSave": true,

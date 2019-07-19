@@ -5,6 +5,7 @@ local_settings.py
 .cache/
 .mypy_cache/
 .pytest_cache/
+.coverage
 
 
 /static_root
