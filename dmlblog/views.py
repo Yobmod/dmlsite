@@ -68,10 +68,7 @@ def post_list(request: HttpRequest) -> HttpResponse:
     # print(paginator.count)
     # print(paginator.num_pages)
     try:
-        # if page is not None:
-        queryset = paginator.page(int(page))
-        #else:
-            #pass  # raise EmptyPage
+        queryset = paginator.page(page)
     except PageNotAnInteger:
         queryset = paginator.page(1)  # if not enough, give first page
     except (EmptyPage or InvalidPage):
