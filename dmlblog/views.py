@@ -70,8 +70,8 @@ def post_list(request: HttpRequest) -> HttpResponse:
     try:
         if page is not None:
             queryset = paginator.page(int(page))
-        else: 
-            raise EmptyPage
+        else:
+            pass  # raise EmptyPage
     except PageNotAnInteger:
         queryset = paginator.page(1)  # if not enough, give first page
     except (EmptyPage or InvalidPage):
@@ -96,7 +96,7 @@ def post_detail(request: WSGIRequest, pk: str) -> HttpResponse:
     comments = Comment.objects.filter_by_instance(post)  # aka = post.comments
     counts = 1
     for comment in comments:
-        if comment.content_object.id == post.id:
+        if isinstance(comment.content_object, Post) and comment.content_object.id == post.id:
             counts += 1
             post.post_comments.count = counts
     initial_data = {
