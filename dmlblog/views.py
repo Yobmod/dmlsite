@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.contrib import messages
 from .utils import get_read_time
 from .models import Post
-from .forms import PostForm, TagIndexView, TagMixin
+from .forms import PostForm  # , TagIndexView, TagMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Prefetch

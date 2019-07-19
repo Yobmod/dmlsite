@@ -1,9 +1,9 @@
 from django import forms
-from django.views.generic import DetailView, ListView
-from .models import Post, Comment
+# from django.views.generic import ListView  # , DetailView
+from .models import Post  # , Comment
 from pagedown.widgets import PagedownWidget
 
-from django.db.models.query import QuerySet
+# from django.db.models.query import QuerySet
 
 
 class PostForm(forms.ModelForm):
@@ -13,10 +13,20 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'text', "tags", "video", "image", "image_width", "image_height", "draft", "published_date")
+        fields = (
+            "title",
+            "text",
+            "tags",
+            "video",
+            "image",
+            "image_width",
+            "image_height",
+            "draft",
+            "published_date",
+        )
 
 
-
+"""
 class TagMixin(object):
     def get_context_data(self, **kwargs):
         context = super(TagMixin, self).get_context_data(**kwargs)
@@ -27,5 +37,6 @@ class TagMixin(object):
 class TagIndexView(TagMixin, ListView):
     paginate_by = 5  # "5"
 
-    def get_queryset(self) -> 'QuerySet[Post]':
-        return Post.objects.filter(tags__slug=self.kwargs.get('pk'))
+    def get_queryset(self) -> "QuerySet[Post]":
+        return Post.objects.filter(tags__slug=self.kwargs.get("pk"))
+"""
