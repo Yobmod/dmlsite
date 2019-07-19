@@ -1,5 +1,7 @@
 {
-    
+    "python.analysis.disabled": ["unresolved-import", "undefined-variable"],
+    "python.analysis.downloadChannel": "daily",
+    "python.autoComplete.extraPaths": ["./",],
     "workbench.iconTheme": "material-icon-theme",
 
 
