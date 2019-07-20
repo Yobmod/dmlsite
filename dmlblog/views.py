@@ -95,7 +95,10 @@ def post_detail(request: WSGIRequest, pk: str) -> HttpResponse:
     comments = Comment.objects.filter_by_instance(post)  # aka = post.comments
     counts = 1
     for comment in comments:
-        if isinstance(comment.content_object, Post) and comment.content_object.id == post.id:
+        if (
+            isinstance(comment.content_object, Post)
+            and comment.content_object.id == post.id
+        ):
             counts += 1
             post.post_comments.count = counts
     initial_data = {
@@ -231,13 +234,12 @@ def comment_approve(request: HttpRequest, pk: str) -> HttpResponse:
 @login_required
 def comment_remove(request: WSGIRequest, pk: str) -> HttpResponse:
     comment = get_object_or_404(Comment, pk=pk)
-    if isinstance(comment.content_object, Post):  # changed from comment.post.uk
-        post_pk = comment.content_object.pk
     comment.delete()
+    if isinstance(comment.content_object, Post):  # mypy
+        post_pk = comment.content_object.pk
     return redirect("dmlblog.views.post_detail", pk=post_pk)
 
 
 def tag_post(request: HttpRequest, pk: str) -> HttpResponse:
     post = get_object_or_404(Post, pk=pk)
     return redirect("dmlblog.views.post_detail", pk=post.pk)
-

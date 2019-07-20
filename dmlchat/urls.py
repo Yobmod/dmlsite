@@ -4,14 +4,11 @@ from django.urls import re_path  # , path, include
 from . import views
 
 
-app_name = 'dmlchat'
+app_name = "dmlchat"
 
 urlpatterns = [
-	url(r'^$', views.chat_main, name='chat_main'),
+    url(r"^$", views.chat_main, name="chat_main"),
+    re_path(r"^(?P<room_name>[^/]+)/$", views.chat_room, name="chat_room"),
+    # url(r'^test/$', views.chat_test, name='test'),
+]
 
-	re_path(r'^(?P<room_name>[^/]+)/$', views.chat_room, name='chat_room'),
-
-
-	# url(r'^test/$', views.chat_test, name='test'),
-
-	]
