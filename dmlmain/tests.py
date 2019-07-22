@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from .urls import urlpatterns
-
+from .tasks import create_html_report
 # unittest / unittest2
 # doctest
 # from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -31,4 +31,9 @@ class UrlsTest(TestCase):
         resp = self.client.get("/this_page_should_not_exist/")
         self.assertEqual(resp.status_code, 404)
 
+
+class TaskTest(TestCase):
+    def test_create_html_report(self) -> None:
+        report = create_html_report()
+        assert isinstance(report, str) and len(report) > 0
 
