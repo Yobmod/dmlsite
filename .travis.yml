@@ -6,6 +6,23 @@ before_install:
   - sudo apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
   - sudo apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
   - sudo apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl llvm
+
 language: python
 python:
+  - "3.6"
   - "3.7"
+  services:
+  - postgres
+  - redis
+  env:
+  - DJANGO=2.2 DB=posgres
+install:
+    - pip install -r requirements.txt
+matrix:
+  include:
+    - python: 3.6
+      dist: trusty
+      sudo: true
+    - python: 3.7
+      dist: xenial
+      sudo: true
