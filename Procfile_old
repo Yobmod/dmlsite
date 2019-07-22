@@ -1,6 +1,7 @@
 web: gunicorn dmlsite.wsgi:application
 
 web: daphne dmlsite.asgi:application --port $PORT --bind 0.0.0.0 -v2
-daphne dmlsite.asgi:application -b 127.0.0.1 -p 8000
+web: daphne dmlsite.asgi:application -b 127.0.0.1 -p 8000
 
 worker: python manage.py qcluster
+web: python manage.py runworker channels -v2

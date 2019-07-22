@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django_jinja import views
+from django_jinja import views as dj_jn_views
 from django.conf.urls import url, include
 from django.urls import re_path, path
 # import django.contrib.auth.views    # The login views redirect to admin here, or to previous page in dmlmain
@@ -42,10 +42,10 @@ urlpatterns = [
 ]
 
 
-handler400 = views.BadRequest.as_view()
-handler403 = views.PermissionDenied.as_view()
-handler404 = views.PageNotFound.as_view()
-handler500 = 'views.ServerError.as_view()'
+# handler400 = dj_jn_views.BadRequest.as_view()
+# handler403 = dj_jn_views.PermissionDenied.as_view()
+handler404 = dj_jn_views.PageNotFound.as_view()
+# handler500 = dj_jn_views.ServerError.as_view()
 
 if settings.DEBUG: 
     urlpatterns += static(cast(str, settings.STATIC_URL), document_root=settings.STATIC_ROOT)

@@ -10,10 +10,10 @@ from django.test import TestCase
 # from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 # from django.utils.translation import activate
 
-from django.conf import settings
+# from django.conf import settings
 
 # DJANGO_SETTINGS_MODULE =
-settings.configure()
+# settings.configure()
 
 
 class ChatViewsTestCase(TestCase):

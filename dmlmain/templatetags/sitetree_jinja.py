@@ -50,16 +50,17 @@ def sitetree_tree(parser: Parser, token: TokenType.TEXT) -> sitetree_treeNode:
         tree_alias = parser.compile_filter(tokens[2])
         return sitetree_treeNode(tree_alias, use_template)
     else:
-        raise jinja2.exceptions.TemplateSyntaxError(lineno=0, 
-                                                    name='sitetreeError', 
-                                                    filename='meeehhh', 
+        raise jinja2.exceptions.TemplateSyntaxError(lineno=0,
+                                                    name='sitetreeError',
+                                                    filename='meeehhh',
                                                     message=f"""{tokens[0]} tag requires two arguments. 
-                                                            E.g. {{%% sitetree_tree from "mytree" %%\}}.""")
+                                                            E.g. {{%% sitetree_tree from "mytree" %%}}.""")
 
 
-def detect_clause(parser: Parser, clause_name: str, tokens: TokenType.TEXT) -> Opt[str]:
+def detect_clause(parser: Parser, clause_name: str, tokens: TokenType.TEXT) -> Opt[FilterExpression]:
     """Helper function detects a certain clause in tag tokens list. Returns its value."""
 
+    clause_value: Opt[FilterExpression]
     if clause_name in tokens:
         t_index = tokens.index(clause_name)
         clause_value = parser.compile_filter(tokens[t_index + 1])
@@ -78,8 +79,9 @@ def render(context: template.Context, tree_items: Union[str, List[str]], use_tem
 
     if isinstance(use_template, FilterExpression):
         use_template = use_template.resolve(context)
-
-    content = get_template(use_template).render(context.flatten() if _CONTEXT_FLATTEN else context)
+    elif use_template is None:
+        use_template = ""
+    content: str = get_template(use_template).render(context.flatten() if _CONTEXT_FLATTEN else context)
     context.pop()
 
     return content

@@ -10,8 +10,9 @@ It’s a very good idea to make sure there is actually something useful on a 404
 at least a link back to the index.
 </p>
 
-{{ "Urlify: turn spaces to plus" | urlify_filter() }}
-{{ urlify_tag("fhlk v cdl;") }}
+<p>Urlifiy:{{ "turn spaces to plus" | urlify_filter() }}
+<br>
+{{ urlify_tag("so they can be used as urls") }}
 
 <br><br><br><br>
 {% now "h:i:s A" as today %}
@@ -24,7 +25,7 @@ at least a link back to the index.
 
 
     <form method='POST' action='' class="post-form">{%csrf_token %}
-     {{ crispify(form) }}
+     {# {{ crispify(form) }}  #}
       <dl>
         <dt>Title:
         <dd><input type='text' size='30' name='title'>

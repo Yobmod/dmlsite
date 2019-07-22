@@ -119,7 +119,7 @@ class GenerateInvoice(View):
     def get(
         self, request: HttpRequest, name: str = "Default", *args: Any, **kwargs: Any
     ) -> HttpResponse:
-        if kwargs["amount"]:
+        if "amount" in kwargs:
             amount = kwargs["amount"]
         else:
             amount = None
@@ -140,7 +140,11 @@ class GeneratePdf(View):
         self, request: HttpRequest, name: str = "Default", *args: Any, **kwargs: Any
     ) -> HttpResponse:
         # template = get_template("pdf/test.html")
-        amount = 13490  # = Invoice.amount etc from a model. Then can be added by form
+        # = Invoice.amount etc from a model. Then can be added by form
+        if "amount" in kwargs:
+            amount = kwargs["amount"]
+        else:
+            amount = None
         invoice_id = 12345
         customer_name = name
         context = {
@@ -165,3 +169,11 @@ class GeneratePdf(View):
         # response = HttpResponseRedirect("URL u want to redirect to"
         # response['Content-Disposition'] = "attachment; filename='%s'" % ("attachment; filename='yourpdffilename')
         # return response﻿
+
+
+def handler404(request):
+    return render(request, '404.html', status=404)
+    
+
+def handler500(request):
+    return render(request, '500.html', status=500)

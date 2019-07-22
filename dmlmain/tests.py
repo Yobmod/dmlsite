@@ -16,12 +16,19 @@ class MainViewsTestCase(TestCase):
 
 class UrlsTest(TestCase):
     def test_responses(self) -> None:
+        allowed_codes = [200, 302]
+        """ 200: httpresponse, 302:httpredirect """
         for pattern in urlpatterns:
             if hasattr(pattern, "name") and pattern.name:
                 response = self.client.get(reverse(pattern.name))
-                print(str(pattern) + str(response.status_code))
+                print(pattern.name, response.status_code)
+                self.assertTrue(response.status_code in allowed_codes)
             else:
                 print(str(pattern) + "skipped")
-            allowed_codes = [200, 302]
-            """ 200: httpresponse, 302:httpredirect """
-            self.assertTrue(response.status_code in allowed_codes)
+
+    def test_page_not_found_response(self) -> None:
+        """404: PageNotFound"""
+        resp = self.client.get("/this_page_should_not_exist/")
+        self.assertEqual(resp.status_code, 404)
+
+

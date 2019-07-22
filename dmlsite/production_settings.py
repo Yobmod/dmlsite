@@ -81,6 +81,7 @@ try:
 except KeyError:
     pass
 
+AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 MEDIAFILES_LOCATION = 'media'
