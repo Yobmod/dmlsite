@@ -1,17 +1,18 @@
 from django import forms
-from .models import Question, Choice #, Votes
+from .models import Question, Choice  # , Votes
 
 
 class AddPollForm(forms.ModelForm):
-	class Meta:
-		model = Question
-		fields = ['question_text',] #"tags""image" add comment form
+    class Meta:
+        model = Question
+        fields = ['question_text', ]  # "tags""image" add comment form
 
-	def clean_question_text(self):
-		question_text = self.cleaned_data.get('question_text')
-		return question_text
+    def clean_question_text(self) -> str:
+        question_text: str = self.cleaned_data.get('question_text')
+        return question_text
+
 
 class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
-        fields = ['choice_text',]
+        fields = ['choice_text', ]
