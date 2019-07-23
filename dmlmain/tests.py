@@ -9,6 +9,7 @@ from .tasks import create_html_report
 
 
 class MainViewsTestCase(TestCase):
+    """for texting specific dmlmain views from their url"""
     def test_homepage(self) -> None:
         resp = self.client.get("/")
         self.assertEqual(resp.status_code, 200)
