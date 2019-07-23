@@ -1,4 +1,4 @@
-# sudo: true
+# sudo: required
 # before_install:
 #   - sudo apt-get update -qq
 #   - sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
@@ -23,14 +23,11 @@ language: python
    # - pip install -r requirements.txt
 matrix:
   include:
-    - python: 3.6
-      dist: trusty
-      sudo: true
     - python: 3.7
       dist: xenial
       sudo: true
 install:
-    - pip install pipenv
+    - pip install pipenv --dev
     - pipenv install
     # - pip install -r requirements.txt
 before_script:
