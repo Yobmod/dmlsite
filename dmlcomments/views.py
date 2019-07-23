@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from dmlcomments.models import Comment
 from dmlcomments.forms import CommentForm
 from dmlblog.models import Post
-
+from dmlpolls.models import Question
 
 def comment_thread(request, pk):
     # comment = get_object_or_404(Comment, pk=pk)
@@ -33,7 +33,7 @@ def comment_thread(request, pk):
         parent_obj = None
         try:
             parent_id = int(request.POST.get("parent_id"))
-        except Exception:
+        except:
             parent_id = None
         if parent_id:
             parent_qs = Comment.objects.filter(id=parent_id)
@@ -82,13 +82,16 @@ def comment_delete(request, pk):
 def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
-    return redirect("dmlblog.views.post_detail", pk=comment.post.pk)
+    return redirect("dmlblog.views.post_detail", pk=comment.content_object.id)
 
 
 @login_required
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
     if isinstance(comment.content_object, Post):
         post_pk = comment.content_object.id
-    comment.delete()
-    return redirect("dmlblog.views.post_detail", pk=post_pk)
+        return redirect("dmlblog.views.post_detail", pk=post_pk)
+    elif isinstance(comment.content_object, Question):
+        Q_pk = comment.content_object.id
+        return redirect("dmlblog.views.poll_detail", pk=Q_pk)

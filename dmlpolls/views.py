@@ -11,7 +11,7 @@ from .models import Choice, Question  # , Opinion
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dmlcomments.models import Comment
 from dmlcomments.forms import CommentForm
-from django.models import QuerySet
+from django.db.models import QuerySet
 from django.core.handlers.wsgi import WSGIRequest
 from typing import Optional, cast
 
@@ -38,9 +38,11 @@ def poll_list(request: HttpRequest) -> HttpResponse:
     page_request_var = "polls_page"
     page = request.GET.get(page_request_var)
     try:
-        if page is not None:
+        if isinstance(page, (str, int)):
             queryset = paginator.page(page)
-    except PageNotAnInteger:
+        else: 
+            raise TypeError
+    except (PageNotAnInteger, TypeError):
         queryset = paginator.page(1)  # if not enough, give first page
     except EmptyPage:
         page_int = paginator.num_pages()
@@ -63,8 +65,8 @@ def poll_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     form = CommentForm(request.POST or None, initial=initial_data)
     if form.is_valid():
         c_type = form.cleaned_data.get("content_type")
-        content_type = ContentType.objects.get(model=c_type)
-        obj_id = form.cleaned_data.get('object_id')
+        content_type = ContentType.objects.get(model=c_type)  # comment
+        obj_id = form.cleaned_data.get('object_id')  
         content_data = form.cleaned_data.get("text")
         parent_obj = None
         try:
@@ -101,7 +103,7 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = 'dmlpolls/poll_detail.html'
 
-    def get_queryset(self) -> QuerySet[Question]:
+    def get_queryset(self) -> 'QuerySet[Question]':
         """Excludes any questions that aren't published yet."""
         return Question.objects.filter(pub_date__lte=timezone.now())
 
@@ -110,7 +112,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'dmlpolls/poll_results.html'
 
-    def get_queryset(self) -> QuerySet[Question]:
+    def get_queryset(self) -> 'QuerySet[Question]':
         """Excludes any questions that aren't published yet."""
         return Question.objects.filter(pub_date__lte=timezone.now())
 

@@ -11,12 +11,12 @@ language: python
 # python:
 #   - "3.6"
 #   - "3.7"
-#   services:
-#   - postgres
+services:
+   - postgres
 #   - redis
-# env:
+env:
 #   - DJANGO=2.2 
-#   - DB=posgres
+   - DB=posgres
 # install:
 #   - pip install pipenv
 #   - pipenv install

@@ -92,7 +92,11 @@
     		   Login to comment</p>
 	{% endfor %} -->
 
-<span>{% if comments.count > 0 %}  {{post.post_comments.count}} comments in {{comments.count}} thread{% if comments.count > 1 %}s {% endif %}{% endif %}
+<span>{% if comments.count > 0 %}  
+{{post.post_comments.count}} comments in {{comments.count}} thread
+{% if comments.count > 1 %}s {% endif %}
+{% endif %}
+
 <div class="btn btn-default" id="commentShowButton">Add comment</div></span>
 <div id="commentShow">
 	<h3>Add comment:</h3>
@@ -136,6 +140,7 @@
  		</div>
 
  	{% if user.is_authenticated or comment.approved_comment %}
+
  	{% elif not comment.approved_comment and user.is_staff %}
  	<a class="btn btn-default" href="{% url 'blog:comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
  	<a class="btn btn-default" href="{% url 'blog:comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>

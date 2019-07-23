@@ -5,7 +5,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.utils import timezone
 
-from django.db.models import QuerySet, Model
+from django.db.models import QuerySet
+from typing import Union, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from dmlblog.models import Post
+    from dmlpolls.models import Question
 
 
 class CommentManager(models.Manager):
@@ -13,9 +18,9 @@ class CommentManager(models.Manager):
         qs = super(CommentManager, self).filter(parent=None)
         return qs
 
-    def filter_by_instance(self, instance: Model) -> 'QuerySet[Comment]':
+    def filter_by_instance(self, instance: Union['Post', 'Question']) -> 'QuerySet[Comment]':
         content_type = ContentType.objects.get_for_model(instance.__class__)
-        obj_id = content_type.id  # changed from instance.id
+        obj_id = instance.id
         qs = (
             super(CommentManager, self)
             .filter(content_type=content_type, object_id=obj_id)
@@ -65,5 +70,6 @@ class Comment(models.Model):
         self.save()
 
     def approved_comments(self) -> 'QuerySet[Comment]':
-        return self.comment_set.filter(approved_comment=True)
-        # changed from self.comments.filter(approved_comment=True)
+        qs: 'QuerySet[Comment]' = self.comment_set.filter(approved_comment=True)
+        return qs
+        # return self.comments.filter(approved_comment=True)

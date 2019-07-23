@@ -93,6 +93,7 @@ def post_detail(request: WSGIRequest, pk: str) -> HttpResponse:
     # comments = post.comments #FK changed to GFK
     # form = CommentForm()
     comments = Comment.objects.filter_by_instance(post)  # aka = post.comments
+    
     counts = 1
     for comment in comments:
         if (
