@@ -32,7 +32,7 @@
             "python.linting.enabled": true,
             "python.linting.pylamaEnabled": true,
             "python.linting.flake8Enabled": true,
-            "python.linting.pep8Enabled": false,
+            "python.linting.pycodestyleEnabled": false,
             "python.linting.pydocstyleEnabled": false,
         
             "python.linting.lintOnSave": true,
@@ -46,6 +46,6 @@
             "[python]": {
                 
             },
-            "python.pythonPath": "C:\\Users\\laventin.LANCS\\.virtualenvs\\dmlsite-n8-43umq\\Scripts\\python.exe",
+            "python.pythonPath": "C:\\Users\\Customer\\.virtualenvs\\dmlsite-ZrUzNFBB\\Scripts\\python.exe",
             "python.formatting.provider": "autopep8"  // "autopep8"
         }

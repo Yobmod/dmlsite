@@ -61,7 +61,7 @@ INSTALLED_APPS = [
 
     # other tools
     'markdown_deux',
-    'pagedown',
+    'pagedown',  # 'pagedown.apps.PagedownConfig',
     'cookielaw',
     'taggit',
     'sorl.thumbnail',

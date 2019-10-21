@@ -12,7 +12,7 @@ class CommentForm(forms.ModelForm):
     parent_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
     text = forms.CharField(
         label="",
-        widget=PagedownWidget(show_preview=False, template="./comment_widget.html"),
+        widget=PagedownWidget(template="./comment_widget.html"),
     )  # , css=("custom/css1.css", "custom/css2.css")
     # published_date = forms.DateField(widget=forms.SelectDateWidget)
 

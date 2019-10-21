@@ -8,7 +8,7 @@ from pagedown.widgets import PagedownWidget
 
 class PostForm(forms.ModelForm):
     # template="path/to/template.html", css=("custom/css1.css", "custom/css2.css"))
-    text = forms.CharField(widget=PagedownWidget(show_preview=True))
+    text = forms.CharField(widget=PagedownWidget())
     published_date = forms.DateField(widget=forms.SelectDateWidget)
 
     class Meta:

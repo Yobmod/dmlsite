@@ -14,7 +14,7 @@ try:
 except ImportError:
     pass
 
-
+# if local_settings found, it overwrites some production_settings
 try:
     from .local_settings import *
 except ImportError:

@@ -21,7 +21,7 @@ django-dotenv = "*"
 django-embed-video = "*"
 django-libsass = "*"
 django-markdown-deux = "*"
-django-pagedown = "*"
+django-pagedown = "==1.0.6"
 django-picklefield = "*"  
 # django-pkgconf = "*"  # req_by controlcenter
 django-q = "*"
@@ -38,7 +38,7 @@ psycopg2 = "*"
 redis = "*"
 sorl-thumbnail = "*"
 twilio = "*"
-whitenoise = {version = "*", extras = ["brotli"]}
+whitenoise = {version = "*",extras = ["brotli"]}
 xhtml2pdf = "*" # -> pillow
 CherryPy = "*"
 Django = "==2.2.3"
@@ -46,7 +46,7 @@ PyJWT = "*"
 pyOpenSSL = "*"
 PyPDF2 = "*"
 # service-identity = "*"  ## <- twisted[tls] <- channels-redis
-twisted = {version = "*", extras = ["http2", "tls"]}  #-> service-identity
+twisted = {version = "*",extras = ["http2", "tls"]}  #-> service-identity
 django-pipeline = "*"
 django-jinja = "*"
 django-webpack-loader = "*"
@@ -70,7 +70,6 @@ django-emoji-picker = "*"
 # django-tables2 = "==1.21.2"
 # django-tagulous = "==0.13.2"
 # django-widget-tweaks = "==1.4.3"
-# [dev]
 # django-debug-toolbar = "==1.10.1"
 
 [dev-packages]
@@ -85,7 +84,7 @@ pytest-sugar = "*"
 pytest-xdist = "*"
 coverage = "*"
 mypy = "*"  # typing-extensions
-djangorestframework-stubs = "*"
+# djangorestframework-stubs = "*"
 pylama = "*"
 flake8 = "*"
 flake8-comprehensions = "*"
