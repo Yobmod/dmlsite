@@ -41,7 +41,7 @@ twilio = "*"
 whitenoise = {version = "*",extras = ["brotli"]}
 xhtml2pdf = "*" # -> pillow
 CherryPy = "*"
-Django = "==2.2.5"
+Django = "==2.2.10"
 PyJWT = "*"
 pyOpenSSL = "*"
 PyPDF2 = "*"
