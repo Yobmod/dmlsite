@@ -177,6 +177,9 @@ django-embed-video==1.3.3 \
 django-emoji-picker==0.0.6 \
     --hash=sha256:b13a7b5ebb192b710502c2b72efc4dea02e048cc6da21286608a998b59c4c251 \
     --hash=sha256:7931537b93608c051a82f2510838235e08b8c829a289e55382ff3aa09809302c
+django-extensions==3.0.5 \
+    --hash=sha256:6306175ae8c78c18ea7aff794f5fa3a47de7d128666e6668bd40596895da7f84 \
+    --hash=sha256:40d4b7aec7bbe66dda8704fbfaf2e1b7e04ec4aea6b10dcbd78d8af7c37bfddb
 django-jinja==2.6.0 \
     --hash=sha256:7459985c25ddb6584c6bab345761c8c5557713448e6fbb322af1b6dd7f5512bd \
     --hash=sha256:4e3e97d7b40669926a9517eb4522cd98dce2e32dcba908aad156810b74744148

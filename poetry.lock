@@ -509,7 +509,7 @@ version = "0.0.6"
 django = ">=2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Extensions for Django"
 name = "django-extensions"
 optional = false
@@ -1907,7 +1907,7 @@ test = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 
 [metadata]
-content-hash = "fbb99298f90c6a424dd4bcf0552ba2707872eb46be30717b7255b21681a71104"
+content-hash = "b053b7857472cb8bd96a9c1fc23863d1b3af85dc90d916e96433e5da658fe987"
 python-versions = "^3.7"
 
 [metadata.files]
