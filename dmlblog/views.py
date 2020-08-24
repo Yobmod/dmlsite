@@ -1,3 +1,5 @@
+from django.db.models.manager import Manager
+from django.http.response import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.core.handlers.wsgi import WSGIRequest
@@ -37,7 +39,7 @@ def post_test(request: HttpRequest) -> HttpResponse:
 
 
 def post_list(request: HttpRequest) -> HttpResponse:
-    posts = (
+    posts: Manager[Post] = (
         Post.objects.filter(draft=False)
         .filter(published_date__lte=timezone.now())
         .order_by("published_date")
@@ -45,11 +47,11 @@ def post_list(request: HttpRequest) -> HttpResponse:
     )
     c_type = ContentType.objects.get_for_model(Post)
     # post_id = posts.values_list('id')
-    post_comments = Comment.objects.filter(content_type=c_type)
+    post_comments: Manager[Comment] = Comment.objects.filter(content_type=c_type)
     counts = 1
     for post in posts:
         for comment in post_comments:
-            if comment.content_object.id == post.id:
+            if comment.content_object is not None and comment.content_object.id == post.id:
                 counts += 1
                 post.post_comments.count = counts
 
@@ -75,7 +77,7 @@ def post_list(request: HttpRequest) -> HttpResponse:
         queryset = paginator.page(1)  # if not enough, give first page
     except (EmptyPage or InvalidPage):
         # if too many, give last page
-        number_pages = paginator.num_pages()
+        number_pages = paginator.num_pages
         queryset = paginator.page(number_pages)
     context = {
         "posts": posts,
@@ -93,7 +95,6 @@ def post_detail(request: WSGIRequest, pk: str) -> HttpResponse:
     # comments = post.comments #FK changed to GFK
     # form = CommentForm()
     comments = Comment.objects.filter_by_instance(post)  # aka = post.comments
-    
     counts = 1
     for comment in comments:
         if (
@@ -109,15 +110,23 @@ def post_detail(request: WSGIRequest, pk: str) -> HttpResponse:
     }
     form = CommentForm(request.POST or None, initial=initial_data)
     if form.is_valid():
-        c_type = form.cleaned_data.get("content_type")
-        content_type = ContentType.objects.get(model=c_type)
+        c_data = form.cleaned_data.get("content_type")  # "blog | post"
+        app_label = c_data.split()[0]
+        model = c_data.split()[-1]
+        content_type = ContentType.objects.get_by_natural_key(app_label=app_label, model=model)
+
+        # pid = int(form.cleaned_data.get("parent_id"))
+        # content_type = ContentType.objects.get_for_id(pid)
+
         obj_id = form.cleaned_data.get("object_id")
-        content_data = form.cleaned_data.get("text")
+        content_text = form.cleaned_data.get("text")
         parent_obj = None
         try:
             parent_id_str = request.POST.get("parent_id")
             if parent_id_str is not None:
                 parent_id = int(parent_id_str)
+            else:
+                parent_id = 0
         except Exception:
             parent_id = 0
 
@@ -125,14 +134,16 @@ def post_detail(request: WSGIRequest, pk: str) -> HttpResponse:
             parent_qs = Comment.objects.filter(id=parent_id)
             if parent_qs.exists() and parent_qs.count() == 1:
                 parent_obj = parent_qs.first()
+        new_comment: Comment
         new_comment, created = Comment.objects.get_or_create(
             author=request.user,
             content_type=content_type,
             object_id=obj_id,
-            text=content_data,
+            text=content_text,
             parent=parent_obj,
         )
-        return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+        if new_comment.content_object is not None:
+            return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
     context = {
         "post": post,
         "share_string": share_string,
@@ -229,16 +240,20 @@ def comment_approve(request: HttpRequest, pk: str) -> HttpResponse:
     comment.approve()
     if isinstance(comment.content_object, Post):
         post_pk = comment.content_object.pk
-    return redirect("dmlblog.views.post_detail", pk=post_pk)
+        return redirect("dmlblog.views.post_detail", pk=post_pk)
+    else:
+        raise(TypeError)
 
 
 @login_required
 def comment_remove(request: WSGIRequest, pk: str) -> HttpResponse:
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
-    if isinstance(comment.content_object, Post):  # mypy
+    if isinstance(comment.content_object, Post):
         post_pk = comment.content_object.pk
-    return redirect("dmlblog.views.post_detail", pk=post_pk)
+        return redirect("dmlblog.views.post_detail", pk=post_pk)
+    else:
+        raise Http404("Comments can only be removed from Post at this time")
 
 
 def tag_post(request: HttpRequest, pk: str) -> HttpResponse:

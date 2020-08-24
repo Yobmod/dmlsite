@@ -46,6 +46,11 @@
             "[python]": {
                 
             },
-            "python.pythonPath": "C:\\Users\\Customer\\.virtualenvs\\dmlsite-ZrUzNFBB\\Scripts\\python.exe",
-            "python.formatting.provider": "autopep8"  // "autopep8"
+            "python.formatting.provider": "autopep8",
+            "python.languageSever": "Pylance",
+            "python.analysis.typeCheckingMode": "basic",
+            "python.analysis.extraPaths": [
+                "./",
+                "."
+            ]
         }

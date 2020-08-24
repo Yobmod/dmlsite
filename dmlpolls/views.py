@@ -117,18 +117,23 @@ class ResultsView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-def addpoll(request: WSGIRequest) -> HttpResponse:
+def addpoll(request: HttpRequest) -> HttpResponse:
     form = AddPollForm(request.POST or None)
+    
     if form.is_valid():
         poll = form.save(commit=False)
         poll.author = request.user
         poll.save()
-        # question_text = form.cleaned_data.get('question_text')
+        question_text = form.cleaned_data.get('question_text')
         questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
-        return render(request, 'dmlpolls/poll_list.html', {'questions': questions})
+
+        # return render(request, 'dmlpolls/poll_list.html', {'questions': questions})
+        return poll_list(request)
         # context ={'form':form}
         # return render(request, 'dmlpolls/add_choice.html', context)
     else:
+        print("form not valid")
+        # print(form.errors)
         form = AddPollForm()
         context = {'form': form}
         return render(request, 'dmlpolls/add_poll.html', context)

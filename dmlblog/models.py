@@ -1,3 +1,4 @@
+from __future__ import annotations
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -13,7 +14,7 @@ from django.utils.text import slugify
 from dmlcomments.models import Comment
 from .utils import get_read_time
 
-from typing import Any, Union
+from typing import Any, Union, cast
 from django.db.models import QuerySet, CharField
 
 
@@ -21,21 +22,28 @@ def upload_location(instance: "Post", filename: str) -> str:
     PostModel = instance.__class__
     latest_post = PostModel.objects.order_by("pk").last()
     if latest_post:
-        new_id = latest_post + 1
+        new_id = cast(int, latest_post) + 1
+    else:
+        new_id = 0
     return f"{new_id}/{filename}"
 
 
 class PostManager(models.Manager):
-    def active(self, *args: Any, **kwargs: Any) -> QuerySet:
-        # Post.objects.all() = super(PostManager, self).all()
-        return (
-            super(PostManager, self)
-            .filter(draft=False)
-            .filter(publish__lte=timezone.now())
-        )
+    def active(self, *args: Any, **kwargs: Any) -> QuerySet[Post]:
+        postqs = super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
+        return cast(QuerySet[Post], postqs)
+
+    def public_posts(self, *args: Any, **kwargs: Any) -> QuerySet[Post]:
+        return cast(QuerySet[Post], super(PostManager, self).filter(public=True))
+
+    def private_posts(self, *args: Any, **kwargs: Any) -> QuerySet[Post]:
+        user = kwargs.pop('user')
+        return cast(QuerySet[Post], super(PostManager, self).filter(public=False, user=user))
 
 
 class Post(models.Model):
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL
     )
@@ -111,7 +119,7 @@ def create_slug(
     # else it makes one from the title
     else:
         slug_inp = instance.title
-    slug = slugify(slug_inp, allow_unicode=True)
+    slug = slugify(cast(str, slug_inp), allow_unicode=True)
     qs = Post.objects.filter(slug=slug).order_by("-id")
     qs_first = qs.first()
     qs_exists = qs.exists()

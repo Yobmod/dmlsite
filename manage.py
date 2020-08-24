@@ -14,7 +14,7 @@ if __name__ == "__main__":
         # exceptions on Python 2.
         try:
             import django
-            dj_versopn = django.get_version()
+            dj_version = django.get_version()
         except ImportError:
             raise ImportError(
                 "Couldn't import Django. Are you sure it's installed and "

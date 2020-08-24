@@ -1,3 +1,4 @@
+from __future__ import annotations
 from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -6,7 +7,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from django.db.models import QuerySet
-from typing import Union, TYPE_CHECKING
+from typing import Union, TYPE_CHECKING, cast
 
 if TYPE_CHECKING:
     from dmlblog.models import Post
@@ -14,18 +15,26 @@ if TYPE_CHECKING:
 
 
 class CommentManager(models.Manager):
-    def all(self) -> 'QuerySet[Comment]':
-        qs = super(CommentManager, self).filter(parent=None)
+    def all(self) -> QuerySet[Comment]:
+        qs = cast('QuerySet[Comment]', super(CommentManager, self).filter(parent=None))
         return qs
 
-    def filter_by_instance(self, instance: Union['Post', 'Question']) -> 'QuerySet[Comment]':
+    def get_by_pk(self, pk: int) -> Comment:
+        comm: Comment = Comment.objects.get(pk=pk)
+        return comm
+
+    def filter_by_instance(self, instance: Union['Post', 'Question']) -> QuerySet[Comment]:
         content_type = ContentType.objects.get_for_model(instance.__class__)
         obj_id = instance.id
-        qs = (
-            super(CommentManager, self)
-            .filter(content_type=content_type, object_id=obj_id)
-            .filter(parent=None)
-        )
+        qs = cast('QuerySet[Comment]',
+                  super(CommentManager, self)
+                  .filter(content_type=content_type, object_id=obj_id)
+                  .filter(parent=None)
+                  )
+        return qs
+
+    def approved_comments(self) -> QuerySet[Comment]:
+        qs = cast('QuerySet[Comment]', super(CommentManager, self).filter(approved_comment=True))
         return qs
 
 
@@ -43,6 +52,7 @@ class Comment(models.Model):
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
 
     objects = CommentManager()
+    myobjects = CommentManager()
 
     class Meta:
         ordering = ["created_date"]
@@ -56,7 +66,7 @@ class Comment(models.Model):
     def get_delete_url(self) -> str:
         return reverse("comments:comment_delete", kwargs={"pk": self.pk})
 
-    def children(self) -> "QuerySet[Comment]":
+    def children(self) -> QuerySet[Comment]:
         return Comment.objects.filter(parent=self)
 
     @property
@@ -68,8 +78,3 @@ class Comment(models.Model):
     def approve(self) -> None:
         self.approved_comment = True
         self.save()
-
-    def approved_comments(self) -> 'QuerySet[Comment]':
-        qs: 'QuerySet[Comment]' = self.comment_set.filter(approved_comment=True)
-        return qs
-        # return self.comments.filter(approved_comment=True)

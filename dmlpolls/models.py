@@ -1,3 +1,4 @@
+from __future__ import annotations
 from django.db import models
 import datetime
 from django.utils import timezone
@@ -12,9 +13,11 @@ from typing import Optional
 
 
 class Question(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    id = models.AutoField(primary_key=True)
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published', auto_now_add=True, null=False)
+    pub_date = models.DateTimeField('date published', auto_now_add=True)
     end_date = models.DateTimeField(blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
     poll_comments = GenericRelation(Comment, related_query_name='poll_comments')
@@ -25,11 +28,11 @@ class Question(models.Model):
     def was_published_recently(self) -> Optional[bool]:
         """True is recent, false if not, None is error"""
         now = timezone.now()
-        # if self.pub_date is not None:
-        return now - datetime.timedelta(days=7) <= self.pub_date <= now
-        # else:
+        if self.pub_date is not None:
+            return now - datetime.timedelta(days=7) <= self.pub_date <= now
+        else:
         # raise AttributeError("Pub_date attribute missing for this question")  
-        # return None
+            return None
         # was_published_recently.admin_order_field = 'pub_date'
         # was_published_recently.boolean = True
         # was_published_recently.short_description = 'Published recently?'
@@ -39,15 +42,15 @@ class Question(models.Model):
         return reverse('dmlpolls:poll_detail', kwargs={"pk": self.pk})
 
     @property
-    def comments(self) -> 'QuerySet[Comment]':
+    def comments(self) -> QuerySet[Comment]:
         instance = self
-        qs = Comment.objects.filter_by_instance(instance)
+        qs: QuerySet[Comment] = Comment.objects.filter_by_instance(instance=instance)
         return qs
 
     @property
-    def get_content_type(self) -> 'Question':
+    def get_content_type(self) -> ContentType:
         instance = self
-        content_type: 'Question' = ContentType.objects.get_for_model(instance.__class__)
+        content_type = ContentType.objects.get_for_model(instance.__class__)
         return content_type
 
 
