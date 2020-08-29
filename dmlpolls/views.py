@@ -25,7 +25,7 @@ def poll_list(request: HttpRequest) -> HttpResponse:
     counts = 1
     for question in questions:
         for comment in poll_comments:
-            if comment.content_object.id == question.id:
+            if comment.content_object and comment.content_object.id == question.id:
                 counts += 1
                 question.poll_comments.count = counts
     query = request.GET.get("q")
@@ -39,15 +39,15 @@ def poll_list(request: HttpRequest) -> HttpResponse:
     page = request.GET.get(page_request_var)
     try:
         if isinstance(page, (str, int)):
-            queryset = paginator.page(page)
-        else: 
+            page_set = paginator.page(page)
+        else:
             raise TypeError
-    except (PageNotAnInteger, TypeError):
-        queryset = paginator.page(1)  # if not enough, give first page
-    except EmptyPage:
-        page_int = paginator.num_pages()
-        queryset = paginator.page(page_int)  # if too many, give last page
-    context = {'questions': questions, 'page_request_var': page_request_var, 'obj_list': queryset}
+    except (PageNotAnInteger, TypeError):  # if not enough, give first page
+        page_set = paginator.page(1)
+    except EmptyPage:  # if too many, give last page
+        page_int = paginator.num_pages
+        page_set = paginator.page(page_int)
+    context = {'questions': questions, 'page_request_var': page_request_var, 'obj_list': page_set}
     return render(request, 'dmlpolls/poll_list.html', context)
 
 
@@ -56,17 +56,19 @@ def poll_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     comments = question.comments
     counts = 1
     for comment in comments:
-        if comment.content_object.id == question.id:
+        if comment.content_object and comment.content_object.id == question.id:
             counts += 1
             question.poll_comments.count = counts
     initial_data = {"content_type": question.get_content_type,
                     "object_id": question.id,
                     "author_id": request.user}
+
     form = CommentForm(request.POST or None, initial=initial_data)
     if form.is_valid():
-        c_type = form.cleaned_data.get("content_type")
-        content_type = ContentType.objects.get(model=c_type)  # comment
-        obj_id = form.cleaned_data.get('object_id')  
+        content_type_str: str = form.cleaned_data.get("content_type")
+        content_type_model = content_type_str.split()[-1]
+        content_type = ContentType.objects.get(model=content_type_model)
+        obj_id = form.cleaned_data.get('object_id')
         content_data = form.cleaned_data.get("text")
         parent_obj = None
         try:
@@ -84,7 +86,8 @@ def poll_detail(request: WSGIRequest, pk: int) -> HttpResponse:
             object_id=obj_id,
             text=content_data,
             parent=parent_obj,			)
-        return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
+        if new_comment.content_object:
+            return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
     context = {"form": form, 'question': question, "comments": comments, }
     return render(request, 'dmlpolls/poll_detail.html', context)
 
@@ -119,37 +122,33 @@ class ResultsView(generic.DetailView):
 
 def addpoll(request: HttpRequest) -> HttpResponse:
     form = AddPollForm(request.POST or None)
-    
-    if form.is_valid():
+    if form.is_valid():  # on submit
         poll = form.save(commit=False)
         poll.author = request.user
         poll.save()
-        question_text = form.cleaned_data.get('question_text')
-        questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+        # question_text = form.cleaned_data.get('question_text')
+        # questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
 
         # return render(request, 'dmlpolls/poll_list.html', {'questions': questions})
         return poll_list(request)
         # context ={'form':form}
         # return render(request, 'dmlpolls/add_choice.html', context)
-    else:
-        print("form not valid")
-        # print(form.errors)
+    else:  # on first load
         form = AddPollForm()
         context = {'form': form}
         return render(request, 'dmlpolls/add_poll.html', context)
 
 
 def add_choice(request: HttpRequest, question_id: int) -> HttpResponse:
-    # question = Question.objects.get(pk=question_id)
+    question = Question.objects.get(pk=question_id)
     form = ChoiceForm(request.POST)
     if form.is_valid():
         form.save(commit=False)
         # addpoll.question = question
         # addpoll.vote = 0
         # addpoll.question.save()
-        # form.save()
-        # return render(request, 'dmlpolls/poll_detail.html', {'question': question})
-        return HttpResponse('gbhbetg')
+        return render(request, 'dmlpolls/poll_detail.html', {'question': question})
+        # return HttpResponse('gbhbetg')
     else:
         form = ChoiceForm()
         return render(request, 'dmlpolls/add_choice.html', {'form': form, 'question_id': question_id, })
