@@ -7,35 +7,39 @@ from django.urls import reverse
 from django.utils import timezone
 
 from django.db.models import QuerySet
-from typing import Union, TYPE_CHECKING, cast
+from typing import Union, TYPE_CHECKING, Generic, TypeVar
 
 if TYPE_CHECKING:
     from dmlblog.models import Post
     from dmlpolls.models import Question
 
+_C = TypeVar('_C', bound='Comment')
 
-class CommentManager(models.Manager):
-    def all(self) -> QuerySet[Comment]:
-        qs = cast('QuerySet[Comment]', super(CommentManager, self).filter(parent=None))
+
+class CommentQuerySet(QuerySet):
+
+    def _all(self) -> CommentQuerySet:
+        self.Model = Comment
+        qs = self.filter(parent=None)
         return qs
 
     def get_by_pk(self, pk: int) -> Comment:
         comm: Comment = Comment.objects.get(pk=pk)
         return comm
 
-    def filter_by_instance(self, instance: Union['Post', 'Question']) -> QuerySet[Comment]:
+    def filter_by_instance(self, instance: Union['Post', 'Question']) -> CommentQuerySet:
         content_type = ContentType.objects.get_for_model(instance.__class__)
         obj_id = instance.id
-        qs = cast('QuerySet[Comment]',
-                  super(CommentManager, self)
-                  .filter(content_type=content_type, object_id=obj_id)
-                  .filter(parent=None)
-                  )
+        qs = self.filter(content_type=content_type, object_id=obj_id).filter(parent=None)
         return qs
 
-    def approved_comments(self) -> QuerySet[Comment]:
-        qs = cast('QuerySet[Comment]', super(CommentManager, self).filter(approved_comment=True))
+    def approved_comments(self) -> CommentQuerySet:
+        qs = self.filter(approved_comment=True)
         return qs
+
+
+class CommentManager(models.Manager, Generic[_C]):
+    pass
 
 
 class Comment(models.Model):
@@ -51,8 +55,7 @@ class Comment(models.Model):
     approved_comment = models.BooleanField(default=False)
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL)
 
-    objects = CommentManager()
-    myobjects = CommentManager()
+    myobjects: models.Manager[Comment] = models.Manager.from_queryset(CommentQuerySet)
 
     class Meta:
         ordering = ["created_date"]

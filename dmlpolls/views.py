@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render  # , redirect
 from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
 from django.urls import reverse
-from django.views import generic
+from django.views.generic import ListView, DetailView
 from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
@@ -17,11 +17,11 @@ from typing import Optional, cast
 
 
 def poll_list(request: HttpRequest) -> HttpResponse:
-    questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
+    questions = Question.myobjects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')
     # queryset_list = Question.objects.all()
     c_type = ContentType.objects.get_for_model(Question)
     # post_id = posts.values_list('id')
-    poll_comments = Comment.objects.filter(content_type=c_type)
+    poll_comments = Comment.myobjects.filter(content_type=c_type)
     counts = 1
     for question in questions:
         for comment in poll_comments:
@@ -92,7 +92,7 @@ def poll_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     return render(request, 'dmlpolls/poll_detail.html', context)
 
 
-class IndexView(generic.ListView):
+class PollIndexView(ListView):
     template_name = 'dmlpolls/poll_index.html'
     context_object_name = 'latest_question_list'
 
@@ -102,7 +102,7 @@ class IndexView(generic.ListView):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 
-class DetailView(generic.DetailView):
+class PollDetailView(DetailView):
     model = Question
     template_name = 'dmlpolls/poll_detail.html'
 
@@ -111,7 +111,7 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-class ResultsView(generic.DetailView):
+class PollResultsView(DetailView):
     model = Question
     template_name = 'dmlpolls/poll_results.html'
 
@@ -157,7 +157,7 @@ def add_choice(request: HttpRequest, question_id: int) -> HttpResponse:
 def vote(request: HttpRequest, pk: int) -> HttpResponse:
     question = get_object_or_404(Question, pk=pk)
     try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        selected_choice: Choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'dmlpolls/poll_detail.html', {

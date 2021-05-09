@@ -3,9 +3,9 @@ from . import views
 
 app_name = 'dmlpolls'
 urlpatterns = [
-    # url(r'^index$', views.IndexView.as_view(), name='poll_index'),
-    # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='poll_detail'),
-    # url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='poll_results'),
+    # url(r'^index$', views.PollIndexView.as_view(), name='poll_index'),
+    # url(r'^(?P<pk>[0-9]+)/$', views.PollDetailView.as_view(), name='poll_detail'),
+    # url(r'^(?P<pk>[0-9]+)/results/$', views.PollResultsView.as_view(), name='poll_results'),
 
 
     url(r'^$', views.poll_list, name='poll_list'),
