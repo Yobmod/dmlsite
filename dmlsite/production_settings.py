@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ['dmlsite.herokuapp.com', "127.0.0.1"]
 SITE_ID = 2
 ROOT_URLCONF = 'dmlsite.urls'
 WSGI_APPLICATION = 'dmlsite.wsgi.application'
-DEBUG = True
+DEBUG = False
 
 if not DEBUG:   # redirects to https on heroku
     SECURE_SSL_REDIRECT = True  # [1]
