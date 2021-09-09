@@ -379,14 +379,14 @@ python-versions = "*"
 
 [[package]]
 name = "django"
-version = "3.0.9"
+version = "3.1.12"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-asgiref = ">=3.2,<4.0"
+asgiref = ">=3.2.10,<4"
 pytz = "*"
 sqlparse = ">=0.2.2"
 
@@ -1406,40 +1406,6 @@ mypy = [
 pytest = ">=3.5"
 
 [[package]]
-name = "pytest-mypy"
-version = "0.8.0"
-description = "Mypy static type checker plugin for Pytest"
-category = "dev"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-attrs = ">=19.0"
-filelock = ">=3.0"
-mypy = [
-    {version = ">=0.500", markers = "python_version < \"3.8\""},
-    {version = ">=0.700", markers = "python_version >= \"3.8\" and python_version < \"3.9\""},
-]
-pytest = ">=3.5"
-
-[[package]]
-name = "pytest-mypy"
-version = "0.8.1"
-description = "Mypy static type checker plugin for Pytest"
-category = "dev"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-attrs = ">=19.0"
-filelock = ">=3.0"
-mypy = [
-    {version = ">=0.500", markers = "python_version < \"3.8\""},
-    {version = ">=0.700", markers = "python_version >= \"3.8\" and python_version < \"3.9\""},
-]
-pytest = ">=3.5"
-
-[[package]]
 name = "pytest-runner"
 version = "5.3.1"
 description = "Invoke py.test as distutils command with dependency resolution"
@@ -1925,7 +1891,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "b053b7857472cb8bd96a9c1fc23863d1b3af85dc90d916e96433e5da658fe987"
+content-hash = "03ca650808361f8b05a022f4a50fca119cfed0d081dfed9a7b2c4ded69956fc7"
 
 [metadata.files]
 aioredis = [
@@ -2199,8 +2165,8 @@ dj-database-url = [
     {file = "dj_database_url-0.5.0-py2.py3-none-any.whl", hash = "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9"},
 ]
 django = [
-    {file = "Django-3.0.9-py3-none-any.whl", hash = "sha256:96fbe04e8ba0df289171e7f6970e0ff8b472bf4f909ed9e0e5beccbac7e1dbbe"},
-    {file = "Django-3.0.9.tar.gz", hash = "sha256:c22b4cd8e388f8219dc121f091e53a8701f9f5bca9aa132b5254263cab516215"},
+    {file = "Django-3.1.12-py3-none-any.whl", hash = "sha256:a523d62b7ab2908f551dabc32b99017a86aa7784e32b761708e52be3dce6d35d"},
+    {file = "Django-3.1.12.tar.gz", hash = "sha256:dc41bf07357f1f4810c1c555b685cb51f780b41e37892d6cc92b89789f2847e1"},
 ]
 django-allauth = [
     {file = "django-allauth-0.45.0.tar.gz", hash = "sha256:6d46be0e1480316ccd45476db3aefb39db70e038d2a543112d314b76bb999a4e"},
@@ -2762,10 +2728,6 @@ pytest-forked = [
 pytest-mypy = [
     {file = "pytest-mypy-0.7.0.tar.gz", hash = "sha256:5a667d9a2b66bf98b3a494411f221923a6e2c3eafbe771104951aaec8985673d"},
     {file = "pytest_mypy-0.7.0-py3-none-any.whl", hash = "sha256:e0505ace48d2b19fe686366fce6b4a2ac0d090423736bb6aa2e39554d18974b7"},
-    {file = "pytest-mypy-0.8.0.tar.gz", hash = "sha256:63d418a4fea7d598ac40b659723c00804d16a251d90a5cfbca213eeba5aaf01c"},
-    {file = "pytest_mypy-0.8.0-py3-none-any.whl", hash = "sha256:8d2112972c1debf087943f48963a0daf04f3424840aea0cf437cc97053b1b0ef"},
-    {file = "pytest-mypy-0.8.1.tar.gz", hash = "sha256:1fa55723a4bf1d054fcba1c3bd694215a2a65cc95ab10164f5808afd893f3b11"},
-    {file = "pytest_mypy-0.8.1-py3-none-any.whl", hash = "sha256:6e68e8eb7ceeb7d1c83a1590912f784879f037b51adfb9c17b95c6b2fc57466b"},
 ]
 pytest-runner = [
     {file = "pytest-runner-5.3.1.tar.gz", hash = "sha256:0fce5b8dc68760f353979d99fdd6b3ad46330b6b1837e2077a89ebcf204aac91"},
