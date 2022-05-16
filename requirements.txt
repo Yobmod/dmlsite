@@ -109,7 +109,7 @@ sqlparse==0.4.1; python_version >= "3.6"
 tempora==4.1.1; python_version >= "3.6"
 twilio==6.50.1
 twisted-iocpsupport==1.0.2; platform_system == "Windows" and python_full_version >= "3.6.7" and python_version >= "3.6"
-twisted==21.7.0; python_full_version >= "3.6.7"
+twisted==22.4.0; python_full_version >= "3.6.7"
 txaio==21.2.1; python_version >= "3.7"
 typed-ast==1.4.3; python_version >= "3.6"
 typing-extensions==3.10.0.2; python_full_version >= "3.6.7" and python_version >= "3.6" and python_version < "3.8"
